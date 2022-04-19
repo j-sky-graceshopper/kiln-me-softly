@@ -7,9 +7,15 @@ const Product = require("./models/Product");
 const Review = require("./models/Review");
 const Category = require("./models/Category");
 
-//associations could go here!
+//associations
 Product.belongsToMany(Category, { through: "Product_Category" });
 Category.belongsToMany(Product, { through: "Product_Category" });
+
+Review.belongsTo(User);
+User.hasMany(Review);
+
+Review.belongsTo(Product);
+Product.hasMany(Review);
 
 module.exports = {
   db,

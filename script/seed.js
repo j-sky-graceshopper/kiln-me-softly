@@ -62,7 +62,6 @@ async function seed() {
   // add random category to each product
   products.forEach(async (product) => {
     const catId = Math.floor(Math.random() * categories.length + 1);
-    console.log(catId);
     await product.addCategory(catId);
   });
 
@@ -70,29 +69,36 @@ async function seed() {
 
   // Creating Reviews
   const reviews = await Promise.all([
-    Review.create({ content: "this is an awesome product" }),
-    Review.create({ content: "gorgeous, 5/5 stars, couldn't be better" }),
+    Review.create({
+      content: "this is an awesome product",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
+    Review.create({
+      content: "gorgeous, 5/5 stars, couldn't be better",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
     Review.create({
       content: "I've never seen something more beautiful in my life",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
     }),
     Review.create({
       content: "soooooooo nice",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
     }),
     Review.create({
       content: "just perfect, highly recommended",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
     }),
   ]);
 
   console.log(`seeded ${reviews.length} reviews`);
 
   console.log(`seeded successfully`);
-
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1],
-  //   },
-  // };
 }
 
 /*
