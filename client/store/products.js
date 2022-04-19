@@ -22,7 +22,7 @@ export const _addProduct = (product) => {
  
 //thunk
 
-export const listOfProducts = () => {
+export const fetchProducts = () => {
     return async (dispatch) => {
         console.log("Thunk activated!") 
         const {data} = await axios.get('/api/products')

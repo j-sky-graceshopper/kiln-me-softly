@@ -50,7 +50,6 @@ class AddProduct extends React.Component {
           />
           <br />
 
-          {/* Placeholder for uploading image section */}
           <label htmlFor="image">Add Image:</label>
           <input
             name="imageUrl"
