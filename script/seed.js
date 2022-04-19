@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product, Review },
+  models: { User, Product, Review, Category },
 } = require("../server/db");
 
 /**
@@ -65,6 +65,16 @@ async function seed() {
   ]);
 
   console.log(`seeded ${reviews.length} reviews`);
+
+  const categories = await Promise.all([
+    Category.create({ name: "mug" }),
+    Category.create({ name: "plate" }),
+    Category.create({ name: "bowl" }),
+    Category.create({ name: "pot" }),
+    Category.create({ name: "decorative" }),
+  ]);
+
+  console.log(`seeded ${categories.length} categories`);
 
   console.log(`seeded successfully`);
 
