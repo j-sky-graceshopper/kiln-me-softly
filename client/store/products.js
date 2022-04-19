@@ -15,7 +15,7 @@ const setAllProducts = (products) => {
  
 //thunk
 
-export const listOfProducts = () => {
+export const AllProducts = () => {
     return async (dispatch) => {
         console.log("Thunk activated!") 
         const {data} = await axios.get('/api/products')
