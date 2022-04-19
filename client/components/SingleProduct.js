@@ -14,7 +14,7 @@ class SingleProduct extends Component {
       <div className="singleProduct">
         <h2>{product.title}</h2>
         <img src={product.imageUrl} />
-        <h3>Price: {product.price}</h3>
+        <h3>Price: ${product.price}</h3>
         <p>{product.description}</p>
         <h3>Reviews:</h3>
         {reviews.length === 0 ? (
