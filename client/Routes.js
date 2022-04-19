@@ -6,12 +6,7 @@ import Home from "./components/Home";
 import { me } from "./store";
 import AddProduct from "./components/AddProduct";
 import SingleProduct from "./components/SingleProduct";
-<<<<<<< HEAD
-import AllProducts from './components/AllProducts';
-
-=======
 import AllProducts from "./components/AllProducts";
->>>>>>> main
 
 /**
  * COMPONENT
@@ -31,11 +26,7 @@ class Routes extends Component {
           <Route path="/add" component={AddProduct} />
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:productId" component={SingleProduct} />
-<<<<<<< HEAD
-      </Switch>
-=======
         </Switch>
->>>>>>> main
 
         {isLoggedIn ? (
           <Switch>
