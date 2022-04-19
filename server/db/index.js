@@ -8,13 +8,17 @@ const Review = require("./models/Review");
 const Category = require("./models/Category");
 
 //associations
-Product.belongsToMany(Category, { through: "Product_Category" });
+Product.belongsToMany(
+  Category,
+  { through: "Product_Category" },
+  { foreignKey: { validate: { len: { args: [0] } } } }
+);
 Category.belongsToMany(Product, { through: "Product_Category" });
 
-Review.belongsTo(User);
+Review.belongsTo(User, { foreignKey: { allowNull: false } });
 User.hasMany(Review);
 
-Review.belongsTo(Product);
+Review.belongsTo(Product, { foreignKey: { allowNull: false } });
 Product.hasMany(Review);
 
 module.exports = {
