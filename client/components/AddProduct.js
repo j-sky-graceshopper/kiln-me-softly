@@ -11,6 +11,8 @@ class AddProduct extends React.Component {
       description: "",
       imageUrl: null,
       price: null,
+      inventory: null,
+      //category: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,8 +51,8 @@ class AddProduct extends React.Component {
           <br />
 
           {/* Placeholder for uploading image section */}
+          <label htmlFor="image">Add Image:</label>
           <input
-            type="file"
             name="imageUrl"
             onChange={this.handleChange}
             value={this.state.imageUrl}
@@ -64,6 +66,19 @@ class AddProduct extends React.Component {
             value={this.state.price}
           />
           <br />
+
+          <label htmlFor="inventory">Inventory:</label>
+          <input
+            name="inventory"
+            onChange={this.handleChange}
+            value={this.state.inventory}
+          />
+          <br />
+
+          {/* <label htmlFor="">Select Categories:</label>
+          <input />
+          <br /><br /> */}
+
 
           <button className="add-product" type="submit">
             Add Product
