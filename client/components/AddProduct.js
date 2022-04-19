@@ -7,9 +7,10 @@ class AddProduct extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "",
+      title: "",
       description: "",
       imageUrl: null,
+      price: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,11 +30,11 @@ class AddProduct extends React.Component {
   render() {
     return (
       <div className="add-product-form">
-        <h1>Add Pottery Product</h1>
+        <h1>Add Product</h1>
         <form id="add-product" onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Product Name:</label>
+          <label htmlFor="title">Product Name:</label>
           <input
-            name="name"
+            name="title"
             onChange={this.handleChange}
             value={this.state.name}
           />
@@ -53,6 +54,14 @@ class AddProduct extends React.Component {
             name="imageUrl"
             onChange={this.handleChange}
             value={this.state.imageUrl}
+          />
+          <br />
+
+          <label htmlFor="price">Set Price:</label>
+          <input
+            name="price"
+            onChange={this.handleChange}
+            value={this.state.price}
           />
           <br />
 

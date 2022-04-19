@@ -33,7 +33,7 @@ export const listOfProducts = () => {
 export const addProduct = (product, history) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post("/api/admin", product);
+            const { data } = await axios.post("/api/products", product);
             dispatch(_addProduct(data));
             history.push("/");
         } catch (err) {

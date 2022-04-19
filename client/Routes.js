@@ -4,6 +4,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
+import AddProduct from './components/AddProduct';
 
 /**
  * COMPONENT
@@ -18,6 +19,9 @@ class Routes extends Component {
 
     return (
       <div>
+        <Switch>
+          <Route path="/add" component={AddProduct} />
+        </Switch>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
