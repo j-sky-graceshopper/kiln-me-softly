@@ -8,6 +8,8 @@ const Review = require("./models/Review");
 const Category = require("./models/Category");
 
 //associations could go here!
+Product.belongsToMany(Category, { through: "Product_Category" });
+Category.belongsToMany(Product, { through: "Product_Category" });
 
 module.exports = {
   db,

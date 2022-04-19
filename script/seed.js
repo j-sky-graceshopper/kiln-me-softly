@@ -25,6 +25,17 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
 
+  // Creating Categories
+  const categories = await Promise.all([
+    Category.create({ name: "mug" }),
+    Category.create({ name: "plate" }),
+    Category.create({ name: "bowl" }),
+    Category.create({ name: "pot" }),
+    Category.create({ name: "decorative" }),
+  ]);
+
+  console.log(`seeded ${categories.length} categories`);
+
   // Creating Products
   const products = await Promise.all([
     Product.create({
@@ -48,8 +59,16 @@ async function seed() {
     }),
   ]);
 
+  // add random category to each product
+  products.forEach(async (product) => {
+    const catId = Math.floor(Math.random() * categories.length + 1);
+    console.log(catId);
+    await product.addCategory(catId);
+  });
+
   console.log(`seeded ${products.length} products`);
 
+  // Creating Reviews
   const reviews = await Promise.all([
     Review.create({ content: "this is an awesome product" }),
     Review.create({ content: "gorgeous, 5/5 stars, couldn't be better" }),
@@ -65,16 +84,6 @@ async function seed() {
   ]);
 
   console.log(`seeded ${reviews.length} reviews`);
-
-  const categories = await Promise.all([
-    Category.create({ name: "mug" }),
-    Category.create({ name: "plate" }),
-    Category.create({ name: "bowl" }),
-    Category.create({ name: "pot" }),
-    Category.create({ name: "decorative" }),
-  ]);
-
-  console.log(`seeded ${categories.length} categories`);
 
   console.log(`seeded successfully`);
 
