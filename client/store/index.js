@@ -13,6 +13,7 @@ const reducer = combineReducers({
   product: singleProductReducer,
   categories,
 });
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

@@ -28,7 +28,7 @@ export class AllProducts extends React.Component {
                     <img src={`${product.imageUrl}`} /> {product.title}{" "}
                   </Link>
                 </li>
-                <p>{product.price}</p>
+                <p>${product.price}</p>
                 <button type="button">Add to Cart</button>
               </div>
             );

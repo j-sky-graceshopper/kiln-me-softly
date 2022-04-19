@@ -1,8 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router()
 const {
   models: { Product, Review },
 } = require("../db");
-module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
@@ -16,7 +15,15 @@ router.get("/", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+      res.status(201).send(await Product.create(req.body))
+  } catch (err) {
+      next(err);
+  }
+})
 
 router.get("/:productId", async (req, res, next) => {
   try {
@@ -30,3 +37,7 @@ router.get("/:productId", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router
+
+
