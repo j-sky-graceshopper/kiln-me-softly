@@ -9,6 +9,7 @@ const Product = db.define("product", {
   },
   description: {
     type: Sequelize.TEXT,
+    allowNull: false,
   },
   imageUrl: {
     type: Sequelize.STRING,
