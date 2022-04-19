@@ -21,7 +21,7 @@ export class AllProducts extends React.Component {
           return (
               <div key={product.id}>
                 <li key={product.id}> <Link to={`/products/${product.id}`} key={product.id}><img src={`${product.imageUrl}`}/> {product.title} </Link></li>
-                <p>{product.price}</p>
+                <p>${product.price}</p>
                 <button type="button">Add to Cart</button>
               </div>
           )
