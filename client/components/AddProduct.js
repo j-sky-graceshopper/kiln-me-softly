@@ -78,7 +78,6 @@ class AddProduct extends React.Component {
           <input />
           <br /><br /> */}
 
-
           <button className="add-product" type="submit">
             Add Product
           </button>

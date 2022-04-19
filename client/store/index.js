@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import AllProductsReducer from "./products";
 import singleProductReducer from "./singleProduct";
+import categories from "./categories";
 
 const reducer = combineReducers({
   auth,
   products: AllProductsReducer,
   product: singleProductReducer,
+  categories,
 });
 
 const middleware = composeWithDevTools(
