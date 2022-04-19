@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Review },
 } = require("../server/db");
 
 /**
@@ -50,14 +50,30 @@ async function seed() {
 
   console.log(`seeded ${products.length} products`);
 
+  const reviews = await Promise.all([
+    Review.create({ content: "this is an awesome product" }),
+    Review.create({ content: "gorgeous, 5/5 stars, couldn't be better" }),
+    Review.create({
+      content: "I've never seen something more beautiful in my life",
+    }),
+    Review.create({
+      content: "soooooooo nice",
+    }),
+    Review.create({
+      content: "just perfect, highly recommended",
+    }),
+  ]);
+
+  console.log(`seeded ${reviews.length} reviews`);
+
   console.log(`seeded successfully`);
 
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
+  // return {
+  //   users: {
+  //     cody: users[0],
+  //     murphy: users[1],
+  //   },
+  // };
 }
 
 /*
