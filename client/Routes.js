@@ -8,8 +8,7 @@ import AddProduct from "./components/AddProduct";
 import SingleProduct from "./components/SingleProduct";
 import AllProducts from "./components/AllProducts";
 import UpdateProduct from "./components/UpdateProduct";
-import auth from "./store/auth";
-
+// import auth from "./store/auth";
 
 /**
  * COMPONENT
@@ -21,6 +20,8 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn, auth } = this.props;
+    console.log(auth);
+    console.log(isLoggedIn);
     return (
       <div>
         {isLoggedIn ? (
@@ -32,7 +33,6 @@ class Routes extends Component {
               component={SingleProduct}
             />
             <Route path="/home" component={Home} />
-            <Redirect to="/home" />
             {auth.isAdmin ? (
               <div>
                 <Route
@@ -43,6 +43,7 @@ class Routes extends Component {
                 <Route path="/add" component={AddProduct} />
               </div>
             ) : null}
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
