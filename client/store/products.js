@@ -54,7 +54,6 @@ export const addProduct = (product, history) => {
 export const updateSingleProduct = (product, history) => {
     return async (dispatch) => {
       try {
-        console.log("Thunk activated!")
         const {data} = await axios.put(`/api/products/${product.id}`, product)
         dispatch (updateProduct(data))
         history.push("/products")

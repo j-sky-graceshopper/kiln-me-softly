@@ -16,6 +16,7 @@ const singleProduct = (product) => ({
 export const singleProductThunk = (productId) => {
   return async (dispatch) => {
     try {
+      console.log("Thunk activated!")
       const { data } = await axios.get(`/api/products/${productId}`);
       dispatch(singleProduct(data));
     } catch (error) {
