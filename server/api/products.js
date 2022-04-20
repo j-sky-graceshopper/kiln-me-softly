@@ -1,29 +1,24 @@
-const router = require('express').Router()
+const router = require("express").Router();
 const {
-  models: { Product, Review },
+  models: { Product, Review, Category },
 } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll({
-      // // explicitly select only the id and username fields - even though
-      // // users' passwords are encrypted, it won't help if we just
-      // // send everything to anyone who asks!
-      // attributes: ['id', 'username']
-    });
+    const products = await Product.findAll({ include: Category });
     res.json(products);
   } catch (err) {
     next(err);
   }
-})
+});
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-      res.status(201).send(await Product.create(req.body))
+    res.status(201).send(await Product.create(req.body));
   } catch (err) {
-      next(err);
+    next(err);
   }
-})
+});
 
 router.get("/:productId", async (req, res, next) => {
   try {
@@ -38,6 +33,13 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
+router.put("/:productId", async ( req, res,next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId)
+    res.send(await product.update(req.body))
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
-
-

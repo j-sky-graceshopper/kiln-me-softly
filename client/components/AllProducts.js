@@ -3,29 +3,37 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
+import SearchBar from "./SearchBar";
 
-// Notice that we're exporting the AllStudents component twice. The named export
-// (below) is not connected to Redux, while the default export (at the very
-// bottom) is connected to Redux. Our tests should cover _both_ cases.
-export class AllProducts extends React.Component {
+class AllProducts extends React.Component {
   componentDidMount() {
     this.props.displayProducts();
   }
+
   render() {
-    const { products } = this.props;
-    console.log(products);
+    const { filteredProducts, searchedProducts } = this.props;
+    const products = filteredProducts.filter((product) =>
+      searchedProducts.includes(product)
+    );
     return (
-      <div>
+      <div id="all-products-container">
         <h1>All Products</h1>
-        <CategoryMenu />
-        <ul>
+        <div id="search-and-filter">
+          <SearchBar />
+          <CategoryMenu />
+        </div>
+        <ul id="all-items">
           {products.map((product) => {
             return (
               <div key={product.id}>
                 <li key={product.id}>
-                  {" "}
-                  <Link to={`/products/${product.id}`} key={product.id}>
-                    <img src={`${product.imageUrl}`} /> {product.title}{" "}
+                  <Link
+                    to={`/products/${product.id}`}
+                    key={product.id}
+                    className="item"
+                  >
+                    <h2>{product.title}</h2>
+                    <img src={`${product.imageUrl}`} />
                   </Link>
                 </li>
                 <p>${product.price}</p>
@@ -39,9 +47,32 @@ export class AllProducts extends React.Component {
   }
 }
 
+const filterProducts = (state, selectedCategory) => {
+  if (selectedCategory === "all") {
+    return state.products;
+  }
+  return state.products.filter((product) => {
+    const sameCategory = product.categories.filter((category) => {
+      return category.name === selectedCategory;
+    });
+    return sameCategory.length > 0;
+  });
+};
+
+const searchProducts = (state, searchTerm) => {
+  if (searchTerm === "") {
+    return state.products;
+  }
+  return state.products.filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+};
+
 const mapState = (state) => {
   return {
     products: state.products,
+    filteredProducts: filterProducts(state, state.selectedCategory),
+    searchedProducts: searchProducts(state, state.searchTerm),
   };
 };
 
