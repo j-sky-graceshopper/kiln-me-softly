@@ -7,6 +7,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <h1>Kiln Me Softly</h1>
     <nav>
+      <Link to="/home">Home</Link>
+      <Link to="/products">Shop All Products</Link>
+      <Link to="/add">Add Products</Link> {/* make show only for admins*/}
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}

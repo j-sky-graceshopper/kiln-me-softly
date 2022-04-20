@@ -15,14 +15,18 @@ class AllProducts extends React.Component {
       <div>
         <h1>All Products</h1>
         <CategoryMenu />
-        <ul>
+        <ul id="all-items">
           {filteredProducts.map((product) => {
             return (
               <div key={product.id}>
                 <li key={product.id}>
-                  {" "}
-                  <Link to={`/products/${product.id}`} key={product.id}>
-                    <img src={`${product.imageUrl}`} /> {product.title}{" "}
+                  <Link
+                    to={`/products/${product.id}`}
+                    key={product.id}
+                    className="item"
+                  >
+                    <h2>{product.title}</h2>
+                    <img src={`${product.imageUrl}`} />
                   </Link>
                 </li>
                 <p>${product.price}</p>
