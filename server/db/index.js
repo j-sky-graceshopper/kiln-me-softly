@@ -6,6 +6,7 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const Review = require("./models/Review");
 const Category = require("./models/Category");
+const Order = require("./models/Order");
 
 //associations
 Product.belongsToMany(
@@ -21,6 +22,12 @@ User.hasMany(Review);
 Review.belongsTo(Product, { foreignKey: { allowNull: false } });
 Product.hasMany(Review);
 
+Order.belongsTo(Product, { foreignKey: { allowNull: false } });
+Product.hasMany(Order);
+
+Order.belongsTo(User);
+User.hasMany(Order);
+
 module.exports = {
   db,
   models: {
@@ -28,5 +35,6 @@ module.exports = {
     Product,
     Review,
     Category,
+    Order,
   },
 };

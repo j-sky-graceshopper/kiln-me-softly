@@ -1,8 +1,11 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Product = db.define("product", {
-  price: {
+const Order = db.define("order", {
+  guestUser: {
+    type: Sequelize.STRING,
+  },
+  finalPrice: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {
@@ -17,10 +20,10 @@ const Product = db.define("product", {
       min: 0,
     },
   },
-  completed: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
+  status: {
+    type: Sequelize.ENUM("Created", "Processing", "Cancelled", "Completed"),
+    defaultValue: "Created",
   },
 });
 
-module.exports = Product;
+module.exports = Order;
