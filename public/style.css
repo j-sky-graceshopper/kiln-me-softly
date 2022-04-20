@@ -12,7 +12,7 @@ label {
 
 #home {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 #home p {
@@ -53,6 +53,13 @@ form div {
   display: inline-block;
 }
 
+#all-products-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
 #all-items {
   display: flex;
   flex-wrap: wrap;
@@ -71,4 +78,25 @@ form div {
 
 li {
   list-style: none;
+}
+
+#search-and-filter {
+  padding: 10px;
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+}
+#search-and-filter input, select {
+  width: 100%;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+#search-and-filter label {
+  margin-bottom: 12px;
+  display: inline-block;
+  margin-right: 18px;
+  font-weight: bold;
 }

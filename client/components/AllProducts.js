@@ -15,12 +15,13 @@ class AllProducts extends React.Component {
     const products = filteredProducts.filter((product) =>
       searchedProducts.includes(product)
     );
-    console.log(searchedProducts);
     return (
-      <div>
+      <div id="all-products-container">
         <h1>All Products</h1>
-        <SearchBar></SearchBar>
-        <CategoryMenu />
+        <div id="search-and-filter">
+          <SearchBar />
+          <CategoryMenu />
+        </div>
         <ul id="all-items">
           {products.map((product) => {
             return (
