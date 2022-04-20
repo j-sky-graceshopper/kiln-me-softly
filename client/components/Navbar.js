@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 import auth from "../store/auth";
+import CartIcon from "./CartIcon";
 
 const Navbar = ({ handleClick, isLoggedIn, auth }) => (
   <div>
@@ -31,6 +32,7 @@ const Navbar = ({ handleClick, isLoggedIn, auth }) => (
           <Link to="/products">Shop All Products</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          <CartIcon />
         </div>
       )}
     </nav>
