@@ -17,6 +17,14 @@ const AuthForm = (props) => {
           </label>
           <input name="username" type="text" />
         </div>
+        {name === "signup" ? (
+          <div>
+            <label htmlFor="email">
+              <small>Email address</small>
+            </label>
+            <input name="email" type="text" />
+          </div>
+        ) : null}
         <div>
           <label htmlFor="password">
             <small>Password</small>
@@ -62,7 +70,8 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name;
       const username = evt.target.username.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(username, password, formName));
+      const email = evt.target.email ? evt.target.email.value : null;
+      dispatch(authenticate(username, email, password, formName));
     },
   };
 };

@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
+import auth from "../store/auth";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, auth }) => (
   <div>
     <nav>
       <Link to="/home">
@@ -18,7 +19,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <Link to="/products">Shop All Products</Link>
-          <Link to="/add">Add Products</Link> {/* make show only for admins*/}
+          {auth.isAdmin ? <Link to="/add">Add Products</Link> : null}
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -43,6 +44,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    auth: state.auth,
   };
 };
 
