@@ -41,6 +41,11 @@ nav {
   margin: 0 200px 0 20px;
 }
 
+.icon {
+  height: 32px;
+  width: 32px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;

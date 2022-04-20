@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Add } from "tone";
 import { singleProductThunk } from "../store/singleProduct";
+import AddToCart from "./AddToCart";
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -16,6 +18,7 @@ class SingleProduct extends Component {
         <img src={product.imageUrl} />
         <h3>Price: ${product.price}</h3>
         <p>{product.description}</p>
+        <AddToCart product={product} />
         <h3>Reviews:</h3>
         {reviews.length === 0 ? (
           <p>No reviews yet.</p>

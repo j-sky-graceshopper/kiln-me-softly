@@ -1,26 +1,25 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
 
-class CartIcon extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      itemsInCart: 0,
-    };
-  }
+export default function CartIcon() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const [itemsInCart, setItemsInCart] = useState(cart.length);
 
-  componentDidMount() {
-    const cartFromLocalStorage = JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    );
-    this.setState({
-      itemsInCart: cartFromLocalStorage.length,
+  useEffect(() => {
+    window.addEventListener("click", (event) => {
+      if (event.target.id === "add-to-cart") {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        setItemsInCart(cart.length);
+      }
     });
-  }
+  });
 
-  render() {
-    return <p>{this.state.itemsInCart}</p>;
-  }
+  return (
+    <div>
+      <img
+        className="icon"
+        src="https://img.icons8.com/ios-glyphs/344/favorite-cart.png"
+      />
+      {itemsInCart}
+    </div>
+  );
 }
-
-export default connect(null, null)(CartIcon);
