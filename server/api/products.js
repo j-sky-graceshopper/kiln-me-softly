@@ -14,7 +14,14 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    res.status(201).send(await Product.create(req.body));
+    const newProduct = await Product.create(req.body.product);
+    const category = await Category.findOne({
+      where: {
+        name: req.body.categories,
+      },
+    });
+    await newProduct.addCategory(category.id);
+    res.status(201).send(newProduct);
   } catch (err) {
     next(err);
   }
@@ -33,13 +40,13 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
-router.put("/:productId", async ( req, res,next) => {
+router.put("/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId)
-    res.send(await product.update(req.body))
+    const product = await Product.findByPk(req.params.productId);
+    res.send(await product.update(req.body));
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-module.exports = router
+module.exports = router;

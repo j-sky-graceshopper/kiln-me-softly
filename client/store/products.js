@@ -25,12 +25,6 @@ const updateProduct = (product) => ({
   product,
 });
 
-//thunk
-//   return {
-//     type: ADD_PRODUCT,
-//     product,
-//   };
-// };
 
 //thunks
 export const fetchProducts = () => {
@@ -41,13 +35,15 @@ export const fetchProducts = () => {
   };
 };
 
-export const addProduct = (product, history) => {
+export const addProduct = (product, categories, history) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/products", product);
+      const { data } = await axios.post("/api/products", { product, categories });
+      console.log("data", data);
       dispatch(_addProduct(data));
-      history.push("/");
+      history.push("/products");
     } catch (err) {
+      console.log("product", product, categories)
       console.log("There was an error creating a product", err);
     }
   };
@@ -65,11 +61,6 @@ export const updateSingleProduct = (product, history) => {
   };
 };
 
-//combined reducer
-//probabbly need to add the combined reducer added to /store/index.js
-//   };
-// };
-
 //add to the combined reducer in /store/index.js
 export default function AllProductsReducer(state = [], action) {
   switch (action.type) {
@@ -85,12 +76,3 @@ export default function AllProductsReducer(state = [], action) {
       return state;
   }
 }
-//   switch (action.type) {
-//     case SET_ALLPRODUCTS:
-//       return action.products;
-//     case ADD_PRODUCT:
-//       return [...state, action.product];
-//     default:
-//       return state;
-//   }
-// }

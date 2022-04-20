@@ -10,6 +10,7 @@ import AllProducts from "./components/AllProducts";
 import UpdateProduct from "./components/UpdateProduct";
 import auth from "./store/auth";
 
+
 /**
  * COMPONENT
  */
