@@ -1,4 +1,4 @@
-"use strict";
+const { faker } = require("@faker-js/faker");
 
 const {
   db,
@@ -56,6 +56,13 @@ async function seed() {
         "ficus, spider plant, or succulent, your plants will thrive in this pot",
       price: 86.75,
       inventory: 40,
+    }),
+    Product.create({
+      title: "Decorative vessel",
+      description:
+        "Don't put any food or plants in this, just look at it. And no touching.",
+      price: 86753.09,
+      inventory: 1,
     }),
   ]);
 

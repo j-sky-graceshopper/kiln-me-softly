@@ -10,9 +10,42 @@ label {
   display: block;
 }
 
+#home {
+  display: flex;
+  align-items: center;
+}
+
+#home p {
+  margin: 30px;
+  font-size: 30px;
+  line-height: 1.5;
+  font-weight: 200;
+}
+
+#home-img {
+  margin: 25px 25px 0 25px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+#logo {
+  justify-self: flex-start;
+  font-family: 'Quicksand', sans-serif;
+  color: gray;
+  font-size: 36pt;
+  margin: 0 200px 0 20px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
+  font-size: 24px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 form div {
