@@ -3,6 +3,8 @@ import axios from 'axios'
 //action type
 const SET_ALLPRODUCTS = "SET_ALLPRODUCTS"
 const ADD_PRODUCT = "ADD_PRODUCT";
+const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+
 
 //action creator
 
@@ -13,13 +15,19 @@ const setAllProducts = (products) => {
     }
 }
 
+
 export const _addProduct = (product) => {
     return {
         type: ADD_PRODUCT,
         product,
     }
 }
- 
+
+const updateProduct = (product) => ({
+    type: UPDATE_PRODUCT,
+    product
+  })
+  
 //thunk
 
 export const fetchProducts = () => {
@@ -29,6 +37,7 @@ export const fetchProducts = () => {
         dispatch(setAllProducts(data))
     }
 }
+
 
 export const addProduct = (product, history) => {
     return async (dispatch) => {
@@ -42,6 +51,19 @@ export const addProduct = (product, history) => {
     }
 }
 
+export const updateSingleProduct = (product, history) => {
+    return async (dispatch) => {
+      try {
+        console.log("Thunk activated!")
+        const {data} = await axios.put(`/api/products/${product.id}`, product)
+        dispatch (updateProduct(data))
+        history.push("/products")
+      } catch (err) {
+        console.log("There's an error in updateSingleProduct Thunk!", err)
+      }
+    }
+  }
+
 
 //combined reducer
 //probabbly need to add the combined reducer added to /store/index.js 
@@ -52,6 +74,10 @@ export default function AllProductsReducer(state = [], action) {
             return action.products
         case ADD_PRODUCT:
             return [...state, action.product];
+        case UPDATE_PRODUCT: 
+            return state.map((product) => {
+                product.id === action.product.id ? action.product : product
+            })
         default: 
             return state;
     }

@@ -38,6 +38,15 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
+router.put("/:productID", async ( req, res,next) => {
+  try {
+    const product = await Product.findByPk(req.params.id)
+    res.send(await product.update(req.body))
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
 
 
