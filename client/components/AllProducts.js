@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
+import AddToCart from "./AddToCart";
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -37,7 +38,7 @@ class AllProducts extends React.Component {
                   </Link>
                 </li>
                 <p>${product.price}</p>
-                <button type="button">Add to Cart</button>
+                <AddToCart product={product} />
               </div>
             );
           })}
