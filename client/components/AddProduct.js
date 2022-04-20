@@ -20,7 +20,7 @@ class AddProduct extends React.Component {
   }
 
   componentDidMount() {
-      this.props.loadCategories();
+    this.props.loadCategories();
   }
 
   handleChange(event) {
@@ -32,7 +32,10 @@ class AddProduct extends React.Component {
   handleSubmit(event) {
     const { title, description, imageUrl, price, inventory } = this.state;
     event.preventDefault();
-    this.props.addProduct({ title, description, imageUrl, price, inventory }, this.state.categories);
+    this.props.addProduct(
+      { title, description, imageUrl, price, inventory },
+      this.state.categories
+    );
   }
 
   render() {
@@ -81,7 +84,6 @@ class AddProduct extends React.Component {
           />
           <br />
 
-  
           <div>
             <label htmlFor="categories">Select Category:</label>
             <select
@@ -122,7 +124,8 @@ const mapState = ({ categories }) => {
 
 const mapDispatch = (dispatch, { history }) => ({
   loadCategories: () => dispatch(fetchCategories()),
-  addProduct: (product, categories) => dispatch(addProduct(product, categories, history)),
+  addProduct: (product, categories) =>
+    dispatch(addProduct(product, categories, history)),
 });
 
 export default connect(mapState, mapDispatch)(AddProduct);
