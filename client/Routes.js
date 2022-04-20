@@ -23,22 +23,6 @@ class Routes extends Component {
 
     return (
       <div>
-<<<<<<< HEAD
-        <Switch>
-          <Route exact path="/products" component={AllProducts} />
-          <Route path="/add" component={AddProduct} />
-          <Route exact path="/products" component={AllProducts} />
-          <Route exact path="/products/:productId" component={SingleProduct} />
-          <Route
-            exact
-            path="/edit/products/:productId"
-            component={UpdateProduct}
-          />
-          <Route path="/home" component={Home} />
-        </Switch>
-
-=======
->>>>>>> main
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/products" component={AllProducts} />

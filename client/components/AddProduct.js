@@ -2,6 +2,7 @@ import React from "react";
 import { addProduct } from "../store/products";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchCategories } from "../store/categories";
 
 class AddProduct extends React.Component {
   constructor() {
@@ -9,13 +10,17 @@ class AddProduct extends React.Component {
     this.state = {
       title: "",
       description: "",
-      imageUrl: null,
-      price: null,
-      inventory: null,
-      //category: [],
+      imageUrl: "",
+      price: 0,
+      inventory: 0,
+      categories: "mug",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+      this.props.loadCategories();
   }
 
   handleChange(event) {
@@ -25,11 +30,13 @@ class AddProduct extends React.Component {
   }
 
   handleSubmit(event) {
+    const { title, description, imageUrl, price, inventory } = this.state;
     event.preventDefault();
-    this.props.addProduct({ ...this.state });
+    this.props.addProduct({ title, description, imageUrl, price, inventory }, this.state.categories);
   }
 
   render() {
+    const { categories } = this.props;
     return (
       <div className="add-product-form">
         <h1>Add Product</h1>
@@ -74,9 +81,23 @@ class AddProduct extends React.Component {
           />
           <br />
 
-          {/* <label htmlFor="">Select Categories:</label>
-          <input />
-          <br /><br /> */}
+  
+          <div>
+            <label htmlFor="categories">Select Category:</label>
+            <select
+              name="categories"
+              id="categories"
+              onChange={this.handleChange}
+            >
+              {categories.map((category) => (
+                <option key={category.name} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <br />
+          <br />
 
           <button className="add-product" type="submit">
             Add Product
@@ -93,8 +114,15 @@ class AddProduct extends React.Component {
   }
 }
 
+const mapState = ({ categories }) => {
+  return {
+    categories,
+  };
+};
+
 const mapDispatch = (dispatch, { history }) => ({
-  addProduct: (product) => dispatch(addProduct(product, history)),
+  loadCategories: () => dispatch(fetchCategories()),
+  addProduct: (product, categories) => dispatch(addProduct(product, categories, history)),
 });
 
-export default connect(null, mapDispatch)(AddProduct);
+export default connect(mapState, mapDispatch)(AddProduct);
