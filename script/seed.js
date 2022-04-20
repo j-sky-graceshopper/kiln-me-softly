@@ -1,4 +1,4 @@
-"use strict";
+const { faker } = require("@faker-js/faker");
 
 const {
   db,
@@ -48,6 +48,8 @@ async function seed() {
       title: "Dog bowl",
       description: "Your pup will love drinking water from this bowl",
       price: 8.75,
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0481/8921/0787/products/Saddle_Cereal_Bowl.jpg?v=1624636802",
       inventory: 500,
     }),
     Product.create({
@@ -55,7 +57,27 @@ async function seed() {
       description:
         "ficus, spider plant, or succulent, your plants will thrive in this pot",
       price: 86.75,
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0481/8921/0787/products/dearbornsite_1000x1500.jpg?v=1624636802",
       inventory: 40,
+    }),
+    Product.create({
+      title: "Decorative vessel",
+      description:
+        "Don't put any food or plants in this, just look at it. And no touching.",
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0481/8921/0787/products/saffronsite_1000x1500.jpg?v=1624636802",
+      price: 86753.09,
+      inventory: 1,
+    }),
+    Product.create({
+      title: "Banorah",
+      description:
+        "Neither the banana nor the joke will ever get old. It’s basically a miracle.",
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0481/8921/0787/products/Banorahwebsite_1000x1500.jpg?v=1634343701",
+      price: 88.88,
+      inventory: 18,
     }),
   ]);
 

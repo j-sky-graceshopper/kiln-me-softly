@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCategories } from "../store/categories";
+import { selectCategory } from "../store/filter";
 
 class CategoryMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedCategory: "",
-    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -16,9 +14,7 @@ class CategoryMenu extends React.Component {
   }
 
   handleChange(evt) {
-    this.setState({
-      selectedCategory: evt.target.value,
-    });
+    this.props.filterByCategory(evt.target.value);
   }
 
   render() {
@@ -27,6 +23,7 @@ class CategoryMenu extends React.Component {
       <div>
         <label htmlFor="categories">Filter by category:</label>
         <select name="categories" id="categories" onChange={this.handleChange}>
+          <option value="all">All</option>
           {categories.map((category) => (
             <option key={category.name} value={category.name}>
               {category.name}
@@ -38,8 +35,9 @@ class CategoryMenu extends React.Component {
   }
 }
 
-const mapState = ({ categories }) => {
+const mapState = ({ categories, products }) => {
   return {
+    products,
     categories,
   };
 };
@@ -47,6 +45,7 @@ const mapState = ({ categories }) => {
 const mapDispatch = (dispatch) => {
   return {
     loadCategories: () => dispatch(fetchCategories()),
+    filterByCategory: (category) => dispatch(selectCategory(category)),
   };
 };
 
