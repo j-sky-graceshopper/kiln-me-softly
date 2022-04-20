@@ -7,6 +7,7 @@ import AllProductsReducer from "./products";
 import singleProductReducer from "./singleProduct";
 import categories from "./categories";
 import selectedCategory from "./filter";
+import searchTerm from "./search";
 
 const reducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   product: singleProductReducer,
   categories,
   selectedCategory,
+  searchTerm,
 });
 
 const middleware = composeWithDevTools(

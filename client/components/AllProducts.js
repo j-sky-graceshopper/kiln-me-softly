@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
+import SearchBar from "./SearchBar";
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -10,13 +11,18 @@ class AllProducts extends React.Component {
   }
 
   render() {
-    const { products, filteredProducts } = this.props;
+    const { filteredProducts, searchedProducts } = this.props;
+    const products = filteredProducts.filter((product) =>
+      searchedProducts.includes(product)
+    );
+    console.log(searchedProducts);
     return (
       <div>
         <h1>All Products</h1>
+        <SearchBar></SearchBar>
         <CategoryMenu />
         <ul id="all-items">
-          {filteredProducts.map((product) => {
+          {products.map((product) => {
             return (
               <div key={product.id}>
                 <li key={product.id}>
@@ -52,10 +58,20 @@ const filterProducts = (state, selectedCategory) => {
   });
 };
 
+const searchProducts = (state, searchTerm) => {
+  if (searchTerm === "") {
+    return state.products;
+  }
+  return state.products.filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+};
+
 const mapState = (state) => {
   return {
     products: state.products,
     filteredProducts: filterProducts(state, state.selectedCategory),
+    searchedProducts: searchProducts(state, state.searchTerm),
   };
 };
 
