@@ -4,22 +4,19 @@ import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 
-// Notice that we're exporting the AllStudents component twice. The named export
-// (below) is not connected to Redux, while the default export (at the very
-// bottom) is connected to Redux. Our tests should cover _both_ cases.
-export class AllProducts extends React.Component {
+class AllProducts extends React.Component {
   componentDidMount() {
     this.props.displayProducts();
   }
+
   render() {
-    const { products } = this.props;
-    console.log(products);
+    const { products, filteredProducts } = this.props;
     return (
       <div>
         <h1>All Products</h1>
         <CategoryMenu />
         <ul>
-          {products.map((product) => {
+          {filteredProducts.map((product) => {
             return (
               <div key={product.id}>
                 <li key={product.id}>
@@ -39,9 +36,22 @@ export class AllProducts extends React.Component {
   }
 }
 
+const filterProducts = (state, selectedCategory) => {
+  if (selectedCategory === "all") {
+    return state.products;
+  }
+  return state.products.filter((product) => {
+    const sameCategory = product.categories.filter((category) => {
+      return category.name === selectedCategory;
+    });
+    return sameCategory.length > 0;
+  });
+};
+
 const mapState = (state) => {
   return {
     products: state.products,
+    filteredProducts: filterProducts(state, state.selectedCategory),
   };
 };
 
