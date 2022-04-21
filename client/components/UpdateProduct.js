@@ -20,15 +20,14 @@ export class UpdateProduct extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-      this.props.fetchProduct(this.props.match.params.productId)
+    this.props.fetchProduct(this.props.match.params.productId);
   }
   componentDidUpdate() {
-    console.log('componentDidUpdate')
-    const product = this.props.product
+    const product = this.props.product;
     if (product.id && this.state.id !== product.id) {
-        this.setState(product)
+      this.setState(product);
     }
-}
+  }
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -37,25 +36,20 @@ export class UpdateProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const product = this.state
-    this.props.editProduct(product)
-   
+    const product = this.state;
+    this.props.editProduct(product);
   }
 
   render() {
-      const { description, imageUrl, inventory, price, title } = this.state
-      const { handleChange, handleSubmit } = this
-      
+    const { description, imageUrl, inventory, price, title } = this.state;
+    const { handleChange, handleSubmit } = this;
+
     return (
       <div className="update-product-form">
         <h1>Edit Product</h1>
         <form id="edit-product" onSubmit={handleSubmit}>
           <label htmlFor="title">Product Name:</label>
-          <input
-            name="title"
-            onChange={handleChange}
-            value={title}
-          />
+          <input name="title" onChange={handleChange} value={title} />
           <br />
 
           <label htmlFor="description">Description:</label>
@@ -67,34 +61,24 @@ export class UpdateProduct extends React.Component {
           <br />
 
           <label htmlFor="image">Add Image:</label>
-          <input
-            name="imageUrl"
-            onChange={handleChange}
-            value={imageUrl}
-          />
+          <input name="imageUrl" onChange={handleChange} value={imageUrl} />
           <br />
 
           <label htmlFor="price">Set Price:</label>
-          <input
-            name="price"
-            onChange={handleChange}
-            value={price}
-          />
+          <input name="price" onChange={handleChange} value={price} />
           <br />
 
           <label htmlFor="inventory">Inventory:</label>
-          <input
-            name="inventory"
-            onChange={handleChange}
-            value={inventory}
-          />
+          <input name="inventory" onChange={handleChange} value={inventory} />
           <br />
 
           {/* <label htmlFor="">Select Categories:</label>
           <input />
           <br /><br /> */}
 
-          <button className="add-product" type="submit">Submit</button>
+          <button className="add-product" type="submit">
+            Submit
+          </button>
           <br />
           <br />
         </form>
@@ -109,14 +93,14 @@ export class UpdateProduct extends React.Component {
 }
 
 const mapState = (state) => {
-    return {
-        product: state.product
-    }
-}
+  return {
+    product: state.product,
+  };
+};
 
 const mapDispatch = (dispatch, { history }) => ({
-    fetchProduct: (id) => dispatch(singleProductThunk(id)),
-    editProduct: (product) => dispatch(updateSingleProduct(product, history))
+  fetchProduct: (id) => dispatch(singleProductThunk(id)),
+  editProduct: (product) => dispatch(updateSingleProduct(product, history)),
 });
 
 export default connect(mapState, mapDispatch)(UpdateProduct);
