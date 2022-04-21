@@ -9,41 +9,38 @@ const Navbar = ({ handleClick, isLoggedIn, auth }) => (
   <div>
     <nav>
       <Link to="/home">
-        {" "}
         <h1 id="logo">
           KILN ME<br></br>SOFTLY
         </h1>
       </Link>
 
+      <Link to="/home">Home</Link>
+      <Link to="/products">Shop All Products</Link>
+
       {isLoggedIn ? (
-        <div>
+        <>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Shop All Products</Link>
           {auth.isAdmin ? <Link to="/add">Add Products</Link> : null}
           <a href="#" onClick={handleClick}>
             Logout
           </a>
-          <Link to="/cart"><CartIcon /></Link>
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Shop All Products</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-          <Link to="/cart"><CartIcon /></Link>
-        </div>
+        </>
       )}
+
+      <Link to="/cart" id="cart-icon">
+        <CartIcon />
+      </Link>
     </nav>
     <hr />
   </div>
 );
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
