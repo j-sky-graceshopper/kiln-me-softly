@@ -95,6 +95,15 @@ async function seed() {
 
   console.log(`seeded ${products.length} products`);
 
+  // add to order
+  await users[0].addToCart(products[0]);
+  await users[0].addToCart(products[0]);
+  await users[0].addToCart(products[2]);
+  await users[1].addToCart(products[1]);
+  await users[1].addToCart(products[1]);
+  await users[1].addToCart(products[1]);
+  await users[1].addToCart(products[3]);
+
   // Creating Reviews
   const reviews = await Promise.all([
     Review.create({
