@@ -5,7 +5,6 @@ body {
 a {
   text-decoration: none;
   color: darkcyan;
-
 }
 
 label {
@@ -40,12 +39,17 @@ nav {
   font-family: 'Quicksand', sans-serif;
   color: gray;
   font-size: 36pt;
-  margin: 0 200px 0 20px;
+  margin: 0 0px 0 20px;
+  min-width: 200px;
 }
 
 .icon {
-  height: 32px;
-  width: 32px;
+  height: 42px;
+  width: 42px;
+}
+
+#cart-icon {
+  min-width: 60px;
 }
 
 nav a {
@@ -79,13 +83,22 @@ form div {
 .cart-display {
   display: flex;
   flex-direction: column;
+  width: 70%;
+  margin: auto;
+  align-items: flex-start;
 }
 
 .cart-item {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 10px;
+}
+
+#cart-title {
+  text-align: center;
+  margin: 50px 0 50px 0;
 }
 
 .cart-display img {
@@ -120,23 +133,24 @@ li {
 
 #search-and-filter {
   padding: 10px;
-  width: 40%;
+  width: 70%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   font-size: 18px;
+  gap: 10px;
 }
+
 #search-and-filter input, select {
   width: 100%;
   font-size: 18px;
-  margin: 0;
-  padding: 0;
+  padding: 4px;
 }
 
 #search-and-filter label {
   margin-bottom: 12px;
-  display: inline-block;
   margin-right: 18px;
   font-weight: bold;
+  min-width: 200px;
 }
 
 .add-product-form {

@@ -26,14 +26,17 @@ class Cart extends React.Component {
 
     return (
       <div>
+        <h1 id="cart-title">Your Shopping Cart</h1>
         <div className="cart-display">
           {uniqueItems.map((item) => (
             <div className="cart-item" key={item.id}>
               <img src={item.imageUrl} />
               <h3>{item.title}</h3>
               <li>Price: ${item.price}</li>
-              <li>Quantity: {itemAmount[item.title]} <br /><br />
-              Subtotal: ${(item.price * itemAmount[item.title]).toFixed(2)}
+              <li>
+                Quantity: {itemAmount[item.title]} <br />
+                <br />
+                Subtotal: ${(item.price * itemAmount[item.title]).toFixed(2)}
               </li>
               {/* <p>Subtotal: ${item.price * itemAmount[item.title]}</p> */}
             </div>
