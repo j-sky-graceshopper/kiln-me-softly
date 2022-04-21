@@ -14,8 +14,13 @@ const setAllCategories = (categories) => {
 //thunk
 export const fetchCategories = () => {
   return async (dispatch) => {
-    const { data } = await axios.get("/api/categories");
-    dispatch(setAllCategories(data));
+    try {
+      const { data } = await axios.get("/api/categories");
+      dispatch(setAllCategories(data));
+    } catch (err) {
+      console.log(err)
+    }
+  
   };
 };
 

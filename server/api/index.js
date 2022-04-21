@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 router.use("/categories", require("./categories"));
 router.use("/products", require("./products"));
+router.use("/cart", require("./cart"))
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
