@@ -96,6 +96,7 @@ export class UpdateProduct extends React.Component {
 
           <button className="add-product" type="submit">Submit</button>
           <br />
+          <br />
         </form>
         <Link to="/products">
           <button className="cancel-btn" type="button">

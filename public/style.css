@@ -4,6 +4,8 @@ body {
 
 a {
   text-decoration: none;
+  color: darkcyan;
+
 }
 
 label {
@@ -51,6 +53,15 @@ nav a {
   margin: 1em;
   font-size: 24px;
   font-family: 'Quicksand', sans-serif;
+  color: darkcyan;
+}
+
+nav a:hover {
+  color: rgb(137, 198, 198);
+}
+
+a:hover {
+  color: rgb(137, 198, 198);
 }
 
 form div {
@@ -65,7 +76,29 @@ form div {
   font-family: 'Quicksand', sans-serif;
 }
 
-#all-items {
+.cart-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+}
+
+.cart-display img {
+  width: 200px;
+}
+
+.total {
+  display: flex;
+  justify-content: right;
+  margin-right: 60px;
+}
+
+#all-items, .cart-display {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -104,4 +137,34 @@ li {
   display: inline-block;
   margin-right: 18px;
   font-weight: bold;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  margin-left: 200px;
+  margin-right: 200px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.update-product-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  margin-left: 200px;
+  margin-right: 200px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+button {
+  background-color: white;
+  border: 1px solid black;
+  font-family: 'Quicksand', sans-serif;
+}
+
+button:hover {
+  background-color: lightcyan;
 }
