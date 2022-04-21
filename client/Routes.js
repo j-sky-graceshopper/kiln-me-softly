@@ -31,14 +31,14 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} /> 
             {auth.isAdmin ? (
-              <div>
+              <>
                 <Route
                   exact
                   path="/edit/products/:productId"
                   component={UpdateProduct}
                 />
                 <Route path="/add" component={AddProduct} />
-              </div>
+              </>
             ) : null}
             <Redirect to="/home" />
           </Switch>
