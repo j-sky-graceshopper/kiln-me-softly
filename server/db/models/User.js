@@ -2,7 +2,8 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
+const { Order, Item } = require("./Order");
+const Product = require("./Product");
 
 const SALT_ROUNDS = 5;
 
@@ -42,6 +43,46 @@ User.prototype.correctPassword = function (candidatePwd) {
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
+
+User.prototype.getCart = async function () {
+  let [cart, created] = await Order.findOrCreate({
+    where: { userId: this.id, status: "Created" },
+  });
+  return Order.findByPk(cart.id, {
+    include: [{ model: Item, include: [Product] }],
+  });
+};
+
+User.prototype.removeFromCart = async function (product) {
+  const cart = await this.getCart();
+  const item = cart.items.find((item) => item.productId === product.id);
+  item.quantity--;
+  if (item.quantity) {
+    await item.save();
+  } else {
+    await item.destroy();
+  }
+  return this.cart();
+};
+
+User.prototype.addToCart = async function (product) {
+  const cart = await this.getCart();
+  let item = cart.items.find((item) => item.productId === product.id);
+  if (item) {
+    item.quantity++;
+    await item.save();
+  } else {
+    await Item.create({ productId: product.id, orderId: cart.id });
+  }
+  return this.getCart();
+};
+
+// User.prototype.checkout = async function (product) {
+//   const cart = await this.getCart();
+// cart.status = 'Processing';
+// await cart.save();
+//
+// }
 
 /**
  * classMethods
