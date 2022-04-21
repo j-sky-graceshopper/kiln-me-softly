@@ -4,7 +4,9 @@ import { fetchCart } from "../store/cart"
 
 class Cart extends React.Component {
   componentDidMount() {
-    this.props.loadCart();
+    if (this.props.isLoggedIn) {
+      this.props.loadCart();
+    }
   }
 
   render() {
