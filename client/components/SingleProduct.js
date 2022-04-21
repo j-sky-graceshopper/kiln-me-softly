@@ -7,7 +7,7 @@ import auth from "../store/auth"
 class SingleProduct extends Component {
   constructor(props) {
     super(props)
-    // this.handleLink = this.handleLink.bind(this)
+    this.handleLink = this.handleLink.bind(this)
   }
   componentDidMount() {
     this.props.loadSingleProdcut(this.props.match.params.productId);
