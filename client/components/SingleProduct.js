@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Add } from "tone";
 import { singleProductThunk } from "../store/singleProduct";
 import AddToCart from "./AddToCart";
 

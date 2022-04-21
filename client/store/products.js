@@ -29,7 +29,6 @@ const updateProduct = (product) => ({
 //thunks
 export const fetchProducts = () => {
   return async (dispatch) => {
-    console.log("Thunk activated!");
     const { data } = await axios.get("/api/products");
     dispatch(setAllProducts(data));
   };
@@ -39,11 +38,9 @@ export const addProduct = (product, categories, history) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post("/api/products", { product, categories });
-      console.log("data", data);
       dispatch(_addProduct(data));
       history.push("/products");
     } catch (err) {
-      console.log("product", product, categories)
       console.log("There was an error creating a product", err);
     }
   };

@@ -105,6 +105,7 @@ class AddProduct extends React.Component {
             Add Product
           </button>
           <br />
+          <br />
         </form>
         <Link to="/products">
           <button className="cancel-btn" type="button">
