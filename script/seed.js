@@ -73,7 +73,7 @@ async function seed() {
         "Don't put any food or plants in this, just look at it. And no touching.",
       imageUrl:
         "https://cdn.shopify.com/s/files/1/0481/8921/0787/products/saffronsite_1000x1500.jpg?v=1624636802",
-      price: 86753.09,
+      price: 987.65,
       inventory: 1,
     }),
     Product.create({
@@ -87,6 +87,16 @@ async function seed() {
     }),
   ]);
 
+  for (let i = 0; i < 14; i++) {
+    let product = await Product.create({
+      title: faker.random.word(),
+      description: faker.lorem.sentence(),
+      imageUrl: faker.image.image(800, 1000),
+      price: Math.random(),
+      inventory: Math.floor(Math.random() * 100),
+    });
+    products.push(product);
+  }
   // add random category to each product
   products.forEach(async (product) => {
     const catId = Math.floor(Math.random() * categories.length + 1);
