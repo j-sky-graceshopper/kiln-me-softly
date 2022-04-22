@@ -16,6 +16,7 @@ export const fetchCart = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
+      console.log("TOKEN", token);
       if (token) {
         const res = await axios.get("/api/cart", {
           headers: {

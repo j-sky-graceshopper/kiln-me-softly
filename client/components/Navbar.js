@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import auth from "../store/auth";
+// import auth from "../store/auth";
 import CartIcon from "./CartIcon";
 
 const Navbar = ({ handleClick, isLoggedIn, auth }) => (
