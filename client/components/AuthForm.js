@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
+import { fetchCart } from "../store/cart";
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  useEffect(() => {
+    props.loadCart();
+  }, []);
 
   return (
     <div>
@@ -73,6 +77,7 @@ const mapDispatch = (dispatch) => {
       const email = evt.target.email ? evt.target.email.value : null;
       dispatch(authenticate(username, email, password, formName));
     },
+    loadCart: () => dispatch(fetchCart()),
   };
 };
 

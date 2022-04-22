@@ -29,7 +29,7 @@ class Routes extends Component {
               component={SingleProduct}
             />
             <Route path="/home" component={Home} />
-            <Route path="/cart" component={Cart} /> 
+            <Route path="/cart" component={Cart} />
             {auth.isAdmin ? (
               <>
                 <Route
@@ -51,7 +51,7 @@ class Routes extends Component {
               component={SingleProduct}
             />
             <Route path="/home" component={Home} />
-            <Route path="/cart" component={Cart} /> 
+            <Route path="/cart" component={Cart} />
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
