@@ -58,6 +58,7 @@ nav a {
   font-size: 24px;
   font-family: 'Quicksand', sans-serif;
   color: darkcyan;
+  white-space: nowrap;
 }
 
 nav a:hover {
@@ -182,4 +183,10 @@ button {
 
 button:hover {
   background-color: lightcyan;
+}
+
+@media screen and (max-width: 1100px) {
+  nav {
+    flex-direction: column;
+  }
 }
