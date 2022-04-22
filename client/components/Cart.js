@@ -1,16 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart"
+import { fetchCart } from "../store/cart";
 
 class Cart extends React.Component {
   componentDidMount() {
-    if (this.props.isLoggedIn) {
-      this.props.loadCart();
-    }
+    this.props.loadCart();
   }
 
   render() {
-    let items;     
+    let items;
 
     if (this.props.isLoggedIn) {
       items = this.props.cart.items || [];
@@ -18,7 +16,6 @@ class Cart extends React.Component {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
       const itemAmount = {};
 
-    
       for (let i = 0; i < cart.length; i++) {
         if (itemAmount[cart[i].title]) {
           itemAmount[cart[i].title]++;
@@ -31,17 +28,18 @@ class Cart extends React.Component {
       const uniqueItems = [
         ...new Map(cart.map((item) => [item[key], item])).values(),
       ];
-      
-      items = uniqueItems.map(item => ({"product": item, "quantity": itemAmount[item.title]}))
+
+      items = uniqueItems.map((item) => ({
+        product: item,
+        quantity: itemAmount[item.title],
+      }));
     }
     let total = 0;
-    console.log("items", items)
     items.forEach((item) => {
       total += item.product.price * item.quantity;
     });
-    
-    return (
 
+    return (
       <div>
         <h1 id="cart-title">Your Shopping Cart</h1>
         <div className="cart-display">
@@ -68,15 +66,15 @@ class Cart extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCart : () => dispatch(fetchCart())
-  }
-}
+    loadCart: () => dispatch(fetchCart()),
+  };
+};
 const mapState = (state) => {
   return {
-    cart : state.cart,
+    cart: state.cart,
     isLoggedIn: !!state.auth.id,
-    auth : state.auth
-  }
-}
+    auth: state.auth,
+  };
+};
 
 export default connect(mapState, mapDispatch)(Cart);
