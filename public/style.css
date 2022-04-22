@@ -185,6 +185,19 @@ button:hover {
   background-color: lightcyan;
 }
 
+.singleProduct {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.singleProduct-info {
+  margin-left: 30px;
+}
+
+.singleProduct-info h1 {
+  margin-top: 0px;
+  
 @media screen and (max-width: 1100px) {
   nav {
     flex-direction: column;
