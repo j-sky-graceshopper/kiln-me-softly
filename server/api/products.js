@@ -1,7 +1,18 @@
 const router = require("express").Router();
+const res = require("express/lib/response");
 const {
   models: { Product, Review, Category },
 } = require("../db");
+
+// SECURITY MIDDLEWARE, 
+// const isAdmin = (req, res, next) => {
+//   console.log('isAdmin was called')
+// 	if (!req.user.isAdmin) {
+// 		return res.status(403).send('You shall not pass!')
+// 	} else {
+// 		next()
+// 	}
+// };
 
 router.get("/", async (req, res, next) => {
   try {
@@ -14,7 +25,9 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body.product);
+    // Finish this!
+    const { title, price, } = req.body.product 
+    const newProduct = await Product.create({ title, price, });
     const category = await Category.findOne({
       where: {
         name: req.body.categories,
