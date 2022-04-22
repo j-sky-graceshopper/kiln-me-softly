@@ -26,7 +26,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     // Finish this!
-    const { title, price, } = req.body.product 
+    const { title, price, } = req.body.product;
     const newProduct = await Product.create({ title, price, });
     const category = await Category.findOne({
       where: {
