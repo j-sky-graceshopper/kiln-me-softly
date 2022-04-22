@@ -29,7 +29,8 @@
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
-    "@faker-js/faker": "^6.1.2"
+    "@faker-js/faker": "^6.1.2",
+    "babel-loader": "^8.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
