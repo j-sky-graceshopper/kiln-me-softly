@@ -25,7 +25,6 @@ const updateProduct = (product) => ({
   product,
 });
 
-
 //thunks
 export const fetchProducts = () => {
   return async (dispatch) => {
@@ -37,7 +36,10 @@ export const fetchProducts = () => {
 export const addProduct = (product, categories, history) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/products", { product, categories });
+      const { data } = await axios.post("/api/products", {
+        product,
+        categories,
+      });
       dispatch(_addProduct(data));
       history.push("/products");
     } catch (err) {
@@ -66,9 +68,12 @@ export default function AllProductsReducer(state = [], action) {
     case ADD_PRODUCT:
       return [...state, action.product];
     case UPDATE_PRODUCT:
-      return state.map((product) => {
-        product.id === action.product.id ? action.product : product;
-      });
+      return [
+        ...state,
+        state.map((product) => {
+          product.id === action.product.id ? action.product : product;
+        }),
+      ];
     default:
       return state;
   }

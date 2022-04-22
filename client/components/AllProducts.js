@@ -5,19 +5,13 @@ import { fetchProducts } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
 import AddToCart from "./AddToCart";
-import auth from "../store/auth"
 
 class AllProducts extends React.Component {
   constructor(props) {
-    super(props)
-    this.handleLink = this.handleLink.bind(this)
+    super(props);
   }
   componentDidMount() {
     this.props.displayProducts();
-  }
-  handleLink(event) {
-    const id = event.target.getAttribute("value")
-    this.props.history.push(`/edit/products/${id}`)
   }
 
   render() {
@@ -25,7 +19,7 @@ class AllProducts extends React.Component {
     const products = filteredProducts.filter((product) =>
       searchedProducts.includes(product)
     );
-    const { auth } = this.props
+    const { auth } = this.props;
     return (
       <div id="all-products-container">
         <h1>All Products</h1>
@@ -36,24 +30,23 @@ class AllProducts extends React.Component {
         <ul id="all-items">
           {products.map((product) => {
             return (
-              <div key={product.id}>
-                <li key={product.id}>
-                  <Link
-                    to={`/products/${product.id}`}
-                    key={product.id}
-                    className="item"
-                  >
-                    <h2>{product.title}</h2>
-                    <img src={`${product.imageUrl}`} />
-                  </Link>
-                </li>
+              <div key={product.title}>
+                <Link
+                  to={`/products/${product.id}`}
+                  key={product.id}
+                  className="item"
+                >
+                  <h2>{product.title}</h2>
+                  <img src={`${product.imageUrl}`} />
+                </Link>
                 <p>${product.price}</p>
                 <AddToCart product={product} />
-                <div>
-                  {auth.isAdmin ? <button className="edit-product" type="button" value={product.id} onClick={this.handleLink}>Edit Product</button>: null}
-                </div>
+                {auth.isAdmin ? (
+                  <Link to={`/edit/products/${product.id}`}>
+                    <button className="edit-product">Edit Product</button>
+                  </Link>
+                ) : null}
               </div>
-
             );
           })}
         </ul>
