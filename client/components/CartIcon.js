@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
-import { me } from "../store/auth";
 
 class CartIcon extends React.Component {
   constructor(props) {
@@ -11,10 +10,7 @@ class CartIcon extends React.Component {
     };
   }
 
-  // murphy: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjUwNjM3MjI3fQ.ift_P6BgPUkXMCF7hIqXnxQ-3G-a8O_IIIx7H5CSTQ0
-  // cody:   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwNjM3MzY4fQ.Q1t0SHdu2QOFcEKjKCLaHjW2V41CFfsfwqETSFjidx0
   componentDidMount() {
-    this.props.loadInitialData();
     this.props.loadCart();
     const cart = this.props.cart.items || [];
     this.setState({
@@ -23,18 +19,17 @@ class CartIcon extends React.Component {
   }
 
   componentDidUpdate() {
-    // console.log("component updating");
+    // Logged in users
     if (this.props.isLoggedIn) {
       const cart = this.props.cart.items || [];
       const items = cart.reduce((accum, item) => accum + item.quantity, 0);
-      // console.log("CART", cart);
-      // console.log("STATE", this.state.itemsInCart, "ITEMS", items);
       if (items !== this.state.itemsInCart) {
         this.setState({
-          itemsInCart: cart.reduce((accum, item) => accum + item.quantity, 0),
+          itemsInCart: items,
         });
       }
     } else {
+      // unauthenticated users
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
       const items = cart.length;
       if (items !== this.state.itemsInCart) {
@@ -77,7 +72,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadCart: () => dispatch(fetchCart()),
-    loadInitialData: () => dispatch(me()),
   };
 };
 
