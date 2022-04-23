@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const res = require("express/lib/response");
+// const res = require("express/lib/response");
 const {
   models: { Product, Review, Category },
 } = require("../db");
@@ -61,5 +61,19 @@ router.put("/:productId", async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete('/:productId', async ( req,res, next) => {
+  try {
+    const product = await Product.findOne({
+      where: {
+        id: req.params.productId
+      },
+    })
+    await product.destroy()
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router;

@@ -15,7 +15,8 @@ Category.belongsToMany(Product, { through: "Product_Category" });
 Review.belongsTo(User, { foreignKey: { allowNull: false } });
 User.hasMany(Review);
 
-Review.belongsTo(Product, { foreignKey: { allowNull: false } });
+//onDelete: Cascade = When a product is deleted, then the reviews are also deleted. 
+Review.belongsTo(Product, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 Product.hasMany(Review);
 
 Item.belongsTo(Order, { foreignKey: { allowNull: false } });
