@@ -74,9 +74,9 @@ const searchProducts = (state, searchTerm) => {
   if (searchTerm === "") {
     return state.products;
   }
-  return state.products.filter((product) => {
-    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  return state.products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 };
 
 const mapState = (state) => {
