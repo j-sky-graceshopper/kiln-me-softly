@@ -21,6 +21,8 @@ class SingleProduct extends Component {
     const reviews = this.props.product.reviews || [];
     const { auth } = this.props;
 
+    console.log("REVIEWS", reviews);
+
     return (
       <div className="singleProduct">
         <img src={product.imageUrl} />
@@ -36,7 +38,9 @@ class SingleProduct extends Component {
           ) : (
             reviews.map((review) => (
               <div className="productReviews" key={review.id}>
-                <p>{review.content}</p>
+                <p>
+                  {review.user.username}: {review.content}
+                </p>
               </div>
             ))
           )}
