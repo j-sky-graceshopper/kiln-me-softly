@@ -11,6 +11,39 @@ label {
   display: block;
 }
 
+#authorization {
+  border: 1px black solid;
+  border-radius: 10px;
+  margin: auto;
+  min-width: 45%;
+  max-width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+#authorization input {
+  margin-left: 10px;
+}
+
+#authorization label {
+  display: inline-block;
+  font-size: 18pt;
+}
+
+.error {
+  color: red;
+  font-size: 18pt;
+}
+
+#authorization button {
+  font-size: 14pt;
+}
+
 #home {
   display: flex;
   align-items: flex-start;
@@ -18,13 +51,19 @@ label {
 
 #home p {
   margin: 30px;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1.5;
   font-weight: 200;
 }
 
 #home-img {
   margin: 25px 25px 0 25px;
+  width: 700px;
+}
+
+#home-text {
+  min-width: 700px;
+  max-width: 1100px;
 }
 
 nav {
@@ -108,24 +147,46 @@ form div {
 
 .total {
   display: flex;
-  justify-content: right;
-  margin-right: 60px;
+  justify-content: flex-end;
+  margin-right: 100px;
+  align-items: center;
+  font-size: 14pt;
+}
+
+.total button {
+  margin-left: 30px;
+  font-size: 18pt;
 }
 
 #all-items, .cart-display {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 50px;
+  gap: 18px;
+
 }
 
 .item {
   list-style: none;
   display: flex;
   flex-direction: column;
+  width: 300px;
 }
 
 .item > img {
-  height: 500px;
+  height: 400px;
+}
+
+.below-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#edit-button {
+  display: flex;
+  justify-content: flex-end;
 }
 
 li {
@@ -187,19 +248,33 @@ button:hover {
 
 .singleProduct {
   display: flex;
-  margin-top: 30px;
-  margin-left: 30px;
+  margin: 40px auto 40px auto;
+  /* margin-left: 60px; */
+  width: 80%;
 }
 
 .singleProduct-info {
   margin-left: 30px;
 }
 
+.singleProduct img {
+  width: 700px;
+}
+
 .singleProduct-info h1 {
   margin-top: 0px;
+}
+
+.singleProduct-info p {
+  font-size: 16pt;
+}
   
 @media screen and (max-width: 1100px) {
   nav {
+    flex-direction: column;
+  }
+
+  #home {
     flex-direction: column;
   }
 }

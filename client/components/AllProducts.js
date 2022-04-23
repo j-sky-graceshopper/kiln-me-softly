@@ -28,6 +28,7 @@ class AllProducts extends React.Component {
           <CategoryMenu />
         </div>
         <ul id="all-items">
+          {products.length === 0 ? <h1>No Items Found</h1> : null}
           {products.map((product) => {
             return (
               <div key={product.title}>
@@ -39,10 +40,12 @@ class AllProducts extends React.Component {
                   <h2>{product.title}</h2>
                   <img src={`${product.imageUrl}`} />
                 </Link>
-                <p>${product.price}</p>
-                <AddToCart product={product} />
+                <div className="below-item">
+                  <p>${product.price}</p>
+                  <AddToCart product={product} />
+                </div>
                 {auth.isAdmin ? (
-                  <Link to={`/edit/products/${product.id}`}>
+                  <Link to={`/edit/products/${product.id}`} id="edit-button">
                     <button className="edit-product">Edit Product</button>
                   </Link>
                 ) : null}
