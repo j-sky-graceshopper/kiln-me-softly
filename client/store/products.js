@@ -73,10 +73,7 @@ export const removeProduct = (id) => {
     try{ 
       console.log("THUNK ACTIVATED")
       const {data} = await axios.delete(`/api/products/${id}`)
-      console.log(data)
-      //cannot delete because it affects on reviews too.
       dispatch(deleteProduct(data))
-      // history.push("/products")
     } catch (err) {
       console.log("Error occured while deleting", err)
     }
