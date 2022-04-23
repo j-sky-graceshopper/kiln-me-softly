@@ -14,7 +14,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body.product);
+    const { title, description, imageUrl, price, inventory } = req.body.product
+    const newProduct = await Product.create({ title, description, imageUrl, price, inventory });
     const category = await Category.findOne({
       where: {
         name: req.body.categories,
@@ -43,7 +44,8 @@ router.get("/:productId", async (req, res, next) => {
 router.put("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
-    res.send(await product.update(req.body));
+    const { title, description, imageUrl, price, inventory } = req.body
+    res.send(await product.update({ title, description, imageUrl, price, inventory }));
   } catch (err) {
     next(err);
   }
