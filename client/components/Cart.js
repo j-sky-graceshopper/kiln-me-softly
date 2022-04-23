@@ -41,7 +41,15 @@ class Cart extends React.Component {
 
     return (
       <div>
-        <h1 id="cart-title">Your Shopping Cart</h1>
+        {items.length > 0 ? (
+          <h1 id="cart-title">Your Shopping Cart</h1>
+        ) : (
+          <h1 id="cart-title">No Items In Your Cart</h1>
+        )}
+        <div className="total">
+          <h3>Total: ${total}</h3>
+          <button>Checkout</button>
+        </div>
         <div className="cart-display">
           {items.map((item) => (
             <div className="cart-item" key={item.product.id}>
@@ -55,9 +63,6 @@ class Cart extends React.Component {
               </li>
             </div>
           ))}
-        </div>
-        <div className="total">
-          <h3>Total: ${total}</h3>
         </div>
       </div>
     );

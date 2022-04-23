@@ -15,7 +15,7 @@ export const Home = (props) => {
         id="home-img"
         src="https://img.jakpost.net/c/2020/01/28/2020_01_28_85434_1580208017._large.jpg"
       />
-      <p>
+      <p id="home-text">
         Welcome{username ? `, ${username},` : null} to Kiln Me Softly, a pottery
         studio located in Grace Hopper Villiage, New York. Feel free to browse
         our products, filter by category, or search by item name. <br />

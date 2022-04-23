@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { addItem } from "../store/cart";
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -9,17 +10,20 @@ class AddToCart extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-
-    // load from local storage
-    const cartFromLocalStorage = JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    );
-
-    // push new product onto array
-    cartFromLocalStorage.push(this.props.product);
-
-    // load back into local storage
-    localStorage.setItem("cart", JSON.stringify(cartFromLocalStorage));
+    const { product } = this.props;
+    if (!this.props.isLoggedIn) {
+      // load from local storage
+      const cartFromLocalStorage = JSON.parse(
+        localStorage.getItem("cart") || "[]"
+      );
+      // push new product onto array
+      cartFromLocalStorage.push(product);
+      // load back into local storage
+      localStorage.setItem("cart", JSON.stringify(cartFromLocalStorage));
+    } else {
+      // add to cart in database
+      this.props.addToCart(product);
+    }
   }
 
   render() {
@@ -31,4 +35,17 @@ class AddToCart extends React.Component {
   }
 }
 
-export default connect(null, null)(AddToCart);
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.auth.id,
+    auth: state.auth,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    addToCart: (product) => dispatch(addItem(product)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(AddToCart);
