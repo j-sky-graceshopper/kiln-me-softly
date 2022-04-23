@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { singleProductThunk } from "../store/singleProduct";
 import AddToCart from "./AddToCart";
 import auth from "../store/auth";
+import {deleteReview} from "../store/reviews"
 
 class SingleProduct extends Component {
   constructor(props) {
     super(props);
     this.handleLink = this.handleLink.bind(this);
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     this.props.loadSingleProdcut(this.props.match.params.productId);
@@ -16,6 +18,11 @@ class SingleProduct extends Component {
     const id = this.props.match.params.productId;
     this.props.history.push(`/edit/products/${id}`);
   }
+  handleDelete(event) {
+    const id = event.target.getAttribute("id")
+    this.props.deleteReview(id)
+  }
+
   render() {
     const product = this.props.product;
     const reviews = this.props.product.reviews || [];
@@ -31,14 +38,17 @@ class SingleProduct extends Component {
           <p>{product.description}</p>
           <AddToCart product={product} />
           <h2>Reviews:</h2>
-          {reviews.length === 0 ? (
-            <p>No reviews yet.</p>
-          ) : (
+          {reviews && reviews.length ? (
             reviews.map((review) => (
               <div className="productReviews" key={review.id}>
                 <p>{review.content}</p>
+                {auth.isAdmin ? (
+                  <button type="button" id={review.id} onClick={this.handleDelete}>X</button>
+                ) : null }
               </div>
             ))
+          ) : (
+            <p>No reviews yet.</p>
           )}
 
           <div>
@@ -68,6 +78,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadSingleProdcut: (productId) => dispatch(singleProductThunk(productId)),
+    deleteReview: (id) => dispatch(deleteReview(id))
   };
 };
 
