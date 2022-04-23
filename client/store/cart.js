@@ -61,6 +61,8 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_CART:
       return action.cart;
+    case ADD_TO_CART:
+      return action.cart;
     default:
       return state;
   }
