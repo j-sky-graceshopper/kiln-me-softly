@@ -40,14 +40,16 @@ class AddProduct extends React.Component {
 
   render() {
     const { categories } = this.props;
+    const { handleChange, handleSubmit } = this;
+
     return (
       <div className="add-product-form">
         <h1>Add Product</h1>
-        <form id="add-product" onSubmit={this.handleSubmit}>
+        <form id="add-product" onSubmit={handleSubmit}>
           <label htmlFor="title">Product Name:</label>
           <input
             name="title"
-            onChange={this.handleChange}
+            onChange={handleChange}
             value={this.state.name}
           />
           <br />
@@ -55,7 +57,7 @@ class AddProduct extends React.Component {
           <label htmlFor="description">Description:</label>
           <input
             name="description"
-            onChange={this.handleChange}
+            onChange={handleChange}
             value={this.state.description}
           />
           <br />
@@ -63,7 +65,7 @@ class AddProduct extends React.Component {
           <label htmlFor="image">Add Image:</label>
           <input
             name="imageUrl"
-            onChange={this.handleChange}
+            onChange={handleChange}
             value={this.state.imageUrl}
           />
           <br />
@@ -71,7 +73,7 @@ class AddProduct extends React.Component {
           <label htmlFor="price">Set Price:</label>
           <input
             name="price"
-            onChange={this.handleChange}
+            onChange={handleChange}
             value={this.state.price}
           />
           <br />
@@ -79,7 +81,7 @@ class AddProduct extends React.Component {
           <label htmlFor="inventory">Inventory:</label>
           <input
             name="inventory"
-            onChange={this.handleChange}
+            onChange={handleChange}
             value={this.state.inventory}
           />
           <br />
@@ -89,7 +91,7 @@ class AddProduct extends React.Component {
             <select
               name="categories"
               id="categories"
-              onChange={this.handleChange}
+              onChange={handleChange}
             >
               {categories.map((category) => (
                 <option key={category.name} value={category.name}>
