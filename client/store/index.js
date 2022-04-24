@@ -8,7 +8,8 @@ import singleProductReducer from "./singleProduct";
 import categories from "./categories";
 import selectedCategory from "./filter";
 import searchTerm from "./search";
-import cart from "./cart"
+import cart from "./cart";
+import admin from "./admin";
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   selectedCategory,
   searchTerm,
   cart,
+  admin,
 });
 
 const middleware = composeWithDevTools(
