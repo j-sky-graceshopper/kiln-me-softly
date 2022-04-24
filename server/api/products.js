@@ -6,16 +6,6 @@ const {
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware')
 
 
-// SECURITY MIDDLEWARE,
-// const isAdmin = (req, res, next) => {
-//   console.log('isAdmin was called')
-// 	if (!req.user.isAdmin) {
-// 		return res.status(403).send('You shall not pass!')
-// 	} else {
-// 		next()
-// 	}
-// };
-
 router.get("/", async (req, res, next) => {
   try {
     const products = await Product.findAll({ include: Category });
@@ -28,7 +18,6 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const { title, description, imageUrl, price, inventory } = req.body.product;
-    console.log('what is req.user', req.user)
     const newProduct = await Product.create({ title, description, imageUrl, price, inventory });
     const category = await Category.findOne({
       where: {
