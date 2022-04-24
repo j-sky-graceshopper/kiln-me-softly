@@ -1,10 +1,13 @@
+
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 10px;
 }
 
 a {
   text-decoration: none;
-  color: darkcyan;
+  color: rgb(37,67,50);
 }
 
 label {
@@ -30,6 +33,11 @@ label {
   margin-left: 10px;
 }
 
+#authorization h1 {
+  font-family: 'Alata',sans-serif;
+  color: rgb(37,67,50)
+}
+
 #authorization label {
   display: inline-block;
   font-size: 18pt;
@@ -41,27 +49,45 @@ label {
 }
 
 #authorization button {
-  font-size: 14pt;
+  font-size: 12pt;
+  width: 100px;
+}
+
+.admin-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 #home {
   display: flex;
   align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Quicksand, sans-serif;
+}
+
+#home h1 {
+  margin: 0px;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Alata', sans-serif;
+  color: rgb(37,67,50);
 }
 
 #home p {
-  margin: 30px;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 200;
 }
 
 #home-img {
-  margin: 25px 25px 0 25px;
-  width: 700px;
+  width: 50%;
 }
 
 #home-text {
+  padding: 1% 4% 4% 4%;
   min-width: 600px;
   max-width: 600px;
   text-align:justify;
@@ -76,11 +102,16 @@ nav {
 
 #logo {
   justify-self: flex-start;
-  font-family: 'Quicksand', sans-serif;
-  color: gray;
+  font-family: 'Alata', sans-serif;
+  color: rgb(100,100,100);
   font-size: 36pt;
-  margin: 0 0px 0 20px;
+  margin: 0;
   min-width: 200px;
+  line-height: .9;
+}
+
+#logo:hover {
+  color: darkgray;
 }
 
 .icon {
@@ -95,18 +126,18 @@ nav {
 nav a {
   display: inline-block;
   margin: 1em;
-  font-size: 24px;
+  font-size: 18px;
   font-family: 'Quicksand', sans-serif;
-  color: darkcyan;
+  color: rgb(37,67,50);
   white-space: nowrap;
 }
 
 nav a:hover {
-  color: rgb(137, 198, 198);
+  color: rgb(105,141,112);
 }
 
 a:hover {
-  color: rgb(137, 198, 198);
+  color: rgb(105,141,112);
 }
 
 form div {
@@ -123,12 +154,21 @@ form div {
   font-family: 'Quicksand', sans-serif;
 }
 
+#all-products-container h1 {
+  font-family: 'Alata', sans-serif;
+  color: rgb(37,67,50);
+}
+
 .cart-display {
   display: flex;
   flex-direction: column;
-  width: 70%;
-  margin: auto;
   align-items: flex-start;
+  margin: 0 auto 0 auto;
+  width: 95%;
+}
+
+#cart-container {
+  width: 100%;
 }
 
 .cart-item {
@@ -136,16 +176,19 @@ form div {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  gap: 18px;
+  white-space: nowrap;
 }
 
 #cart-title {
   text-align: center;
   margin: 50px 0 50px 0;
+  color: rgb(37,67,50);
+  font-family: "Alata",sans-serif;
 }
 
 .cart-display img {
-  width: 200px;
+  width: 180px;
 }
 
 .total {
@@ -158,16 +201,15 @@ form div {
 
 .total button {
   margin-left: 30px;
-  font-size: 18pt;
+  font-size: 12pt;
 }
 
 #all-items, .cart-display, #all-users, {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 50px;
+  padding: 10px;
   gap: 18px;
-
 }
 
 .item {
@@ -175,6 +217,11 @@ form div {
   display: flex;
   flex-direction: column;
   width: 300px;
+  color: rgb(105,141,112);
+}
+
+.item:hover {
+  opacity: 80%;
 }
 
 .item > img {
@@ -248,11 +295,11 @@ button {
   background-color: white;
   border: 1px solid black;
   font-family: 'Quicksand', sans-serif;
-  margin-right: 10px;
+  padding: 8px;
 }
 
 button:hover {
-  background-color: lightcyan;
+  background-color: rgb(105,141,112);
 }
 
 .singleProduct {
@@ -281,14 +328,22 @@ hr { margin: 30px 0 30px 0; }
   font-size: 16pt;
 }
   
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 850px) {
   nav {
     flex-direction: column;
   }
+}
 
+@media screen and (max-width: 850px) {
   #home {
     flex-direction: column;
   }
+
+  #home-img {
+    flex-direction: column;
+    width: 100%;
+  }
+}
 
   .singleProduct {
     flex-direction: column;
@@ -298,3 +353,4 @@ hr { margin: 30px 0 30px 0; }
     margin: 0 5% 0 5%;
   }
 }
+
