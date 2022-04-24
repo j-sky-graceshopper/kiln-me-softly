@@ -9,6 +9,7 @@ import SingleProduct from "./components/SingleProduct";
 import AllProducts from "./components/AllProducts";
 import UpdateProduct from "./components/UpdateProduct";
 import Cart from "./components/Cart";
+import AdminLanding from "./components/AdminLanding";
 import AllUsers from "./components/AllUsers";
 // import auth from "./store/auth";
 
@@ -39,7 +40,8 @@ class Routes extends Component {
                   component={UpdateProduct}
                 />
                 <Route path="/add" component={AddProduct} />
-                <Route path="/admin" component={AllUsers} />
+                <Route path="/admin" component={AdminLanding} />
+                <Route path="/admin-users" component={AllUsers} />
               </>
             ) : null}
             <Redirect to="/home" />
