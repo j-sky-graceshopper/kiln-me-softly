@@ -62,7 +62,7 @@ User.prototype.removeFromCart = async function (product) {
   } else {
     await item.destroy();
   }
-  return this.cart();
+  return this.getCart();
 };
 
 User.prototype.addToCart = async function (product) {
