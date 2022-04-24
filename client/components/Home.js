@@ -13,7 +13,7 @@ export const Home = (props) => {
     <div id="home">
       <img
         id="home-img"
-        src="https://img.jakpost.net/c/2020/01/28/2020_01_28_85434_1580208017._large.jpg"
+        src="https://cdn.shopify.com/s/files/1/0158/2248/products/SDB-Nest-5x4-9_1080x.jpg?v=1628607988"
       />
       <span id="home-text">
         <h1>Welcome{username ? `, ${username},` : null} to Kiln Me Softly.</h1>
