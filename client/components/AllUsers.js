@@ -22,9 +22,9 @@ class AllUsers extends React.Component {
           {allUsers.map((user) => {
             return (
               <div key={user.id}>
-                <h5>{user.username}</h5>
-                <p>{user.email}</p>
-                <p>{user.isAdmin ? "Admin" : "User"}</p>
+                <h4>Username: {user.username}</h4>
+                <p>Email: {user.email}</p>
+                <p>Site Access: {user.isAdmin ? "Admin" : "User"}</p>
               </div>
             );
           })}
