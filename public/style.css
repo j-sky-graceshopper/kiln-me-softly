@@ -274,7 +274,7 @@ li {
   min-width: 200px;
 }
 
-.add-product-form, .update-product-form {
+.add-product-form, .update-product-form, .add-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -285,21 +285,21 @@ li {
   font-family: 'Quicksand', sans-serif;
 }
 
-.add-product-form h1, .update-product-form h1 {
+.add-product-form h1, .update-product-form h1, .add-form h1 {
   color: rgb(37,67,50);
   font-family: 'Alata', sans-serif;
 }
 
-#add-product input, select {
+#add-product input, select, #edit-product input, select, #add-user input, select {
   width: 100%;
   margin-bottom: 5%;
 }
 
-#add-product label {
+#add-product label, #edit-product label, #add-user label {
   width: 100%;
 }
 
-#add-product {
+#add-product, #edit-product, #add-user {
   display: flex;
   flex-direction: column;
   align-items: center;
