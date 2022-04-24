@@ -61,7 +61,7 @@ User.prototype.removeFromCart = async function (product) {
   } else {
     await item.destroy();
   }
-  return this.cart();
+  return this.getCart();
 };
 
 User.prototype.addToCart = async function (product) {
@@ -76,12 +76,36 @@ User.prototype.addToCart = async function (product) {
   return this.getCart();
 };
 
-// User.prototype.checkout = async function (product) {
-//   const cart = await this.getCart();
-// cart.status = 'Processing';
-// await cart.save();
-//
-// }
+User.prototype.checkout = async function () {
+  const cart = await this.getCart();
+  cart.status = "Processing";
+  await cart.save();
+  return Order.findByPk(cart.id, {
+    include: [{ model: Item, include: [Product] }],
+  });
+};
+
+User.prototype.complete = async function () {
+  let cart = await Order.findOne({
+    where: { userId: this.id, status: "Processing" },
+  });
+  cart.status = "Completed";
+  await cart.save();
+  return Order.findByPk(cart.id, {
+    include: [{ model: Item, include: [Product] }],
+  });
+};
+
+User.prototype.cancel = async function () {
+  let cart = await Order.findOne({
+    where: { userId: this.id, status: "Processing" },
+  });
+  cart.status = "Cancelled";
+  await cart.save();
+  return Order.findByPk(cart.id, {
+    include: [{ model: Item, include: [Product] }],
+  });
+};
 
 /**
  * classMethods

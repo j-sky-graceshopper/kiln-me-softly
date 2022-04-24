@@ -34,4 +34,11 @@ const Product = db.define("product", {
   },
 });
 
+// Product.beforeCreate(async (product) => {
+//   if (product.imageUrl === "") {
+//     product.imageUrl = null;
+//     // "https://cdn.shopify.com/s/files/1/0481/8921/0787/products/celadonforsite_1000x1500.jpg?v=1624636802";
+//   }
+// });
+
 module.exports = Product;
