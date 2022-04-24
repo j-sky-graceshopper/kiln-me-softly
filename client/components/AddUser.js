@@ -12,7 +12,7 @@ class AddUser extends React.Component {
       isAdmin: false,
     };
     this.handleChange = this.handleChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
+   // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
