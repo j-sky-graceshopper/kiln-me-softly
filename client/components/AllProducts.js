@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../store/products";
+import { fetchProducts, removeProduct } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
 import AddToCart from "./AddToCart";
@@ -9,9 +9,14 @@ import AddToCart from "./AddToCart";
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     this.props.displayProducts();
+  }
+  
+  handleDelete(product) {
+    this.props.deleteProduct(product.id, history)
   }
 
   render() {
@@ -28,6 +33,7 @@ class AllProducts extends React.Component {
           <CategoryMenu />
         </div>
         <ul id="all-items">
+          {products.length === 0 ? <h1>No Items Found</h1> : null}
           {products.map((product) => {
             return (
               <div key={product.title}>
@@ -39,12 +45,17 @@ class AllProducts extends React.Component {
                   <h2>{product.title}</h2>
                   <img src={`${product.imageUrl}`} />
                 </Link>
-                <p>${product.price}</p>
-                <AddToCart product={product} />
+                <div className="below-item">
+                  <p>${product.price}</p>
+                  <AddToCart product={product} />
+                </div>
                 {auth.isAdmin ? (
-                  <Link to={`/edit/products/${product.id}`}>
-                    <button className="edit-product">Edit Product</button>
-                  </Link>
+                  <>
+                    <Link to={`/edit/products/${product.id}`}>
+                      <button className="edit-product">Edit</button>
+                    </Link>
+                    <button className="delete-product" id="delete-product" onClick={() => this.handleDelete(product)}>Delete</button>
+                  </> 
                 ) : null}
               </div>
             );
@@ -71,9 +82,9 @@ const searchProducts = (state, searchTerm) => {
   if (searchTerm === "") {
     return state.products;
   }
-  return state.products.filter((product) => {
-    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  return state.products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 };
 
 const mapState = (state) => {
@@ -85,9 +96,10 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     displayProducts: () => dispatch(fetchProducts()),
+    deleteProduct: (id) => dispatch(removeProduct(id, history)),
   };
 };
 

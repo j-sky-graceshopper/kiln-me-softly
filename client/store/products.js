@@ -48,10 +48,15 @@ export const addProduct = (product, categories, history) => {
   };
 };
 
-export const updateSingleProduct = (product, history) => {
+export const updateSingleProduct = (product, categories, history) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/products/${product.id}`, product);
+      const { data } = await axios.put(
+        `/api/products/${product.id}`,
+        product,
+        categories,
+      );
+      console.log("what is the data", data)
       dispatch(updateProduct(data));
       history.push("/products");
     } catch (err) {

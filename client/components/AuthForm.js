@@ -1,44 +1,42 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-import { fetchCart } from "../store/cart";
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
-  useEffect(() => {
-    props.loadCart();
-  }, []);
-
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form id="authorization" onSubmit={handleSubmit} name={name}>
+        <h1>{displayName}</h1>
         <div>
           <label htmlFor="username">
-            <small>Username</small>
+            <p>Username</p>
           </label>
           <input name="username" type="text" />
         </div>
         {name === "signup" ? (
           <div>
             <label htmlFor="email">
-              <small>Email address</small>
+              <p>Email address</p>
             </label>
             <input name="email" type="text" />
           </div>
         ) : null}
         <div>
           <label htmlFor="password">
-            <small>Password</small>
+            <p>Password</p>
           </label>
           <input name="password" type="password" />
         </div>
         <div>
           <button type="submit">{displayName}</button>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        {error && error.response && (
+          <div className="error"> {error.response.data} </div>
+        )}
       </form>
     </div>
   );
@@ -77,7 +75,6 @@ const mapDispatch = (dispatch) => {
       const email = evt.target.email ? evt.target.email.value : null;
       dispatch(authenticate(username, email, password, formName));
     },
-    loadCart: () => dispatch(fetchCart()),
   };
 };
 

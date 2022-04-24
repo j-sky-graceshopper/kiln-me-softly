@@ -1,4 +1,5 @@
 import axios from "axios";
+import { DELETE_REVIEW } from "./reviews"
 
 //initial state
 const initialState = {};
@@ -29,6 +30,10 @@ export default function singleProductReducer(state = initialState, action) {
   switch (action.type) {
     case SINGLE_PRODUCT:
       return action.product;
+    case DELETE_REVIEW: 
+      return {...state, 
+      //geting reviews from product object (state)
+      reviews: state.reviews.filter((review) => review.id !== action.review.id)}
     default:
       return state;
   }

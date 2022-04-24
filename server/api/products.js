@@ -1,9 +1,20 @@
 const router = require("express").Router();
+// const res = require("express/lib/response");
 const {
-  models: { Product, Review, Category },
+  models: { Product, Review, Category, User },
 } = require("../db");
 const { requireToken, isAdmin } = require('./gatekeepingMiddleware')
 
+
+// SECURITY MIDDLEWARE,
+// const isAdmin = (req, res, next) => {
+//   console.log('isAdmin was called')
+// 	if (!req.user.isAdmin) {
+// 		return res.status(403).send('You shall not pass!')
+// 	} else {
+// 		next()
+// 	}
+// };
 
 router.get("/", async (req, res, next) => {
   try {
@@ -35,7 +46,7 @@ router.get("/:productId", async (req, res, next) => {
   try {
     const productInfo = await Product.findOne({
       where: { id: req.params.productId },
-      include: [{ model: Review }],
+      include: [{ model: Review, include: [User] }],
     });
 
     res.send(productInfo);
@@ -53,5 +64,19 @@ router.put("/:productId", async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete('/:productId', async ( req,res, next) => {
+  try {
+    const product = await Product.findOne({
+      where: {
+        id: req.params.productId
+      },
+    })
+    await product.destroy()
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router;
