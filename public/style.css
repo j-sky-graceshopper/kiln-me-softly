@@ -1,5 +1,8 @@
+
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 10px;
 }
 
 a {
@@ -47,23 +50,30 @@ label {
 #home {
   display: flex;
   align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Quicksand, sans-serif;
+}
+
+#home h1 {
+  margin: 0px;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 #home p {
-  margin: 30px;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 200;
 }
 
 #home-img {
-  margin: 25px 25px 0 25px;
-  width: 700px;
+  width: 50%;
 }
 
 #home-text {
-  min-width: 700px;
-  max-width: 1100px;
+  padding: 12px 24px 24px 24px;
 }
 
 nav {
@@ -75,11 +85,16 @@ nav {
 
 #logo {
   justify-self: flex-start;
-  font-family: 'Quicksand', sans-serif;
-  color: gray;
+  font-family: 'Rajdhani', sans-serif;
+  color: rgb(100,100,100);
   font-size: 36pt;
-  margin: 0 0px 0 20px;
+  margin: 0;
   min-width: 200px;
+  line-height: .9;
+}
+
+#logo:hover {
+  color: darkgray;
 }
 
 .icon {
@@ -94,7 +109,7 @@ nav {
 nav a {
   display: inline-block;
   margin: 1em;
-  font-size: 24px;
+  font-size: 18px;
   font-family: 'Quicksand', sans-serif;
   color: darkcyan;
   white-space: nowrap;
@@ -123,7 +138,7 @@ form div {
 .cart-display {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
   margin: auto;
   align-items: flex-start;
 }
@@ -134,6 +149,8 @@ form div {
   align-items: center;
   width: 100%;
   padding: 10px;
+  gap: 20px;
+  white-space: nowrap;
 }
 
 #cart-title {
@@ -142,7 +159,7 @@ form div {
 }
 
 .cart-display img {
-  width: 200px;
+  width: 180px;
 }
 
 .total {
@@ -162,9 +179,8 @@ form div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 50px;
+  padding: 10px;
   gap: 18px;
-
 }
 
 .item {
@@ -269,12 +285,18 @@ button:hover {
   font-size: 16pt;
 }
   
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 850px) {
   nav {
     flex-direction: column;
   }
+}
 
+@media screen and (max-width: 850px) {
   #home {
     flex-direction: column;
+  }
+  #home-img {
+    flex-direction: column;
+    width: 100%;
   }
 }
