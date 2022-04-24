@@ -38,7 +38,7 @@ class SingleProduct extends Component {
 
           <h2>Price: ${product.price}</h2>
           <p>{product.description}</p>
-          <div>
+          <div className="single-product-buttons">
             <AddToCart product={product} />
             {auth.isAdmin ? (
               <button
