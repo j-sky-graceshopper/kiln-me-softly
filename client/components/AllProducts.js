@@ -1,17 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../store/products";
+import { fetchProducts, removeProduct } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
 import AddToCart from "./AddToCart";
+// import {removeReviews} from "../store/reviews"
 
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     this.props.displayProducts();
+  }
+  
+  handleDelete(product) {
+    this.props.deleteProduct(product.id, history)
   }
 
   render() {
@@ -45,9 +51,12 @@ class AllProducts extends React.Component {
                   <AddToCart product={product} />
                 </div>
                 {auth.isAdmin ? (
-                  <Link to={`/edit/products/${product.id}`} id="edit-button">
-                    <button className="edit-product">Edit Product</button>
-                  </Link>
+                  <>
+                    <Link to={`/edit/products/${product.id}`}>
+                      <button className="edit-product">Edit</button>
+                    </Link>
+                    <button className="delete-product" id="delete-product" onClick={() => this.handleDelete(product)}>Delete</button>
+                  </> 
                 ) : null}
               </div>
             );
@@ -88,9 +97,10 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     displayProducts: () => dispatch(fetchProducts()),
+    deleteProduct: (id) => dispatch(removeProduct(id, history)),
   };
 };
 
