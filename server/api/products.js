@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
   models: { Product, Review, Category },
 } = require("../db");
-const { requireToken } = require('./gatekeepingMiddleware')
+const { requireToken, isAdmin } = require('./gatekeepingMiddleware')
 
 
 router.get("/", async (req, res, next) => {
@@ -44,7 +44,7 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
-router.put("/:productId", requireToken, async (req, res, next) => {
+router.put("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
     const { title, description, imageUrl, price, inventory } = req.body
