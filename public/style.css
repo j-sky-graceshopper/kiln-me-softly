@@ -189,6 +189,12 @@ form div {
   justify-content: flex-end;
 }
 
+.productReviews {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 li {
   list-style: none;
 }
@@ -249,16 +255,19 @@ button:hover {
 .singleProduct {
   display: flex;
   margin: 40px auto 40px auto;
-  /* margin-left: 60px; */
-  width: 80%;
+  width: 90%;
 }
 
 .singleProduct-info {
   margin-left: 30px;
+  min-width: 400px;
 }
 
+hr { margin: 30px 0 30px 0; }
+
 .singleProduct img {
-  width: 700px;
+  width: 600px;
+  margin-bottom: 40px;
 }
 
 .singleProduct-info h1 {
@@ -275,6 +284,10 @@ button:hover {
   }
 
   #home {
+    flex-direction: column;
+  }
+
+  .singleProduct {
     flex-direction: column;
   }
 }
