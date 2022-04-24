@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { Order, Item } = require("./Order");
 const Product = require("./Product");
-
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
