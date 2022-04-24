@@ -2,6 +2,8 @@ const router = require("express").Router();
 const {
   models: { Product, Review, Category },
 } = require("../db");
+const { requireToken } = require('./gatekeepingMiddleware')
+
 
 router.get("/", async (req, res, next) => {
   try {
@@ -14,7 +16,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { title, description, imageUrl, price, inventory } = req.body.product
+    const { title, description, imageUrl, price, inventory } = req.body.product;
+    console.log('what is req.user', req.user)
     const newProduct = await Product.create({ title, description, imageUrl, price, inventory });
     const category = await Category.findOne({
       where: {
@@ -41,7 +44,7 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
-router.put("/:productId", async (req, res, next) => {
+router.put("/:productId", requireToken, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
     const { title, description, imageUrl, price, inventory } = req.body
