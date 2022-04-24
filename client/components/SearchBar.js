@@ -12,16 +12,15 @@ class SearchBar extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(evt) {
-    this.setState({
-      searchInput: evt.target.value,
+  async handleChange(evt) {
+    this.setState({ searchInput: evt.target.value }, () => {
+      this.props.searchByTerm(this.state.searchInput);
     });
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.searchByTerm(this.state.searchInput);
-    // this.setState({ searchInput: "" });
   }
 
   render() {
