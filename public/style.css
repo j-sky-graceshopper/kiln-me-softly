@@ -307,6 +307,18 @@ li {
   margin: 0 auto;
 }
 
+#admin-label {
+  display: flex;
+  white-space: nowrap;
+  justify-content: flex-start;
+  gap: 3%;
+}
+
+#admin-label input {
+  width: 5%;
+  margin: auto 0 auto 0;
+}
+
 button {
   background-color: white;
   border: 1px solid black;
@@ -330,7 +342,6 @@ button:hover {
   margin: 0 auto;
   padding: 0 5%;
 }
-
 
 .singleProduct img {
   width: 50%;
