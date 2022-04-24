@@ -17,12 +17,12 @@ class AllUsers extends React.Component {
     const { allUsers } = this.props;
     return (
       <div id="all-users-container">
-        <h1>All Users</h1>
+        <h2>All Users</h2>
         <ul id="all-users">
           {allUsers.map((user) => {
             return (
               <div key={user.id}>
-                <h4>Username: {user.username}</h4>
+                <h4>User: {user.username}</h4>
                 <p>Email: {user.email}</p>
                 <p>Site Access: {user.isAdmin ? "Admin" : "User"}</p>
               </div>

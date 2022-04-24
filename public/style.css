@@ -114,7 +114,9 @@ form div {
   display: inline-block;
 }
 
-#all-products-container {
+
+
+#all-products-container, #admin-landing-page, #all-users-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +161,7 @@ form div {
   font-size: 18pt;
 }
 
-#all-items, .cart-display {
+#all-items, .cart-display, #all-users, {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -216,7 +218,7 @@ li {
   min-width: 200px;
 }
 
-.add-product-form {
+.add-form {
   display: flex;
   flex-direction: column;
   align-items: center;

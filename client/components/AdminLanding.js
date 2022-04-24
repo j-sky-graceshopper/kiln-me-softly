@@ -6,8 +6,11 @@ class AdminLanding extends React.Component {
     return (
       <div id="admin-landing-page">
         <div>
-          <Link to="/admin-users">
+          <Link to="/admin/users">
             <h2>View/Edit Users</h2>
+          </Link>
+          <Link to="/admin/add-user">
+            <h2>Add User</h2>
           </Link>
         </div>
       </div>

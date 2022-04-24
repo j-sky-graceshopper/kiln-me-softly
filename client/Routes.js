@@ -11,6 +11,7 @@ import UpdateProduct from "./components/UpdateProduct";
 import Cart from "./components/Cart";
 import AdminLanding from "./components/AdminLanding";
 import AllUsers from "./components/AllUsers";
+import AddUser from "./components/AddUser";
 // import auth from "./store/auth";
 
 class Routes extends Component {
@@ -34,14 +35,15 @@ class Routes extends Component {
             <Route path="/cart" component={Cart} />
             {auth.isAdmin ? (
               <>
-                <Route
-                  exact
-                  path="/edit/products/:productId"
-                  component={UpdateProduct}
-                />
-                <Route path="/add" component={AddProduct} />
-                <Route path="/admin" component={AdminLanding} />
-                <Route path="/admin-users" component={AllUsers} />
+                  <Route
+                    exact
+                    path="/edit/products/:productId"
+                    component={UpdateProduct}
+                  />
+                  <Route path="/add" component={AddProduct} />
+                  <Route path="/admin" component={AdminLanding} />
+                  <Route path="/admin/users" component={AllUsers} />
+                  <Route path="/admin/add-user" component={AddUser} />
               </>
             ) : null}
             <Redirect to="/home" />
