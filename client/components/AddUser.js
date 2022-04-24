@@ -53,19 +53,20 @@ class AddUser extends React.Component {
             onChange={handleChange}
             value={this.state.email}
           />
-          <label htmlFor="isAdmin">Make User Admin:</label>
-          <input
-            type="checkbox"
-            name="isAdmin"
-            onChange={handleChange}
-            value={this.state.isAdmin === true}
-          />
+          <label htmlFor="isAdmin" id="admin-label">
+            Make User Admin:
+            <input
+              type="checkbox"
+              name="isAdmin"
+              onChange={handleChange}
+              value={this.state.isAdmin === true}
+            />
+          </label>
           <div className="below-item">
             <button className="add-user" type="submit">
               Add User
             </button>
           </div>
-          <br />
         </form>
       </div>
     );
