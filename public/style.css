@@ -62,8 +62,9 @@ label {
 }
 
 #home-text {
-  min-width: 700px;
-  max-width: 1100px;
+  min-width: 600px;
+  max-width: 600px;
+  text-align:justify;
 }
 
 nav {
@@ -276,5 +277,9 @@ button:hover {
 
   #home {
     flex-direction: column;
+  }
+  #home-img, #home-text {
+    width: 90%;
+    margin: 0 5% 0 5%;
   }
 }
