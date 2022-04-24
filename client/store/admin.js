@@ -1,31 +1,30 @@
 import axios from "axios";
 
-const ADD_PRODUCT = "ADD_PRODUCT";
+const SET_ALLUSERS = "SET_ALLUSERS";
 
-export const _addProduct = (product) => {
+const setAllUsers = (users) => {
     return {
-        type: ADD_PRODUCT,
-        product,
-    }
+        type: SET_ALLUSERS,
+        users,
+    };
 }
 
-export const addProduct = (product, history) => {
+export const fetchUsers = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post("/api/admin", product);
-            dispatch(_addProduct(data));
-            history.push("/");
+            const { data } = await axios.get("/api/admin");
+            dispatch(setAllUsers(data));
         } catch (err) {
-            console.log("There was an error creating a product", err);
+            console.log("There was an error fetching users", err);
         }
     }
 }
 
 export default (state = [], action) => {
     switch (action.type) {
-        case ADD_PRODUCT:
-            return [...state, action.product];
+        case SET_ALLUSERS:
+            return action.users;
         default: 
           return state;
     }
-}
+};

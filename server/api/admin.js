@@ -1,9 +1,12 @@
 const router = require('express').Router();
-const Product = require('../db/product');
+const {
+    models: { User },
+  } = require("../db");
 
-router.post('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     try {
-        res.status(201).send(await Product.create(req.body))
+        const allUsers = await User.findAll()
+        res.json(allUsers);
     } catch (err) {
         next(err);
     }
