@@ -9,7 +9,6 @@ import categories from "./categories";
 import selectedCategory from "./filter";
 import searchTerm from "./search";
 import cart from "./cart"
-import review from "./reviews"
 
 const reducer = combineReducers({
   auth,
@@ -19,7 +18,6 @@ const reducer = combineReducers({
   selectedCategory,
   searchTerm,
   cart,
-  review,
 });
 
 const middleware = composeWithDevTools(

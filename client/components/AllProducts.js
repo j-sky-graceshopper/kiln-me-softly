@@ -5,7 +5,6 @@ import { fetchProducts, removeProduct } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
 import AddToCart from "./AddToCart";
-// import {removeReviews} from "../store/reviews"
 
 class AllProducts extends React.Component {
   constructor(props) {
