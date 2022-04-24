@@ -1,11 +1,11 @@
 import axios from "axios";
 
-
 //action types
 const SET_ALLPRODUCTS = "SET_ALLPRODUCTS";
 const ADD_PRODUCT = "ADD_PRODUCT";
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
+
 
 //action creators
 const setAllProducts = (products) => {

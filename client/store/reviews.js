@@ -21,11 +21,11 @@ export const deleteReview = (id) => {
     }
 }
 
-export default function (state = [], action) {
-    switch (action.type) {
-      case DELETE_REVIEW:
-        return state.filter((review) => review.id !== action.review.id)
-      default:
-        return state;
-    }
-  }
+// export default function (state = [], action) {
+//     switch (action.type) {
+//       case DELETE_REVIEW:
+//         return state.filter((review) => review.id !== action.review.id)
+//       default:
+//         return state;
+//     }
+//   }
