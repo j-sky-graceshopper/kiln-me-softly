@@ -68,7 +68,7 @@ class Cart extends React.Component {
     });
 
     return (
-      <div>
+      <div id="cart-container">
         {items.length > 0 ? (
           <h1 id="cart-title">Your Shopping Cart</h1>
         ) : (

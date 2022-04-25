@@ -3,16 +3,8 @@ const router = require("express").Router();
 const {
   models: { Product, Review, Category, User },
 } = require("../db");
+const { requireToken, isAdmin } = require('./gatekeepingMiddleware')
 
-// SECURITY MIDDLEWARE,
-// const isAdmin = (req, res, next) => {
-//   console.log('isAdmin was called')
-// 	if (!req.user.isAdmin) {
-// 		return res.status(403).send('You shall not pass!')
-// 	} else {
-// 		next()
-// 	}
-// };
 
 router.get("/", async (req, res, next) => {
   try {
@@ -25,9 +17,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    // Finish this!
-    const { title, price } = req.body.product;
-    const newProduct = await Product.create({ title, price });
+    const { title, description, imageUrl, price, inventory } = req.body.product;
+    const newProduct = await Product.create({ title, description, imageUrl, price, inventory });
     const category = await Category.findOne({
       where: {
         name: req.body.categories,
@@ -56,7 +47,8 @@ router.get("/:productId", async (req, res, next) => {
 router.put("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
-    res.send(await product.update(req.body));
+    const { title, description, imageUrl, price, inventory } = req.body
+    res.send(await product.update({ title, description, imageUrl, price, inventory }));
   } catch (err) {
     next(err);
   }

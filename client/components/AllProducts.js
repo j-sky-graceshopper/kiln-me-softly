@@ -5,19 +5,18 @@ import { fetchProducts, removeProduct } from "../store/products";
 import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
 import AddToCart from "./AddToCart";
-// import {removeReviews} from "../store/reviews"
 
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDelete = this.handleDelete.bind(this);
   }
   componentDidMount() {
     this.props.displayProducts();
   }
-  
+
   handleDelete(product) {
-    this.props.deleteProduct(product.id, history)
+    this.props.deleteProduct(product.id, history);
   }
 
   render() {
@@ -48,16 +47,23 @@ class AllProducts extends React.Component {
                 </Link>
                 <div className="below-item">
                   <p>${product.price}</p>
+
+                  {auth.isAdmin ? (
+                    <>
+                      <Link to={`/edit/products/${product.id}`}>
+                        <button className="edit-product">Edit</button>
+                      </Link>
+                      <button
+                        className="delete-product"
+                        id="delete-product"
+                        onClick={() => this.handleDelete(product)}
+                      >
+                        Delete
+                      </button>
+                    </>
+                  ) : null}
                   <AddToCart product={product} />
                 </div>
-                {auth.isAdmin ? (
-                  <>
-                    <Link to={`/edit/products/${product.id}`}>
-                      <button className="edit-product">Edit</button>
-                    </Link>
-                    <button className="delete-product" id="delete-product" onClick={() => this.handleDelete(product)}>Delete</button>
-                  </> 
-                ) : null}
               </div>
             );
           })}
@@ -97,7 +103,7 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch, {history}) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     displayProducts: () => dispatch(fetchProducts()),
     deleteProduct: (id) => dispatch(removeProduct(id, history)),
