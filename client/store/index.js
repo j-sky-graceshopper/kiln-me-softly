@@ -11,7 +11,7 @@ import searchTerm from "./search";
 import cart from "./cart";
 import order from "./order";
 import admin from "./admin";
-import orders from "./order";
+import orders from "./orderHistory";
 
 const reducer = combineReducers({
   auth,
@@ -23,7 +23,7 @@ const reducer = combineReducers({
   cart,
   order,
   admin,
-  orders
+  orders,
 });
 
 const middleware = composeWithDevTools(

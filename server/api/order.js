@@ -1,19 +1,16 @@
 const router = require("express").Router();
 const {
-  models: { User, Order },
+  models: { User },
 } = require("../db");
-
 module.exports = router;
 
-router.get("/:id", async (req, res, next) => {
-    try {
-        const orders = await Order.findAll({
-            where: {
-                userId: req.params.id
-            }
-        })
-        res.send(orders)
-    } catch (err) {
-      next(err);
+router.get("/", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    if (user) {
+      res.send(await user.getCart(req.headers.status));
     }
-  });
+  } catch (err) {
+    next(err);
+  }
+});
