@@ -40,15 +40,12 @@ class AddUser extends React.Component {
             onChange={handleChange}
             value={this.state.username}
           />
-          <br />
-
           <label htmlFor="password">Password:</label>
           <input
             name="password"
             onChange={handleChange}
             value={this.state.password}
           />
-          <br />
 
           <label htmlFor="email">Email:</label>
           <input
@@ -56,22 +53,20 @@ class AddUser extends React.Component {
             onChange={handleChange}
             value={this.state.email}
           />
-          <br />
-          <br />
-
-          <label htmlFor="isAdmin">Make User Admin:</label>
-          <input
-            type="checkbox"
-            name="isAdmin"
-            onChange={handleChange}
-            value={this.state.isAdmin === true}
-          />
-          <br />
-
-          <button className="add-user" type="submit">
-            Add User
-          </button>
-          <br />
+          <label htmlFor="isAdmin" id="admin-label">
+            Make User Admin:
+            <input
+              type="checkbox"
+              name="isAdmin"
+              onChange={handleChange}
+              value={this.state.isAdmin === true}
+            />
+          </label>
+          <div className="below-item">
+            <button className="add-user" type="submit">
+              Add User
+            </button>
+          </div>
         </form>
       </div>
     );
