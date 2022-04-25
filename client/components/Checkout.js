@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchOrder } from "../store/order";
+import { fetchOrder } from "../store/currentOrder";
 import { changeStatus } from "../store/cart";
 import history from "../history";
 
