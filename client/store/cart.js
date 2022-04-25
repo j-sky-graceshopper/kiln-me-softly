@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchOrder } from "./order";
+import { fetchOrder } from "./currentOrder";
 import history from "../history";
 
 const TOKEN = "token";
@@ -75,7 +75,7 @@ export const changeStatus = (cartId, status) => {
         status,
       });
       if (status === "Processing") {
-        dispatch(fetchCart(status));
+        dispatch(fetchOrder(status));
       }
       return dispatch(setCart(cart.data));
     } catch (err) {
@@ -87,7 +87,6 @@ export const changeStatus = (cartId, status) => {
 export const updateCart = (item) => {
   return async (dispatch) => {
     try {
-      console.log(item);
       return dispatch(updateCartItem(item));
     } catch (err) {
       console.log("Error while updating the cart");
@@ -108,7 +107,6 @@ export default function (
     case ADD_TO_CART:
       return action.cart;
     case UPDATE_CART_ITEM:
-      console.log("state", state);
       return {
         items: state.items.map((item) => {
           if (item.id === action.item.id) {
