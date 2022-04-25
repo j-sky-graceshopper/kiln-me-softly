@@ -217,6 +217,20 @@ form div {
   gap: 18px;
 }
 
+#all-users-table, th, td {
+  border: 1px rgb(105,141,112) solid;
+  text-align: center;
+}
+
+#all-users-table td {
+  padding: 10px;
+}
+
+#all-users-table th {
+  background-color: rgb(100,100,100);
+  color: white;
+}
+
 .item {
   list-style: none;
   display: flex;
