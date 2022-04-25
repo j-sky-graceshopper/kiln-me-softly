@@ -33,8 +33,8 @@ class Cart extends React.Component {
     //     }
     //   })
     // console.log("cart", cart, "updatedCart", updatedCart)
-    // localStorage.setItem("cart", JSON.stringify(updatedCart))
     cart.push(item.product);
+
     localStorage.setItem("cart", JSON.stringify(cart));
 
     this.props.updateCart(item);
@@ -95,15 +95,17 @@ class Cart extends React.Component {
               <li>Price: ${item.product.price}</li>
               <li>
                 <form>
-                  <label htmlFor="quantity">Quantity:</label>
-                  <input
-                    type="number"
-                    id="quantity"
-                    min={1}
-                    max={item.product.inventory}
-                    value={item.quantity}
-                    onChange={(event) => this.handleChange(event, item)}
-                  />
+                  <label id="quantity-input" htmlFor="quantity">
+                    Quantity:
+                    <input
+                      type="number"
+                      id="quantity"
+                      min={1}
+                      max={item.product.inventory}
+                      value={item.quantity}
+                      onChange={(event) => this.handleChange(event, item)}
+                    />
+                  </label>
                 </form>
                 Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
               </li>

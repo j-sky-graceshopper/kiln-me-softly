@@ -74,6 +74,9 @@ export const changeStatus = (cartId, status) => {
         cartId,
         status,
       });
+      if (status === "Processing") {
+        dispatch(fetchCart(status));
+      }
       return dispatch(setCart(cart.data));
     } catch (err) {
       console.log(err);
