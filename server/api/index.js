@@ -6,6 +6,7 @@ router.use("/cart", require("./cart"));
 router.use("/order", require("./order"));
 router.use("/reviews", require("./reviews"));
 router.use("/admin", require("./admin"));
+router.use("/orders", require("./order"))
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
