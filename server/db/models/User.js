@@ -76,6 +76,17 @@ User.prototype.addToCart = async function (product) {
   return this.getCart();
 };
 
+User.prototype.updateCartItem = async function (updatedItem) {
+  const cart = await this.getCart();
+  let item = cart.items.find((item) => item.productId === updatedItem.productId);
+  if (item) {
+    item.quantity = updatedItem.quantity
+    await item.save()
+  }
+  return await this.getCart()
+}
+
+
 User.prototype.checkout = async function () {
   const cart = await this.getCart();
   cart.status = "Processing";

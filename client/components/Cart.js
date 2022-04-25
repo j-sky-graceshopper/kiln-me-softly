@@ -6,6 +6,9 @@ import { fetchCart, updateCart } from "../store/cart";
 class Cart extends React.Component {
   constructor() {
     super()
+    this.state = {
+      cart: []
+    }
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -15,7 +18,7 @@ class Cart extends React.Component {
 
   handleChange(event, item) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    item.quantity = event.target.value
+    item.quantity = parseInt(event.target.value)
 
     // const updatedCart = cart.map((cartItem) => {
     //     if (cartItem.id === item.id) {
@@ -28,7 +31,7 @@ class Cart extends React.Component {
     // localStorage.setItem("cart", JSON.stringify(updatedCart))
     cart.push(item.product)
     localStorage.setItem("cart", JSON.stringify(cart))
-
+  
     this.props.updateCart(item)
   }
 
@@ -81,14 +84,13 @@ class Cart extends React.Component {
         <div className="cart-display">
           {items.map((item) => (
             <div className="cart-item" key={item.product.id}>
-              {console.log(item.product.id)}
               <img src={item.product.imageUrl} />
               <h3>{item.product.title}</h3>
               <li>Price: ${item.product.price}</li>
               <li>
                 <form >
                   <label htmlFor="quantity">Quantity:</label>
-                  <input type="number" id="quantity" min={1} max={item.product.inventory} value={item.quantity} onChange={(event) => this.handleChange(event,item)} />
+                  <input type="number" id="quantity" min={0} max={item.product.inventory} value={item.quantity} onChange={(event) => this.handleChange(event,item)} />
                 </form>
                 Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
               </li>

@@ -67,8 +67,15 @@ export const addItem = (product) => {
 export const updateCart = ( item ) => {
   return async (dispatch) => {
     try {
+      //checks if there's a user, there should be a token
+      const token = window.localStorage.getItem(TOKEN);
       console.log(item)
-      return dispatch(updateCartItem(item))
+      if (token) {
+        await axios.put("/api/cart/update", item, {
+          headers: {authorization: token}
+        });
+        return dispatch(updateCartItem(item))
+      }
   } catch (err) {
     console.log("Error while updating the cart")
   }
@@ -84,7 +91,6 @@ export default function (state = {
     case ADD_TO_CART:
       return action.cart;
     case UPDATE_CART_ITEM:
-      console.log("state", state)
       return {
         items: state.items.map((item) => {
           if (item.id === action.item.id) {

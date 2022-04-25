@@ -32,3 +32,13 @@ router.delete("/remove", async (req, res, next) => {
     next(err);
   }
 });
+
+router.put("/update", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    // console.log(req.body)
+    res.send(await user.updateCartItem(req.body))
+  } catch (err) {
+    next(err);
+  }
+});
