@@ -51,8 +51,19 @@ async function seed() {
   const decorative = await Category.create({ name: "decorative" });
   const set = await Category.create({ name: "set" });
   const vase = await Category.create({ name: "vase" });
+  const other = await Category.create({ name: "other" });
 
-  const categories = [mug, plate, bowl, pot, planter, decorative, set, vase];
+  const categories = [
+    mug,
+    plate,
+    bowl,
+    pot,
+    planter,
+    decorative,
+    set,
+    vase,
+    other,
+  ];
 
   console.log(`seeded ${categories.length} categories`);
 
@@ -492,6 +503,137 @@ async function seed() {
       price: 150,
       inventory: 79,
     }),
+    Product.create({
+      title: "Stoneware Yarn Bowls",
+      description:
+        "Stoneware pottery bowl that keeps the yarn in one place as you knit.",
+      imageUrl:
+        "https://cdn11.bigcommerce.com/s-sckh288/images/stencil/1280x1280/products/897/11133/5E1A6739-C8FB-4B69-A2C9-4E25D978A6F7_1_201_a__84604.1620228824.jpg?c=2",
+      price: 45,
+      inventory: 230,
+    }),
+    Product.create({
+      title: "Jewelry Holder",
+      description:
+        "Lovely decorative piece to store jewelry on a bureau or table.",
+      imageUrl:
+        "https://cdn11.bigcommerce.com/s-sckh288/images/stencil/1280x1280/products/1714/11117/5226A1F2-40D8-49A5-90C5-B7D89E870999_1_201_a__32090.1620228439.jpg?c=2",
+      price: 69,
+      inventory: 125,
+    }),
+    Product.create({
+      title: "Stoneware Small Bird Feeder",
+      description:
+        "A great gift for bird-lovers. Small bird feeder that is the perfect size for chickadees and smaller birds.",
+      imageUrl:
+        "https://cdn11.bigcommerce.com/s-sckh288/images/stencil/1280x1280/products/827/11811/40EB537D-DB61-46A6-97DD-1187A1B3E844_1_105_c__49623.1626841411.jpg?c=2",
+      price: 45,
+      inventory: 250,
+    }),
+    Product.create({
+      title: "Bloomingville Plate",
+      description: "Jules lunch plate.",
+      imageUrl:
+        "https://static.smallable.com/1082599-720x720q80/jules-lunch-plate.jpg",
+      price: 22,
+      inventory: 700,
+    }),
+    Product.create({
+      title: "Whiskey Barrel Pot",
+      description: "Barrel design pot for outdoor plants.",
+      imageUrl:
+        "https://static.athome.com/images/w_800,h_800,c_pad,f_auto,fl_lossy,q_auto/v1629491282/p/124325962/14.75in-whiskey-barrel-pot-gr.jpg",
+      price: 114,
+      inventory: 49,
+    }),
+    Product.create({
+      title: "Two-Tone Glazed Ceramic Pot",
+      description:
+        "Curvy round two-tone decorative planter. Perfect on patio, offering resilience and resistance to extreme weather conditions.",
+      imageUrl:
+        "https://static.athome.com/images/w_800,h_800,c_pad,f_auto,fl_lossy,q_auto/v1629488648/p/124322528/indoor-2-tone-navy-blue-white-glazed-ceramic-pot-8.jpg",
+      price: 14.99,
+      inventory: 500,
+    }),
+    Product.create({
+      title: "Teapot blue",
+      description:
+        "Stylish round porcelain teapot by Tricia Thom in a clear blue glaze. Beautiful proportions.",
+      imageUrl:
+        "https://1ba8km1l12jmrieuunzl782p-wpengine.netdna-ssl.com/wp-content/uploads/2021/04/Tricia-Thom-15-3.jpg",
+      price: 220,
+      inventory: 100,
+    }),
+    Product.create({
+      title: "Maadam Stoltz Plate",
+      description: "Beautiful, rustic appearance.",
+      imageUrl:
+        "https://static.smallable.com/1210159-720x720q80/flat-ceramic-plate.jpg",
+      price: 18,
+      inventory: 350,
+    }),
+    Product.create({
+      title: "Waterfall at Porth Ysgo",
+      description:
+        "This is a very wide thrown porcelain dish by Richard Heeley that he has decorated using cobalt Gosu pigment",
+      imageUrl:
+        "https://1ba8km1l12jmrieuunzl782p-wpengine.netdna-ssl.com/wp-content/uploads/2019/07/Richard-Heeley-26-6.jpg",
+      price: 496,
+      inventory: 5,
+    }),
+    Product.create({
+      title: "Chun Bowl",
+      description:
+        "Stoneware bowl by John Jelfs that he has decorated in chun glaze over a tenmoku glaze then fired in his gas kiln.",
+      imageUrl:
+        "https://1ba8km1l12jmrieuunzl782p-wpengine.netdna-ssl.com/wp-content/uploads/2020/02/John-Jelfs-71-6.jpg",
+      price: 249,
+      inventory: 20,
+    }),
+    Product.create({
+      title: "Geometrical shaped Bowl",
+      description:
+        "A wonderful jade glaze in the inner part of the bowl, while outer layer is a beautiful white glaze by Steve Kelly.",
+      imageUrl:
+        "https://lameridiana.fi.it/wp-content/uploads/2022/04/Square-Bowl-2020-scaled.jpg",
+      price: 100,
+      inventory: 23,
+    }),
+    Product.create({
+      title: "Small Blue Fruit Bowl",
+      description:
+        "Hand-thrown, hand-glazed earthenware bowl by Work A Day Handmade .",
+      imageUrl:
+        "https://images.squarespace-cdn.com/content/v1/51e2d91ee4b0502fe2129774/1516375481403-WN2EBAJJCOQLIAO7D8Z5/smlbluefruitbowl.jpg?format=2500w",
+      price: 66,
+      inventory: 200,
+    }),
+    Product.create({
+      title: "Artist’s Mug",
+      description:
+        "Stoneware mug with allover rainbow splatter pattern, coated in clear glaze.",
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0407/1229/products/DSC0212_1024x1024.jpg?v=1638718794",
+      price: 52,
+      inventory: 62,
+    }),
+    Product.create({
+      title: "Pink Ombre Mug",
+      description: "Sleek Scandinavian aesthetic mug by Brit McDaniel.",
+      imageUrl:
+        "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1690,h_1690/k%2Farchive%2Fffa6cbc4da5a3d54b87a1a39d9dcb400cdef78bb",
+      price: 44,
+      inventory: 80,
+    }),
+    Product.create({
+      title: "White Floral Mug",
+      description:
+        "Unique handmade mug by Collen Deiss who pressed dried wild flowers to create this design.",
+      imageUrl:
+        "https://images.squarespace-cdn.com/content/v1/5a4bebdda803bb1a5d98b15a/1637382284467-JPAFHMKJCGPJ4H403N2H/IMG_0282-2.jpg?format=2500w",
+      price: 40,
+      inventory: 30,
+    }),
   ]);
 
   // for (let i = 0; i < 14; i++) {
@@ -563,6 +705,21 @@ async function seed() {
   products[48].addCategory(4);
   products[49].addCategory(2);
   products[50].addCategory(3);
+  products[51].addCategory(3);
+  products[52].addCategory(9);
+  products[53].addCategory(9);
+  products[54].addCategory(2);
+  products[55].addCategory(4);
+  products[56].addCategory(4);
+  products[57].addCategory(4);
+  products[58].addCategory(2);
+  products[59].addCategory(2);
+  products[60].addCategory(3);
+  products[61].addCategory(3);
+  products[62].addCategory(3);
+  products[63].addCategory(1);
+  products[64].addCategory(1);
+  products[65].addCategory(1);
 
   console.log(`seeded ${products.length} products`);
 
@@ -688,6 +845,32 @@ async function seed() {
     }),
     Review.create({
       content: "I wasn't a fan of this item but my blind grandma loves it! :D",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
+    Review.create({
+      content: "Functional and necessary pottery collection.",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
+    Review.create({
+      content: "Love the design and color on this!",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
+    Review.create({
+      content:
+        "The item broke when it got shipped :(.. Had to return this beautiful mug sadly..",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
+    Review.create({
+      content: "I bought it for a friend and she absolutely loved it!",
+      userId: Math.floor(Math.random() * users.length + 1),
+      productId: Math.floor(Math.random() * products.length + 1),
+    }),
+    Review.create({
+      content: "It’s my favorite out of all of my pottery collection!!",
       userId: Math.floor(Math.random() * users.length + 1),
       productId: Math.floor(Math.random() * products.length + 1),
     }),
