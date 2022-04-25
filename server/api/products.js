@@ -15,7 +15,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", requireToken, isAdmin, async (req, res, next) => {
+  console.log("authorized, went into post route");
   try {
     const { title, description, imageUrl, price, inventory } = req.body.product;
     const newProduct = await Product.create({ title, description, imageUrl, price, inventory });

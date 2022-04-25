@@ -1,24 +1,26 @@
-const { models: { User }} = require("../db")
-
+const { models: { User }} = require("../db");
 
 const requireToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
         const user = await User.findByToken(token);
-        req.user = user;
-        next()
+        res.user = user;
+        return next()
     } catch (err) {
-        next(err);
+        return next(err);
     }
-}
+};
 
 const isAdmin = (req, res, next) => {
-   if (!req.user.isAdmin) {
-        return res.status(403).send("This function is for admins only!")
+    console.log('isAdmin was called');
+   if (!res.user.isAdmin) {
+        const error = new Error("This function is for admins only!")
+        error.status = 401;
+        return next(error)
     } else {
-        next()
+        return next()
     }
-}
+};
 
 module.exports = {
     requireToken,
