@@ -81,19 +81,15 @@ class Cart extends React.Component {
         <div className="cart-display">
           {items.map((item) => (
             <div className="cart-item" key={item.product.id}>
+              {console.log(item.product.id)}
               <img src={item.product.imageUrl} />
               <h3>{item.product.title}</h3>
               <li>Price: ${item.product.price}</li>
               <li>
-                <form onSubmit={this.handleSubmit}>
+                <form >
                   <label htmlFor="quantity">Quantity:</label>
                   <input type="number" id="quantity" min={1} max={item.product.inventory} value={item.quantity} onChange={(event) => this.handleChange(event,item)} />
-                  {/* <input type="submit" value="Submit" /> */}
                 </form>
-                {/* Quantity: {item.quantity} <br />
-                <br /> */}
-
-              
                 Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
               </li>
             </div>
