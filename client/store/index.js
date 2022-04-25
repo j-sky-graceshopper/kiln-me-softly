@@ -9,7 +9,7 @@ import categories from "./categories";
 import selectedCategory from "./filter";
 import searchTerm from "./search";
 import cart from "./cart";
-import order from "./order";
+import order from "./currentOrder";
 import admin from "./admin";
 
 const reducer = combineReducers({

@@ -18,7 +18,7 @@ export const fetchOrder = (status) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       if (token) {
-        const res = await axios.get("/api/order", {
+        const res = await axios.get("/api/currentOrder", {
           headers: {
             authorization: token,
             status,
