@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+<<<<<<< HEAD
 import { fetchCart, changeStatus } from "../store/cart";
 import history from "../history";
 
@@ -8,6 +9,17 @@ class Cart extends React.Component {
     super(props);
     this.handleCheckout = this.handleCheckout.bind(this);
   }
+=======
+import { fetchCart, updateCart } from "../store/cart";
+
+
+class Cart extends React.Component {
+  constructor() {
+    super()
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+>>>>>>> origin/main
   componentDidMount() {
     this.props.loadCart("Created");
   }
@@ -17,6 +29,25 @@ class Cart extends React.Component {
       await this.props.checkoutCart(this.props.cart.id, "Processing");
     }
     history.push("./checkout");
+  }
+
+  handleChange(event, item) {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    item.quantity = event.target.value
+
+    // const updatedCart = cart.map((cartItem) => {
+    //     if (cartItem.id === item.id) {
+    //       return item
+    //     } else {
+    //       return cartItem
+    //     }
+    //   })
+    // console.log("cart", cart, "updatedCart", updatedCart)
+    // localStorage.setItem("cart", JSON.stringify(updatedCart))
+    cart.push(item.product)
+    localStorage.setItem("cart", JSON.stringify(cart))
+
+    this.props.updateCart(item)
   }
 
   render() {
@@ -45,7 +76,10 @@ class Cart extends React.Component {
         product: item,
         quantity: itemAmount[item.title],
       }));
+
+
     }
+
     let total = 0;
     items.forEach((item) => {
       total += item.product.price * item.quantity;
@@ -67,12 +101,15 @@ class Cart extends React.Component {
         <div className="cart-display">
           {items.map((item) => (
             <div className="cart-item" key={item.product.id}>
+              {console.log(item.product.id)}
               <img src={item.product.imageUrl} />
               <h3>{item.product.title}</h3>
               <li>Price: ${item.product.price}</li>
               <li>
-                Quantity: {item.quantity} <br />
-                <br />
+                <form >
+                  <label htmlFor="quantity">Quantity:</label>
+                  <input type="number" id="quantity" min={1} max={item.product.inventory} value={item.quantity} onChange={(event) => this.handleChange(event,item)} />
+                </form>
                 Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
               </li>
             </div>
@@ -85,8 +122,13 @@ class Cart extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
+<<<<<<< HEAD
     loadCart: (status) => dispatch(fetchCart(status)),
     checkoutCart: (cartId, status) => dispatch(changeStatus(cartId, status)),
+=======
+    loadCart: () => dispatch(fetchCart()),
+    updateCart: (item) => dispatch(updateCart(item))
+>>>>>>> origin/main
   };
 };
 const mapState = (state) => {
@@ -98,3 +140,6 @@ const mapState = (state) => {
 };
 
 export default connect(mapState, mapDispatch)(Cart);
+
+
+//NEED REDUX STORE TO UPDATE CART : action type, action creator (item and quanity), thunk (has item and quantity), 
