@@ -297,16 +297,16 @@ li {
   font-family: 'Alata', sans-serif;
 }
 
-#add-product input, select, #edit-product input, select, #add-user input, select {
+#add-product input, select, #edit-product input, select, #add-user input, select, #checkout input, select {
   width: 100%;
   margin-bottom: 5%;
 }
 
-#add-product label, #edit-product label, #add-user label {
+#add-product label, #edit-product label, #add-user label, #checkout label {
   width: 100%;
 }
 
-#add-product, #edit-product, #add-user {
+#add-product, #edit-product, #add-user, #checkout {
   display: flex;
   flex-direction: column;
   align-items: center;

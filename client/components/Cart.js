@@ -11,7 +11,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadCart("Created");
+    // this.props.loadCart("Created");
   }
 
   async handleCheckout() {

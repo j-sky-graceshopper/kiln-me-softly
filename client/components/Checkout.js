@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/currentOrder";
-import { changeStatus } from "../store/cart";
+import { changeStatus, shippingInfo } from "../store/cart";
 import history from "../history";
 
 class Checkout extends React.Component {
@@ -33,8 +33,12 @@ class Checkout extends React.Component {
   handleSumbit(evt) {
     evt.preventDefault();
     // if user not logged in, create new user and new order first
-    // update order in database
-    this.props.updateOrder(this.props.order.id, this.State);
+
+    this.props.addShippingInfo(this.props.order.id, this.state);
+    history.push({
+      pathname: "/confirmation",
+      state: { status: "Completed" },
+    });
   }
 
   async handleCancel(evt) {
@@ -88,7 +92,7 @@ class Checkout extends React.Component {
         <div className="add-form">
           <h1>Checkout</h1>
           <h3>Please Enter Your Shipping Information</h3>
-          <form id="add-user" onSubmit={handleSumbit}>
+          <form id="checkout" onSubmit={handleSumbit}>
             <label htmlFor="name">Name:</label>
             <input
               name="name"
@@ -136,7 +140,7 @@ class Checkout extends React.Component {
           </form>
         </div>
         <div className="total">
-          <h3>Total: ${total}</h3>
+          <h3>Total: ${total.toFixed(2)}</h3>
         </div>
         <div className="cart-display">
           {items.map((item) => (
@@ -161,7 +165,8 @@ const mapDispatch = (dispatch) => {
   return {
     loadOrder: (status) => dispatch(fetchOrder(status)),
     cancelOrder: (cartId, status) => dispatch(changeStatus(cartId, status)),
-    updateOrder: (cartId, order) => dispatch(updateOrder(cartId, order)),
+    addShippingInfo: (cartId, address) =>
+      dispatch(shippingInfo(cartId, address)),
   };
 };
 const mapState = (state) => {

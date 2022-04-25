@@ -9,10 +9,13 @@ class Checkout extends React.Component {
 
   render() {
     const { status } = this.props.location.state;
-
     return (
       <div id="cart-title">
-        {status === "Cancelled" ? <h1>Your Order Has Been Canceled</h1> : null}
+        {status === "Cancelled" ? (
+          <h1>Your Order Has Been Canceled</h1>
+        ) : (
+          <h1>Order Confirmation</h1>
+        )}
       </div>
     );
   }

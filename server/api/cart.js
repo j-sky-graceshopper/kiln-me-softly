@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Order },
+  models: { User, Order, Item, Product },
 } = require("../db");
 module.exports = router;
 
@@ -30,6 +30,21 @@ router.put("/change-status", async (req, res, next) => {
     order.status = req.body.status;
     await order.save();
     res.send(await Order.findByPk(req.body.cartId));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/shipping", async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.body.cartId);
+    order.update(req.body.address);
+    await order.save();
+    res.send(
+      await Order.findByPk(req.body.cartId, {
+        include: [{ model: Item, include: [Product] }],
+      })
+    );
   } catch (err) {
     next(err);
   }

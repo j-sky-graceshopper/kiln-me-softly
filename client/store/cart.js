@@ -1,6 +1,5 @@
 import axios from "axios";
-import { fetchOrder } from "./currentOrder";
-import history from "../history";
+import { setOrder } from "./currentOrder";
 
 const TOKEN = "token";
 const SET_CART = "SET_CART";
@@ -74,10 +73,26 @@ export const changeStatus = (cartId, status) => {
         cartId,
         status,
       });
-      if (status === "Processing") {
-        dispatch(fetchOrder(status));
-      }
+      // if (status === "Processing") {
+      //   dispatch(fetchOrder(status));
+      // }
       return dispatch(setCart(cart.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const shippingInfo = (cartId, address) => {
+  return async (dispatch) => {
+    try {
+      console.log(cartId, address);
+      const cart = await axios.put("/api/cart/shipping", {
+        cartId,
+        address,
+      });
+      await dispatch(changeStatus(cartId, "Completed"));
+      return dispatch(setOrder(cart.data));
     } catch (err) {
       console.log(err);
     }
