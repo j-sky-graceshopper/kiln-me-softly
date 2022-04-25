@@ -87,7 +87,6 @@ export const changeStatus = (cartId, status) => {
 export const updateCart = (item) => {
   return async (dispatch) => {
     try {
-      console.log(item);
       return dispatch(updateCartItem(item));
     } catch (err) {
       console.log("Error while updating the cart");

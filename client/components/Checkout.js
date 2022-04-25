@@ -34,8 +34,7 @@ class Checkout extends React.Component {
     evt.preventDefault();
     // if user not logged in, create new user and new order first
     // update order in database
-    // const { username, password, email, isAdmin } = this.state;
-    // this.props.addUser({ username, password, email, isAdmin });
+    this.props.updateOrder(this.props.order.id, this.State);
   }
 
   async handleCancel(evt) {
@@ -128,7 +127,7 @@ class Checkout extends React.Component {
                 id="cancel-order"
                 onClick={handleCancel}
               >
-                Cancel
+                Cancel Order
               </button>
               <button className="complete" type="submit">
                 Complete Order
@@ -162,6 +161,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadOrder: (status) => dispatch(fetchOrder(status)),
     cancelOrder: (cartId, status) => dispatch(changeStatus(cartId, status)),
+    updateOrder: (cartId, order) => dispatch(updateOrder(cartId, order)),
   };
 };
 const mapState = (state) => {
