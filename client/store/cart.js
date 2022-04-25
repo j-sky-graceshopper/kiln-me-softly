@@ -75,10 +75,12 @@ export const updateCart = ( item ) => {
           headers: {authorization: token}
         });
         return dispatch(updateCartItem(item))
+      } else {
+        return dispatch(updateCartItem(item))
       }
-  } catch (err) {
+    } catch (err) {
     console.log("Error while updating the cart")
-  }
+    }
   }}
 
 //reducer
