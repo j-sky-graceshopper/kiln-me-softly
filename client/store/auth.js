@@ -25,7 +25,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    dispatch(fetchCart());
+    dispatch(fetchCart("Created"));
     return dispatch(setAuth(res.data));
   }
 };

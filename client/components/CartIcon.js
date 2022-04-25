@@ -11,7 +11,7 @@ class CartIcon extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadCart();
+    // this.props.loadCart("Created");
     const cart = this.props.cart.items || [];
     this.setState({
       itemsInCart: cart.reduce((accum, item) => accum + item.quantity, 0),
@@ -71,7 +71,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCart: () => dispatch(fetchCart()),
+    loadCart: (status) => dispatch(fetchCart(status)),
   };
 };
 

@@ -1,28 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart, checkout } from "../store/cart";
-import history from "../history";
+import { fetchCart } from "../store/cart";
 
-class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleCheckout = this.handleCheckout.bind(this);
-  }
+class Checkout extends React.Component {
   componentDidMount() {
-    // this.props.loadCart("Created");
-  }
-
-  handleCheckout() {
-    console.log("checking out");
-    this.props.checkoutCart(this.props.cart.id);
-    history.push("./checkout");
+    this.props.loadCart("Processing");
   }
 
   render() {
+    console.log(this.props.order);
     let items;
 
     if (this.props.isLoggedIn) {
-      items = this.props.cart.items || [];
+      items = this.props.order.items || [];
     } else {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
       const itemAmount = {};
@@ -51,18 +41,12 @@ class Cart extends React.Component {
     });
 
     return (
-      <div id="cart-container">
-        {items.length > 0 ? (
-          <>
-            <h1 id="cart-title">Your Shopping Cart</h1>
-            <div className="total">
-              <h3>Total: ${total}</h3>
-              <button onClick={this.handleCheckout}>Checkout</button>
-            </div>
-          </>
-        ) : (
-          <h1 id="cart-title">No Items In Your Cart</h1>
-        )}
+      <div>
+        <h1 id="cart-title">Checkout</h1>
+        <div className="total">
+          <h3>Total: ${total}</h3>
+          <button>Complete Order</button>
+        </div>
         <div className="cart-display">
           {items.map((item) => (
             <div className="cart-item" key={item.product.id}>
@@ -85,15 +69,14 @@ class Cart extends React.Component {
 const mapDispatch = (dispatch) => {
   return {
     loadCart: (status) => dispatch(fetchCart(status)),
-    checkoutCart: (cartId) => dispatch(checkout(cartId)),
   };
 };
 const mapState = (state) => {
   return {
-    cart: state.cart,
+    order: state.cart,
     isLoggedIn: !!state.auth.id,
     auth: state.auth,
   };
 };
 
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapState, mapDispatch)(Checkout);

@@ -20,7 +20,7 @@ const addToCart = (cart) => {
 };
 
 //THUNK
-export const fetchCart = () => {
+export const fetchCart = (status) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -28,6 +28,7 @@ export const fetchCart = () => {
         const res = await axios.get("/api/cart", {
           headers: {
             authorization: token,
+            status,
           },
         });
         return dispatch(setCart(res.data));
@@ -50,6 +51,17 @@ export const addItem = (product) => {
         });
         return dispatch(addToCart(res.data));
       }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const checkout = (cartId) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put("/api/cart/checkout", { cartId });
+      console.log("DATA", res.data);
     } catch (err) {
       console.log(err);
     }
