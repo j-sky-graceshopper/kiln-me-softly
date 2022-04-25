@@ -13,7 +13,12 @@ class Cart extends React.Component {
   }
 
   async handleCheckout() {
-    await this.props.checkoutCart(this.props.cart.id);
+    if (this.props.isLoggedIn) {
+      await this.props.checkoutCart(this.props.cart.id);
+    } else {
+      console.log("here");
+      history.push("./checkout");
+    }
   }
 
   render() {
