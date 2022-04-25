@@ -3,11 +3,48 @@ import { connect } from "react-redux";
 import { fetchOrder } from "../store/order";
 
 class Checkout extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSumbit = this.handleSumbit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
   componentDidMount() {
     this.props.loadOrder("Processing");
   }
 
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleSumbit(evt) {
+    evt.preventDefault();
+    // if user not logged in, create new user and new order first
+    // update order in database
+    // const { username, password, email, isAdmin } = this.state;
+    // this.props.addUser({ username, password, email, isAdmin });
+  }
+
+  handleCancel(evt) {
+    evt.preventDefault();
+    console.log("cancelling order");
+    // if user not logged in, clear local storage
+    // if user logged in, update status of order to cancelled
+  }
+
   render() {
+    const { handleChange, handleSumbit, handleCancel } = this;
     let items;
 
     if (this.props.isLoggedIn) {
@@ -41,8 +78,53 @@ class Checkout extends React.Component {
 
     return (
       <div>
-        <h1 id="cart-title">Checkout</h1>
-        <div className="total">
+        <div className="add-form">
+          <h1>Checkout</h1>
+          <h3>Please Enter Your Shipping Information</h3>
+          <form id="add-user" onSubmit={handleSumbit}>
+            <label htmlFor="name">Name:</label>
+            <input
+              name="name"
+              onChange={handleChange}
+              value={this.state.name}
+            />
+            <label htmlFor="email">Email:</label>
+            <input
+              name="email"
+              onChange={handleChange}
+              value={this.state.email}
+            />
+            <label htmlFor="street">Street address:</label>
+            <input
+              name="street"
+              onChange={handleChange}
+              value={this.state.street}
+            />
+            <label htmlFor="city">City:</label>
+            <input
+              name="city"
+              onChange={handleChange}
+              value={this.state.city}
+            />
+            <label htmlFor="state">State:</label>
+            <input
+              name="state"
+              onChange={handleChange}
+              value={this.state.state}
+            />
+            <label htmlFor="zip">ZIP code:</label>
+            <input name="zip" onChange={handleChange} value={this.state.zip} />
+            <div className="below-item">
+              <button className="cancel" onClick={handleCancel}>
+                Cancel
+              </button>
+              <button className="complete" type="submit">
+                Complete Order
+              </button>
+            </div>
+          </form>
+        </div>
+        {/* <div className="total">
           <h3>Total: ${total}</h3>
           <button>Complete Order</button>
         </div>
@@ -59,7 +141,7 @@ class Checkout extends React.Component {
               </li>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     );
   }
