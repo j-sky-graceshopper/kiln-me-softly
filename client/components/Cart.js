@@ -9,13 +9,11 @@ class Cart extends React.Component {
     this.handleCheckout = this.handleCheckout.bind(this);
   }
   componentDidMount() {
-    // this.props.loadCart("Created");
+    this.props.loadCart("Created");
   }
 
-  handleCheckout() {
-    console.log("checking out");
-    this.props.checkoutCart(this.props.cart.id);
-    history.push("./checkout");
+  async handleCheckout() {
+    await this.props.checkoutCart(this.props.cart.id);
   }
 
   render() {

@@ -9,6 +9,7 @@ import categories from "./categories";
 import selectedCategory from "./filter";
 import searchTerm from "./search";
 import cart from "./cart";
+import order from "./order";
 import admin from "./admin";
 
 const reducer = combineReducers({
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   selectedCategory,
   searchTerm,
   cart,
+  order,
   admin,
 });
 

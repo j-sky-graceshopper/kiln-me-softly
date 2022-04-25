@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
+import { fetchOrder } from "../store/order";
 
 class Checkout extends React.Component {
   componentDidMount() {
-    this.props.loadCart("Processing");
+    this.props.loadOrder("Processing");
   }
 
   render() {
-    console.log(this.props.order);
     let items;
 
     if (this.props.isLoggedIn) {
@@ -68,12 +67,12 @@ class Checkout extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCart: (status) => dispatch(fetchCart(status)),
+    loadOrder: (status) => dispatch(fetchOrder(status)),
   };
 };
 const mapState = (state) => {
   return {
-    order: state.cart,
+    order: state.order,
     isLoggedIn: !!state.auth.id,
     auth: state.auth,
   };

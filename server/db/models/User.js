@@ -47,7 +47,7 @@ User.prototype.getCart = async function (status) {
   let [cart, created] = await Order.findOrCreate({
     where: { userId: this.id, status },
   });
-  return Order.findByPk(cart.id, {
+  return await Order.findByPk(cart.id, {
     include: [{ model: Item, include: [Product] }],
   });
 };

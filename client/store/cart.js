@@ -1,4 +1,5 @@
 import axios from "axios";
+import history from "../history";
 
 const TOKEN = "token";
 const SET_CART = "SET_CART";
@@ -60,15 +61,15 @@ export const addItem = (product) => {
 export const checkout = (cartId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.put("/api/cart/checkout", { cartId });
-      console.log("DATA", res.data);
+      await axios.put("/api/cart/checkout", { cartId });
+      history.push("./checkout");
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-//reducer
+//cart reducer
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_CART:

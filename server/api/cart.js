@@ -26,18 +26,10 @@ router.post("/add", async (req, res, next) => {
 
 router.put("/checkout", async (req, res, next) => {
   try {
-    // console.log("TOKEN:", req.headers);
-    // const user = await User.findByToken(req.headers.authorization);
-    // res.send(await user.checkout());
-    console.log("BODY", req.body);
-    const order = await Order.findOne({
-      where: { id: req.body.cartId, status: "Created" },
-    });
-    if (order) {
-      order.status = "Processing";
-      await order.save();
-      res.send(await Order.findByPk(req.body.cartId));
-    }
+    const order = await Order.findByPk(req.body.cartId);
+    order.status = "Processing";
+    await order.save();
+    res.send(await Order.findByPk(req.body.cartId));
   } catch (err) {
     next(err);
   }
