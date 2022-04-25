@@ -43,17 +43,17 @@ User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
-User.prototype.getCart = async function () {
+User.prototype.getCart = async function (status) {
   let [cart, created] = await Order.findOrCreate({
-    where: { userId: this.id, status: "Created" },
+    where: { userId: this.id, status },
   });
-  return Order.findByPk(cart.id, {
+  return await Order.findByPk(cart.id, {
     include: [{ model: Item, include: [Product] }],
   });
 };
 
 User.prototype.removeFromCart = async function (product) {
-  const cart = await this.getCart();
+  const cart = await this.getCart("Created");
   const item = cart.items.find((item) => item.productId === product.id);
   item.quantity--;
   if (item.quantity) {
@@ -61,11 +61,11 @@ User.prototype.removeFromCart = async function (product) {
   } else {
     await item.destroy();
   }
-  return this.getCart();
+  return this.getCart("Created");
 };
 
 User.prototype.addToCart = async function (product) {
-  const cart = await this.getCart();
+  const cart = await this.getCart("Created");
   let item = cart.items.find((item) => item.productId === product.id);
   if (item) {
     item.quantity++;
@@ -73,11 +73,11 @@ User.prototype.addToCart = async function (product) {
   } else {
     await Item.create({ productId: product.id, orderId: cart.id });
   }
-  return this.getCart();
+  return this.getCart("Created");
 };
 
 User.prototype.checkout = async function () {
-  const cart = await this.getCart();
+  const cart = await this.getCart("Created");
   cart.status = "Processing";
   await cart.save();
   return Order.findByPk(cart.id, {
