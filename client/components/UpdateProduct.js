@@ -49,43 +49,32 @@ export class UpdateProduct extends React.Component {
         <form id="edit-product" onSubmit={handleSubmit}>
           <label htmlFor="title">Product Name:</label>
           <input name="title" onChange={handleChange} value={title} />
-          <br />
-
           <label htmlFor="description">Description:</label>
           <input
             name="description"
             onChange={handleChange}
             value={description}
           />
-          <br />
-
           <label htmlFor="image">Add Image:</label>
           <input name="imageUrl" onChange={handleChange} value={imageUrl} />
-          <br />
-
           <label htmlFor="price">Set Price:</label>
           <input name="price" onChange={handleChange} value={price} />
-          <br />
-
           <label htmlFor="inventory">Inventory:</label>
           <input name="inventory" onChange={handleChange} value={inventory} />
-          <br />
 
           {/* <label htmlFor="">Select Categories:</label>
-          <input />
-          <br /><br /> */}
-
-          <button className="add-product" type="submit">
-            Submit
-          </button>
-          <br />
-          <br />
+          <input />*/}
+          <div className="below-item">
+            <button className="add-product" type="submit">
+              Submit
+            </button>
+            <Link to="/products">
+              <button className="cancel-btn" type="button">
+                Cancel
+              </button>
+            </Link>
+          </div>
         </form>
-        <Link to="/products">
-          <button className="cancel-btn" type="button">
-            Cancel
-          </button>
-        </Link>
       </div>
     );
   }

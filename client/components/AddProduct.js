@@ -47,73 +47,52 @@ class AddProduct extends React.Component {
         <h1>Add Product</h1>
         <form id="add-product" onSubmit={handleSubmit}>
           <label htmlFor="title">Product Name:</label>
-          <input
-            name="title"
-            onChange={handleChange}
-            value={this.state.name}
-          />
-          <br />
-
+          <input 
+            placeholder="Title"
+            name="title" onChange={handleChange} value={this.state.name} />
           <label htmlFor="description">Description:</label>
           <input
             name="description"
             onChange={handleChange}
             value={this.state.description}
           />
-          <br />
-
           <label htmlFor="image">Add Image:</label>
           <input
             name="imageUrl"
             onChange={handleChange}
             value={this.state.imageUrl}
           />
-          <br />
-
           <label htmlFor="price">Set Price:</label>
           <input
             name="price"
             onChange={handleChange}
             value={this.state.price}
           />
-          <br />
-
           <label htmlFor="inventory">Inventory:</label>
           <input
             name="inventory"
             onChange={handleChange}
             value={this.state.inventory}
           />
-          <br />
-
-          <div>
-            <label htmlFor="categories">Select Category:</label>
-            <select
-              name="categories"
-              id="categories"
-              onChange={handleChange}
-            >
-              {categories.map((category) => (
-                <option key={category.name} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
+          <label htmlFor="categories">Select Category:</label>
+          <select name="categories" id="categories" onChange={handleChange}>
+            {categories.map((category) => (
+              <option key={category.name} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <div className="below-item">
+            <button className="add-product" type="submit">
+              Add Product
+            </button>
+            <Link to="/products">
+              <button className="cancel-btn" type="button">
+                Cancel
+              </button>
+            </Link>
           </div>
-          <br />
-          <br />
-
-          <button className="add-product" type="submit">
-            Add Product
-          </button>
-          <br />
-          <br />
         </form>
-        <Link to="/products">
-          <button className="cancel-btn" type="button">
-            Cancel
-          </button>
-        </Link>
       </div>
     );
   }

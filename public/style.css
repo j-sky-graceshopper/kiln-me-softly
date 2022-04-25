@@ -1,10 +1,12 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 10px;
 }
 
 a {
   text-decoration: none;
-  color: darkcyan;
+  color: rgb(37,67,50);
 }
 
 label {
@@ -30,6 +32,11 @@ label {
   margin-left: 10px;
 }
 
+#authorization h1 {
+  font-family: 'Alata',sans-serif;
+  color: rgb(37,67,50)
+}
+
 #authorization label {
   display: inline-block;
   font-size: 18pt;
@@ -41,29 +48,45 @@ label {
 }
 
 #authorization button {
-  font-size: 14pt;
+  font-size: 12pt;
+  width: 100px;
+}
+
+.admin-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 #home {
   display: flex;
   align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Quicksand, sans-serif;
+}
+
+#home h1 {
+  margin: 0px;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Alata', sans-serif;
+  color: rgb(37,67,50);
 }
 
 #home p {
-  margin: 30px;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 200;
 }
 
 #home-img {
-  margin: 25px 25px 0 25px;
-  width: 700px;
+  width: 50%;
 }
 
 #home-text {
-  min-width: 600px;
-  max-width: 600px;
+  padding: 1% 4% 4% 4%;
   text-align:justify;
 }
 
@@ -76,11 +99,16 @@ nav {
 
 #logo {
   justify-self: flex-start;
-  font-family: 'Quicksand', sans-serif;
-  color: gray;
+  font-family: 'Alata', sans-serif;
+  color: rgb(100,100,100);
   font-size: 36pt;
-  margin: 0 0px 0 20px;
+  margin: 0;
   min-width: 200px;
+  line-height: .9;
+}
+
+#logo:hover {
+  color: darkgray;
 }
 
 .icon {
@@ -95,18 +123,18 @@ nav {
 nav a {
   display: inline-block;
   margin: 1em;
-  font-size: 24px;
+  font-size: 18px;
   font-family: 'Quicksand', sans-serif;
-  color: darkcyan;
+  color: rgb(37,67,50);
   white-space: nowrap;
 }
 
 nav a:hover {
-  color: rgb(137, 198, 198);
+  color: rgb(105,141,112);
 }
 
 a:hover {
-  color: rgb(137, 198, 198);
+  color: rgb(105,141,112);
 }
 
 form div {
@@ -123,29 +151,42 @@ form div {
   font-family: 'Quicksand', sans-serif;
 }
 
+#all-products-container h1 {
+  font-family: 'Alata', sans-serif;
+  color: rgb(37,67,50);
+}
+
 .cart-display {
   display: flex;
   flex-direction: column;
-  width: 70%;
-  margin: auto;
   align-items: flex-start;
+  margin: 0 auto 0 auto;
+  width: 95%;
+}
+
+#cart-container {
+  width: 95%;
 }
 
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 10px;
+  width: 90%;
+  gap: 18px;
+  white-space: nowrap;
+  font-family: "Quicksand",sans-serif;
 }
 
 #cart-title {
   text-align: center;
   margin: 50px 0 50px 0;
+  color: rgb(37,67,50);
+  font-family: "Alata",sans-serif;
 }
 
 .cart-display img {
-  width: 200px;
+  width: 180px;
 }
 
 .total {
@@ -158,16 +199,15 @@ form div {
 
 .total button {
   margin-left: 30px;
-  font-size: 18pt;
+  font-size: 12pt;
 }
 
-#all-items, .cart-display, #all-users, {
+#all-items, .cart-display, #all-users {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 50px;
+  padding: 10px;
   gap: 18px;
-
 }
 
 .item {
@@ -175,6 +215,11 @@ form div {
   display: flex;
   flex-direction: column;
   width: 300px;
+  color: rgb(105,141,112);
+}
+
+.item:hover {
+  opacity: 80%;
 }
 
 .item > img {
@@ -185,11 +230,22 @@ form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 #edit-button {
   display: flex;
   justify-content: flex-end;
+}
+
+.productReviews {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.productReviews p {
+ margin: 0;
 }
 
 li {
@@ -218,70 +274,126 @@ li {
   min-width: 200px;
 }
 
-.add-form {
+.add-product-form, .update-product-form, .add-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
-  margin-left: 200px;
-  margin-right: 200px;
+  width: 40%;
+  margin: 0 auto;
+  padding: 2%;
   font-family: 'Quicksand', sans-serif;
 }
 
-.update-product-form{
+.add-product-form h1, .update-product-form h1, .add-form h1 {
+  color: rgb(37,67,50);
+  font-family: 'Alata', sans-serif;
+}
+
+#add-product input, select, #edit-product input, select, #add-user input, select {
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+#add-product label, #edit-product label, #add-user label {
+  width: 100%;
+}
+
+#add-product, #edit-product, #add-user {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
-  margin-left: 200px;
-  margin-right: 200px;
-  font-family: 'Quicksand', sans-serif;
+  width: 90%;
+  margin: 0 auto;
+}
+
+#admin-label {
+  display: flex;
+  white-space: nowrap;
+  justify-content: flex-start;
+  gap: 3%;
+}
+
+#admin-label input {
+  width: 5%;
+  margin: auto 0 auto 0;
 }
 
 button {
   background-color: white;
   border: 1px solid black;
   font-family: 'Quicksand', sans-serif;
-  margin-right: 10px;
+  padding: 8px;
 }
 
 button:hover {
-  background-color: lightcyan;
+  background-color: rgb(105,141,112);
 }
 
 .singleProduct {
   display: flex;
-  margin: 40px auto 40px auto;
-  /* margin-left: 60px; */
-  width: 80%;
+  margin: 30px auto 30px auto;
+  width: 90%;
+  font-family: "Quicksand", sans-serif;
 }
 
 .singleProduct-info {
-  margin-left: 30px;
+  width: 50%;
+  margin: 0 auto;
+  padding: 0 5%;
 }
 
 .singleProduct img {
-  width: 700px;
+  width: 50%;
+  margin-bottom: 40px;
 }
 
 .singleProduct-info h1 {
   margin-top: 0px;
+  font-family: "Alata", sans-serif;
+  color: rgb(105,141,112);
 }
 
 .singleProduct-info p {
   font-size: 16pt;
 }
+
+.single-product-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5%;
+}
+
+hr { margin: 30px 0 30px 0; }
   
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 850px) {
   nav {
     flex-direction: column;
   }
+}
 
+@media screen and (max-width: 850px) {
   #home {
     flex-direction: column;
   }
+
+  #home-img {
+    flex-direction: column;
+    width: 100%;
+  }
+
   #home-img, #home-text {
     width: 90%;
-    margin: 0 5% 0 5%;
+    margin: 0 auto 5% auto;
+  }
+
+  .singleProduct {
+    flex-direction: column;
+  }
+
+  .singleProduct-info, .singleProduct img {
+    width: 90%;
+    margin: 0 auto 5% auto;
   }
 }
+
