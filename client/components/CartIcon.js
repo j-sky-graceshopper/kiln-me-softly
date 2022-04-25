@@ -22,7 +22,8 @@ class CartIcon extends React.Component {
     // Logged in users
     if (this.props.isLoggedIn) {
       const cart = this.props.cart.items || [];
-      const items = cart.reduce((accum, item) => accum + item.quantity, 0);
+      const items = cart.reduce((accum, item) => accum + parseInt(item.quantity), 0);
+
       if (items !== this.state.itemsInCart) {
         this.setState({
           itemsInCart: items,
