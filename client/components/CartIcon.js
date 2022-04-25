@@ -22,7 +22,10 @@ class CartIcon extends React.Component {
     // Logged in users
     if (this.props.isLoggedIn) {
       const cart = this.props.cart.items || [];
-      const items = cart.reduce((accum, item) => accum + parseInt(item.quantity), 0);
+      const items = cart.reduce(
+        (accum, item) => accum + parseInt(item.quantity),
+        0
+      );
 
       if (items !== this.state.itemsInCart) {
         this.setState({
@@ -39,7 +42,10 @@ class CartIcon extends React.Component {
         });
       }
       window.addEventListener("click", (event) => {
-        if (event.target.id === "add-to-cart") {
+        if (
+          event.target.id === "add-to-cart" ||
+          event.target.id === "cancel-order"
+        ) {
           const cart = JSON.parse(localStorage.getItem("cart") || "[]");
           this.setState({
             itemsInCart: cart.length,

@@ -42,9 +42,9 @@ class Checkout extends React.Component {
     evt.preventDefault();
     if (this.props.isLoggedIn) {
       await this.props.cancelOrder(this.props.order.id, "Cancelled");
+    } else {
+      window.localStorage.removeItem("cart");
     }
-    // if user not logged in, clear local storage
-    // history.push("./confirmation");
     history.push({
       pathname: "/confirmation",
       state: { status: "Cancelled" },
@@ -123,7 +123,11 @@ class Checkout extends React.Component {
             <label htmlFor="zip">ZIP code:</label>
             <input name="zip" onChange={handleChange} value={this.state.zip} />
             <div className="below-item">
-              <button className="cancel" onClick={handleCancel}>
+              <button
+                className="cancel"
+                id="cancel-order"
+                onClick={handleCancel}
+              >
                 Cancel
               </button>
               <button className="complete" type="submit">
