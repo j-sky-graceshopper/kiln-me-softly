@@ -62,12 +62,10 @@ export const addItem = (product) => {
 export const changeStatus = (cartId, status) => {
   return async (dispatch) => {
     try {
-      console.log(cartId, status);
       const cart = await axios.put("/api/cart/change-status", {
         cartId,
         status,
       });
-      // return dispatch(fetchOrder(status));
       return dispatch(setCart(cart.data));
     } catch (err) {
       console.log(err);

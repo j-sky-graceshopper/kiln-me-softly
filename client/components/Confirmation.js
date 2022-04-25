@@ -6,15 +6,13 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    console.log(this.props.location.state.status);
-    // console.log(history.pop());
-  }
+
   render() {
+    const { status } = this.props.location.state;
+
     return (
       <div id="cart-title">
-        <h1>Your Order Has Been Canceled</h1>
-        <h3>We hope to see you again soon</h3>
+        {status === "Cancelled" ? <h1>Your Order Has Been Canceled</h1> : null}
       </div>
     );
   }

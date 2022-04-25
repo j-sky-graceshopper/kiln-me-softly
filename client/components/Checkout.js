@@ -40,7 +40,6 @@ class Checkout extends React.Component {
 
   async handleCancel(evt) {
     evt.preventDefault();
-    console.log("cancelling order");
     if (this.props.isLoggedIn) {
       await this.props.cancelOrder(this.props.order.id, "Cancelled");
     }
