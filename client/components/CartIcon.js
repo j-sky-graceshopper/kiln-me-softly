@@ -11,7 +11,7 @@ class CartIcon extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadCart();
+    // this.props.loadCart("Created");
     const cart = this.props.cart.items || [];
     this.setState({
       itemsInCart: cart.reduce((accum, item) => accum + item.quantity, 0),
@@ -22,7 +22,10 @@ class CartIcon extends React.Component {
     // Logged in users
     if (this.props.isLoggedIn) {
       const cart = this.props.cart.items || [];
-      const items = cart.reduce((accum, item) => accum + parseInt(item.quantity), 0);
+      const items = cart.reduce(
+        (accum, item) => accum + parseInt(item.quantity),
+        0
+      );
 
       if (items !== this.state.itemsInCart) {
         this.setState({
@@ -39,7 +42,10 @@ class CartIcon extends React.Component {
         });
       }
       window.addEventListener("click", (event) => {
-        if (event.target.id === "add-to-cart") {
+        if (
+          event.target.id === "add-to-cart" ||
+          event.target.id === "cancel-order"
+        ) {
           const cart = JSON.parse(localStorage.getItem("cart") || "[]");
           this.setState({
             itemsInCart: cart.length,
@@ -72,7 +78,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCart: () => dispatch(fetchCart()),
+    loadCart: (status) => dispatch(fetchCart(status)),
   };
 };
 

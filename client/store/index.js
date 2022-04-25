@@ -9,7 +9,9 @@ import categories from "./categories";
 import selectedCategory from "./filter";
 import searchTerm from "./search";
 import cart from "./cart";
+import order from "./currentOrder";
 import admin from "./admin";
+import orders from "./orderHistory";
 
 const reducer = combineReducers({
   auth,
@@ -19,7 +21,9 @@ const reducer = combineReducers({
   selectedCategory,
   searchTerm,
   cart,
+  order,
   admin,
+  orders,
 });
 
 const middleware = composeWithDevTools(

@@ -18,6 +18,12 @@ const Order = db.define("order", {
     defaultValue: "Created",
     allowNull: false,
   },
+  name: { type: Sequelize.STRING },
+  email: { type: Sequelize.STRING },
+  street: { type: Sequelize.STRING },
+  city: { type: Sequelize.STRING },
+  state: { type: Sequelize.STRING },
+  zip: { type: Sequelize.STRING },
 });
 
 module.exports = { Order, Item };

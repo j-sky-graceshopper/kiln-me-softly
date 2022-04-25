@@ -1,9 +1,11 @@
 import axios from "axios";
+import { fetchOrder } from "./currentOrder";
+import history from "../history";
 
 const TOKEN = "token";
 const SET_CART = "SET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
-const UPDATE_CART_ITEM = "UPDATE_CART_ITEM"
+const UPDATE_CART_ITEM = "UPDATE_CART_ITEM";
 
 //action creator
 const setCart = (cart) => {
@@ -24,11 +26,11 @@ const updateCartItem = (item) => {
   return {
     type: UPDATE_CART_ITEM,
     item,
-  }
-}
+  };
+};
 
 //THUNK
-export const fetchCart = () => {
+export const fetchCart = (status) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -36,6 +38,7 @@ export const fetchCart = () => {
         const res = await axios.get("/api/cart", {
           headers: {
             authorization: token,
+            status,
           },
         });
         return dispatch(setCart(res.data));
@@ -64,29 +67,45 @@ export const addItem = (product) => {
   };
 };
 
-export const updateCart = ( item ) => {
+export const changeStatus = (cartId, status) => {
   return async (dispatch) => {
     try {
-      //checks if there's a user, there should be a token
+      const cart = await axios.put("/api/cart/change-status", {
+        cartId,
+        status,
+      });
+      if (status === "Processing") {
+        dispatch(fetchOrder(status));
+      }
+      return dispatch(setCart(cart.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const updateCart = (item) => {
+  return async (dispatch) => {
+    try {
       const token = window.localStorage.getItem(TOKEN);
-      console.log(item)
       if (token) {
         await axios.put("/api/cart/update", item, {
           headers: {authorization: token}
         });
-        return dispatch(updateCartItem(item))
-      } else {
-        return dispatch(updateCartItem(item))
       }
+      return dispatch(updateCartItem(item))
     } catch (err) {
     console.log("Error while updating the cart")
     }
-  }}
+}}
 
 //reducer
-export default function (state = {
-  items: []
-}, action) {
+export default function (
+  state = {
+    items: [],
+  },
+  action
+) {
   switch (action.type) {
     case SET_CART:
       return action.cart;
@@ -96,12 +115,12 @@ export default function (state = {
       return {
         items: state.items.map((item) => {
           if (item.id === action.item.id) {
-            return action.item
+            return action.item;
           } else {
-            return item
+            return item;
           }
-        })
-      }
+        }),
+      };
     default:
       return state;
   }

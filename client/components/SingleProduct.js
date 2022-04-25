@@ -28,8 +28,6 @@ class SingleProduct extends Component {
     const reviews = this.props.product.reviews || [];
     const { auth } = this.props;
 
-    console.log("REVIEWS", reviews);
-
     return (
       <div className="singleProduct">
         <img src={product.imageUrl} />
