@@ -13,6 +13,7 @@ import AdminLanding from "./components/AdminLanding";
 import AllUsers from "./components/AllUsers";
 import AddUser from "./components/AddUser";
 import Checkout from "./components/Checkout";
+import Confirmation from "./components/Confirmation";
 // import auth from "./store/auth";
 
 class Routes extends Component {
@@ -30,6 +31,7 @@ class Routes extends Component {
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/confirmation" component={Confirmation} />
           {isLoggedIn ? (
             <>
               <Route path="/" exact component={Home} />

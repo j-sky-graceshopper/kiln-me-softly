@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart, checkout } from "../store/cart";
+import { fetchCart, changeStatus } from "../store/cart";
 import history from "../history";
 
 class Cart extends React.Component {
@@ -14,11 +14,9 @@ class Cart extends React.Component {
 
   async handleCheckout() {
     if (this.props.isLoggedIn) {
-      await this.props.checkoutCart(this.props.cart.id);
-    } else {
-      console.log("here");
-      history.push("./checkout");
+      await this.props.checkoutCart(this.props.cart.id, "Processing");
     }
+    history.push("./checkout");
   }
 
   render() {
@@ -88,7 +86,7 @@ class Cart extends React.Component {
 const mapDispatch = (dispatch) => {
   return {
     loadCart: (status) => dispatch(fetchCart(status)),
-    checkoutCart: (cartId) => dispatch(checkout(cartId)),
+    checkoutCart: (cartId, status) => dispatch(changeStatus(cartId, status)),
   };
 };
 const mapState = (state) => {

@@ -1,10 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/order";
+import { changeStatus } from "../store/cart";
+import history from "../history";
 
 class Checkout extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       email: "",
@@ -36,11 +38,18 @@ class Checkout extends React.Component {
     // this.props.addUser({ username, password, email, isAdmin });
   }
 
-  handleCancel(evt) {
+  async handleCancel(evt) {
     evt.preventDefault();
     console.log("cancelling order");
+    if (this.props.isLoggedIn) {
+      await this.props.cancelOrder(this.props.order.id, "Cancelled");
+    }
     // if user not logged in, clear local storage
-    // if user logged in, update status of order to cancelled
+    // history.push("./confirmation");
+    history.push({
+      pathname: "/confirmation",
+      state: { status: "Cancelled" },
+    });
   }
 
   render() {
@@ -124,9 +133,8 @@ class Checkout extends React.Component {
             </div>
           </form>
         </div>
-        {/* <div className="total">
+        <div className="total">
           <h3>Total: ${total}</h3>
-          <button>Complete Order</button>
         </div>
         <div className="cart-display">
           {items.map((item) => (
@@ -141,7 +149,7 @@ class Checkout extends React.Component {
               </li>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     );
   }
@@ -150,6 +158,7 @@ class Checkout extends React.Component {
 const mapDispatch = (dispatch) => {
   return {
     loadOrder: (status) => dispatch(fetchOrder(status)),
+    cancelOrder: (cartId, status) => dispatch(changeStatus(cartId, status)),
   };
 };
 const mapState = (state) => {

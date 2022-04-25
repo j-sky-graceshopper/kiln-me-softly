@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchOrder } from "./order";
 import history from "../history";
 
 const TOKEN = "token";
@@ -58,11 +59,16 @@ export const addItem = (product) => {
   };
 };
 
-export const checkout = (cartId) => {
+export const changeStatus = (cartId, status) => {
   return async (dispatch) => {
     try {
-      await axios.put("/api/cart/checkout", { cartId });
-      history.push("./checkout");
+      console.log(cartId, status);
+      const cart = await axios.put("/api/cart/change-status", {
+        cartId,
+        status,
+      });
+      // return dispatch(fetchOrder(status));
+      return dispatch(setCart(cart.data));
     } catch (err) {
       console.log(err);
     }

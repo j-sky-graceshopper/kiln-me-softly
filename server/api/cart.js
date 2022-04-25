@@ -24,10 +24,10 @@ router.post("/add", async (req, res, next) => {
   }
 });
 
-router.put("/checkout", async (req, res, next) => {
+router.put("/change-status", async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.body.cartId);
-    order.status = "Processing";
+    order.status = req.body.status;
     await order.save();
     res.send(await Order.findByPk(req.body.cartId));
   } catch (err) {
