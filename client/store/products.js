@@ -6,7 +6,6 @@ const ADD_PRODUCT = "ADD_PRODUCT";
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
 
-
 //action creators
 const setAllProducts = (products) => {
   return {
@@ -27,11 +26,10 @@ const updateProduct = (product) => ({
   product,
 });
 
-
 const deleteProduct = (product) => ({
   type: DELETE_PRODUCT,
-  product
-})
+  product,
+});
 
 //thunks
 export const fetchProducts = () => {
@@ -70,15 +68,14 @@ export const updateSingleProduct = (product, history) => {
 
 export const removeProduct = (id) => {
   return async (dispatch) => {
-    try{ 
-      console.log("THUNK ACTIVATED")
-      const {data} = await axios.delete(`/api/products/${id}`)
-      dispatch(deleteProduct(data))
+    try {
+      const { data } = await axios.delete(`/api/products/${id}`);
+      dispatch(deleteProduct(data));
     } catch (err) {
-      console.log("Error occured while deleting", err)
+      console.log("Error occured while deleting", err);
     }
-  }
-}
+  };
+};
 
 //add to the combined reducer in /store/index.js
 export default function AllProductsReducer(state = [], action) {
@@ -94,8 +91,8 @@ export default function AllProductsReducer(state = [], action) {
           product.id === action.product.id ? action.product : product;
         }),
       ];
-    case DELETE_PRODUCT: 
-      return state.filter((product) => product.id !== action.product.id)
+    case DELETE_PRODUCT:
+      return state.filter((product) => product.id !== action.product.id);
     default:
       return state;
   }

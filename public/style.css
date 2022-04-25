@@ -42,6 +42,15 @@ label {
   font-size: 18pt;
 }
 
+#quantity-input {
+  margin-bottom: 10px;
+}
+
+#quantity-input input {
+  margin-left: 10px;
+  font-size: 12pt;
+}
+
 .error {
   color: red;
   font-size: 18pt;
@@ -142,8 +151,6 @@ form div {
   display: inline-block;
 }
 
-
-
 #all-products-container, #admin-landing-page, #all-users-container {
   display: flex;
   flex-direction: column;
@@ -214,7 +221,7 @@ form div {
   list-style: none;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 250px;
   color: rgb(105,141,112);
 }
 
@@ -222,9 +229,9 @@ form div {
   opacity: 80%;
 }
 
-.item > img {
+/* .item > img {
   height: 400px;
-}
+} */
 
 .below-item {
   display: flex;

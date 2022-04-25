@@ -1,21 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart, updateCart } from "../store/cart";
-
+import { fetchCart, changeStatus, updateCart } from "../store/cart";
+import history from "../history";
 
 class Cart extends React.Component {
-  constructor() {
-    super()
-    this.handleChange = this.handleChange.bind(this)
+  constructor(props) {
+    super(props);
+    this.handleCheckout = this.handleCheckout.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    this.props.loadCart();
+    this.props.loadCart("Created");
+  }
+
+  async handleCheckout() {
+    if (this.props.isLoggedIn) {
+      await this.props.checkoutCart(this.props.cart.id, "Processing");
+    }
+    history.push("./checkout");
   }
 
   handleChange(event, item) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    item.quantity = event.target.value
+    item.quantity = event.target.value;
 
     // const updatedCart = cart.map((cartItem) => {
     //     if (cartItem.id === item.id) {
@@ -25,11 +33,11 @@ class Cart extends React.Component {
     //     }
     //   })
     // console.log("cart", cart, "updatedCart", updatedCart)
-    // localStorage.setItem("cart", JSON.stringify(updatedCart))
-    cart.push(item.product)
-    localStorage.setItem("cart", JSON.stringify(cart))
+    cart.push(item.product);
 
-    this.props.updateCart(item)
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    this.props.updateCart(item);
   }
 
   render() {
@@ -58,8 +66,6 @@ class Cart extends React.Component {
         product: item,
         quantity: itemAmount[item.title],
       }));
-
-
     }
 
     let total = 0;
@@ -70,14 +76,16 @@ class Cart extends React.Component {
     return (
       <div id="cart-container">
         {items.length > 0 ? (
-          <h1 id="cart-title">Your Shopping Cart</h1>
+          <>
+            <h1 id="cart-title">Your Shopping Cart</h1>
+            <div className="total">
+              <h3>Total: ${total}</h3>
+              <button onClick={this.handleCheckout}>Checkout</button>
+            </div>
+          </>
         ) : (
           <h1 id="cart-title">No Items In Your Cart</h1>
         )}
-        <div className="total">
-          <h3>Total: ${total}</h3>
-          <button>Checkout</button>
-        </div>
         <div className="cart-display">
           {items.map((item) => (
             <div className="cart-item" key={item.product.id}>
@@ -86,9 +94,18 @@ class Cart extends React.Component {
               <h3>{item.product.title}</h3>
               <li>Price: ${item.product.price}</li>
               <li>
-                <form >
-                  <label htmlFor="quantity">Quantity:</label>
-                  <input type="number" id="quantity" min={1} max={item.product.inventory} value={item.quantity} onChange={(event) => this.handleChange(event,item)} />
+                <form>
+                  <label id="quantity-input" htmlFor="quantity">
+                    Quantity:
+                    <input
+                      type="number"
+                      id="quantity"
+                      min={1}
+                      max={item.product.inventory}
+                      value={item.quantity}
+                      onChange={(event) => this.handleChange(event, item)}
+                    />
+                  </label>
                 </form>
                 Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
               </li>
@@ -102,8 +119,9 @@ class Cart extends React.Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCart: () => dispatch(fetchCart()),
-    updateCart: (item) => dispatch(updateCart(item))
+    loadCart: (status) => dispatch(fetchCart(status)),
+    checkoutCart: (cartId, status) => dispatch(changeStatus(cartId, status)),
+    updateCart: (item) => dispatch(updateCart(item)),
   };
 };
 const mapState = (state) => {
@@ -116,5 +134,4 @@ const mapState = (state) => {
 
 export default connect(mapState, mapDispatch)(Cart);
 
-
-//NEED REDUX STORE TO UPDATE CART : action type, action creator (item and quanity), thunk (has item and quantity), 
+//NEED REDUX STORE TO UPDATE CART : action type, action creator (item and quanity), thunk (has item and quantity),
