@@ -60,10 +60,6 @@ class Checkout extends React.Component {
     });
 
     if (allValid && this.props.isLoggedIn) {
-      console.log(
-        "clicked submit shipping info for cart#",
-        this.props.order.id
-      );
       this.props.addShippingInfo(this.props.order.id, this.state);
       history.push("/stripepayment");
     }
