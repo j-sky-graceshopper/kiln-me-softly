@@ -22,9 +22,7 @@ class Cart extends React.Component {
   }
 
   handleChange(event, item) {
-<<<<<<< HEAD
     const cart = JSON.parse(localStorage.getItem("cart") || "[]")
-    console.log("cart", [...cart])
     const quantity = parseInt(event.target.value)
     if (quantity > item.quantity) {
       cart.push(item.product)
@@ -36,23 +34,6 @@ class Cart extends React.Component {
     item.quantity = quantity
 
     localStorage.setItem("cart", JSON.stringify(cart));
-=======
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    item.quantity = event.target.value;
-
-    // const updatedCart = cart.map((cartItem) => {
-    //     if (cartItem.id === item.id) {
-    //       return item
-    //     } else {
-    //       return cartItem
-    //     }
-    //   })
-    // console.log("cart", cart, "updatedCart", updatedCart)
-    cart.push(item.product);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
->>>>>>> main
     this.props.updateCart(item);
   }
 
@@ -150,8 +131,3 @@ const mapState = (state) => {
 };
 
 export default connect(mapState, mapDispatch)(Cart);
-
-<<<<<<< HEAD
-=======
-//NEED REDUX STORE TO UPDATE CART : action type, action creator (item and quanity), thunk (has item and quantity),
->>>>>>> main
