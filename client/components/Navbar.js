@@ -41,7 +41,7 @@ const Navbar = ({ handleClick, isLoggedIn, auth }) => (
         <CartIcon />
       </Link>
     </nav>
-    <hr />
+    <hr id="nav-border" />
   </div>
 );
 

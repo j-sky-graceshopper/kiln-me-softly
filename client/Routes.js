@@ -45,8 +45,8 @@ class Routes extends Component {
                     path="/edit/products/:productId"
                     component={UpdateProduct}
                   />
-                  <Route path="/add" component={AddProduct} />
-                  <Route exact path="/admin" component={AdminLanding} />
+                  <Route path="/admin" component={AdminLanding} />
+                  <Route path="/admin/add" component={AddProduct} />
                   <Route path="/admin/users" component={AllUsers} />
                   <Route path="/admin/add-user" component={AddUser} />
                   <Route path="/admin/edit-user" component={UpdateUser} />
