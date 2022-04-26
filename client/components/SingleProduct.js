@@ -53,18 +53,19 @@ class SingleProduct extends Component {
           {reviews && reviews.length ? (
             reviews.map((review) => (
               <div className="productReviews" key={review.id}>
-                <p>
-                  {review.user.username}: {review.content}
-                </p>
                 {auth.isAdmin ? (
                   <button
                     type="button"
                     className="delete-review"
                     onClick={this.handleDelete}
+                    id={review.id}
                   >
                     X
                   </button>
                 ) : null}
+                <p>
+                  {review.user.username}: {review.content}
+                </p>
               </div>
             ))
           ) : (

@@ -1,6 +1,7 @@
 import React from "react";
 import { addUser } from "../store/admin";
 import { connect } from "react-redux";
+import history from "../history";
 
 class AddUser extends React.Component {
   constructor() {
@@ -12,19 +13,27 @@ class AddUser extends React.Component {
       isAdmin: false,
     };
     this.handleChange = this.handleChange.bind(this);
-   // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    if (event.target.name === "isAdmin") {
+      this.setState({
+        isAdmin: !this.state.isAdmin,
+      });
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
+    }
+    console.log(this.state);
   }
 
-  handleSumbit(event) {
+  handleSubmit(event) {
     const { username, password, email, isAdmin } = this.state;
     event.preventDefault();
     this.props.addUser({ username, password, email, isAdmin });
+    history.push("/admin/users");
   }
 
   render() {
@@ -59,7 +68,7 @@ class AddUser extends React.Component {
               type="checkbox"
               name="isAdmin"
               onChange={handleChange}
-              value={this.state.isAdmin === true}
+              value={this.state.isAdmin}
             />
           </label>
           <div className="below-item">

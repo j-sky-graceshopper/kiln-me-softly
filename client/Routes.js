@@ -14,6 +14,8 @@ import AllUsers from "./components/AllUsers";
 import AddUser from "./components/AddUser";
 import Checkout from "./components/Checkout";
 import Confirmation from "./components/Confirmation";
+import UpdateUser from "./components/UpdateUser";
+import { StripePaymentForm } from "./components/StripePaymentForm";
 // import auth from "./store/auth";
 
 class Routes extends Component {
@@ -31,6 +33,7 @@ class Routes extends Component {
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/stripepayment" component={StripePaymentForm} />
           <Route path="/confirmation" component={Confirmation} />
           {isLoggedIn ? (
             <>
@@ -43,9 +46,10 @@ class Routes extends Component {
                     component={UpdateProduct}
                   />
                   <Route path="/add" component={AddProduct} />
-                  <Route path="/admin" component={AdminLanding} />
+                  <Route exact path="/admin" component={AdminLanding} />
                   <Route path="/admin/users" component={AllUsers} />
                   <Route path="/admin/add-user" component={AddUser} />
+                  <Route path="/admin/edit-user" component={UpdateUser} />
                 </>
               ) : null}
             </>

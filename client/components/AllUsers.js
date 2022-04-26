@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../store/admin";
 import { Link } from "react-router-dom";
-
+import UpdateUser from "./UpdateUser";
 
 class AllUsers extends React.Component {
   constructor(props) {
@@ -18,17 +18,28 @@ class AllUsers extends React.Component {
     return (
       <div id="all-users-container">
         <h2>All Users</h2>
-        <ul id="all-users">
-          {allUsers.map((user) => {
-            return (
-              <div key={user.id}>
-                <h4>User: {user.username}</h4>
-                <p>Email: {user.email}</p>
-                <p>Site Access: {user.isAdmin ? "Admin" : "User"}</p>
-              </div>
-            );
-          })}
-        </ul>
+        <div id="all-users">
+          <table id="all-users-table">
+            <th>User</th>
+            <th>Email</th>
+            <th>Access</th>
+            {allUsers.map((user) => {
+              return (
+                <tr key={user.id}>
+                  <td>
+                    <p>{user.username}</p>
+                  </td>
+                  <td>
+                    <p>{user.email}</p>
+                  </td>
+                  <td>
+                    <p>{user.isAdmin ? "Admin" : "User"}</p>
+                  </td>
+                </tr>
+              );
+            })}
+          </table>
+        </div>
         <Link to="/admin">
           <button>Back to Admin Menu</button>
         </Link>

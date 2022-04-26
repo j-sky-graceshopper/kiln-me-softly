@@ -11,14 +11,14 @@ const requireToken = async (req, res, next) => {
     }
 };
 
-const isAdmin = (req, res, next) => {
-    console.log('isAdmin was called');
-   if (!res.user.isAdmin) {
+const isAdmin = async (req, res, next) => {
+   const user = await User.findByToken(req.headers.authorization)
+   if (!user.isAdmin) {
         const error = new Error("This function is for admins only!")
         error.status = 401;
         return next(error)
     } else {
-        return next()
+        return next();
     }
 };
 

@@ -11,32 +11,32 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadCart("Created");
+    // this.props.loadCart("Created");
   }
 
-  async handleCheckout() {
+  handleCheckout() {
     if (this.props.isLoggedIn) {
-      await this.props.checkoutCart(this.props.cart.id, "Processing");
+      console.log("clicked checkout for cart#", this.props.cart.id);
+      this.props.checkoutCart(this.props.cart.id, "Processing");
     }
     history.push("./checkout");
   }
 
   handleChange(event, item) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    item.quantity = event.target.value;
-
-    // const updatedCart = cart.map((cartItem) => {
-    //     if (cartItem.id === item.id) {
-    //       return item
-    //     } else {
-    //       return cartItem
-    //     }
-    //   })
-    // console.log("cart", cart, "updatedCart", updatedCart)
-    cart.push(item.product);
+    const quantity = parseInt(event.target.value);
+    if (quantity > item.quantity) {
+      cart.push(item.product);
+    }
+    if (quantity < item.quantity) {
+      const ind = cart.findIndex(
+        (product) => product.title === item.product.title
+      );
+      cart.splice(ind, 1);
+    }
+    item.quantity = quantity;
 
     localStorage.setItem("cart", JSON.stringify(cart));
-
     this.props.updateCart(item);
   }
 
@@ -73,13 +73,15 @@ class Cart extends React.Component {
       total += item.product.price * item.quantity;
     });
 
+    items.sort((a, b) => a.product.id - b.product.id);
+
     return (
       <div id="cart-container">
         {items.length > 0 ? (
           <>
             <h1 id="cart-title">Your Shopping Cart</h1>
             <div className="total">
-              <h3>Total: ${total}</h3>
+              <h3>Total: ${total.toFixed(2)}</h3>
               <button onClick={this.handleCheckout}>Checkout</button>
             </div>
           </>
@@ -99,7 +101,7 @@ class Cart extends React.Component {
                     <input
                       type="number"
                       id="quantity"
-                      min={1}
+                      min={0}
                       max={item.product.inventory}
                       value={item.quantity}
                       onChange={(event) => this.handleChange(event, item)}
@@ -132,5 +134,3 @@ const mapState = (state) => {
 };
 
 export default connect(mapState, mapDispatch)(Cart);
-
-//NEED REDUX STORE TO UPDATE CART : action type, action creator (item and quanity), thunk (has item and quantity),
