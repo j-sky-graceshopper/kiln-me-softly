@@ -68,7 +68,6 @@ class Checkout extends React.Component {
   async handleCancel(evt) {
     evt.preventDefault();
     if (this.props.isLoggedIn) {
-      console.log("clicked cancel for cart#", this.props.order.id);
       await this.props.cancelOrder(this.props.order.id, "Cancelled");
     } else {
       window.localStorage.removeItem("cart");

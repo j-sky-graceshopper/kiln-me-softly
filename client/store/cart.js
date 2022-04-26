@@ -69,16 +69,10 @@ export const addItem = (product) => {
 export const changeStatus = (cartId, status) => {
   return async (dispatch) => {
     try {
-      console.log("changing status of cart#", cartId);
       const cart = await axios.put("/api/cart/change-status", {
         cartId,
         status,
       });
-      console.log("new cart", cart.data);
-      // if (status === "Processing") {
-      //   dispatch(fetchOrder(status));
-      // }
-      // return dispatch(setCart(cart.data));
       return dispatch(fetchOrder(cartId));
     } catch (err) {
       console.log(err);
@@ -89,12 +83,10 @@ export const changeStatus = (cartId, status) => {
 export const shippingInfo = (cartId, address) => {
   return async (dispatch) => {
     try {
-      console.log("adding shipping info for cart#", cartId);
       const cart = await axios.put("/api/cart/shipping", {
         cartId,
         address,
       });
-      // await dispatch(changeStatus(cartId, "Completed"));
       return dispatch(fetchOrder(cartId));
     } catch (err) {
       console.log(err);

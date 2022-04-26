@@ -21,7 +21,6 @@ class PaymentForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit = async () => {
-    console.log(this.props);
     this.props.submitOrder(this.props.order.id, "Completed");
     history.push({
       pathname: "/confirmation",
