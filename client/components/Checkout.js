@@ -1,19 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/currentOrder";
-import { changeStatus } from "../store/cart";
+import { changeStatus, shippingInfo, addItem } from "../store/cart";
+import { addUser } from "../store/admin";
 import history from "../history";
+import { authenticate } from "../store";
 
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
+      // password: "",
       email: "",
       street: "",
       city: "",
       state: "",
       zip: "",
+      valid: {
+        name: true,
+        // password: true,
+        email: true,
+        street: true,
+        city: true,
+        state: true,
+        zip: true,
+      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSumbit = this.handleSumbit.bind(this);
@@ -30,11 +42,30 @@ class Checkout extends React.Component {
     });
   }
 
-  handleSumbit(evt) {
+  async handleSumbit(evt) {
     evt.preventDefault();
-    // if user not logged in, create new user and new order first
-    // update order in database
-    this.props.updateOrder(this.props.order.id, this.State);
+
+    //check validation
+    let allValid = true;
+    const stateKeys = Object.keys(this.state);
+    stateKeys.forEach((key) => {
+      if (this.state[key].length === 0) {
+        allValid = false;
+        const valid = this.state.valid;
+        valid[key] = false;
+        this.setState({
+          valid,
+        });
+      }
+    });
+
+    if (allValid && this.props.isLoggedIn) {
+      this.props.addShippingInfo(this.props.order.id, this.state);
+      history.push({
+        pathname: "/confirmation",
+        state: { status: "Completed" },
+      });
+    }
   }
 
   async handleCancel(evt) {
@@ -88,39 +119,56 @@ class Checkout extends React.Component {
         <div className="add-form">
           <h1>Checkout</h1>
           <h3>Please Enter Your Shipping Information</h3>
-          <form id="add-user" onSubmit={handleSumbit}>
+          <form id="checkout" onSubmit={handleSumbit}>
             <label htmlFor="name">Name:</label>
             <input
               name="name"
               onChange={handleChange}
               value={this.state.name}
+              className={this.state.valid.name ? null : "invalid"}
             />
+            {/* <label htmlFor="password">Password (for new users):</label>
+            <input
+              name="password"
+              onChange={handleChange}
+              value={this.state.password}
+              className={this.state.valid.password ? null : "invalid"}
+            /> */}
             <label htmlFor="email">Email:</label>
             <input
               name="email"
               onChange={handleChange}
               value={this.state.email}
+              className={this.state.valid.email ? null : "invalid"}
             />
             <label htmlFor="street">Street address:</label>
             <input
               name="street"
               onChange={handleChange}
               value={this.state.street}
+              className={this.state.valid.state ? null : "invalid"}
             />
             <label htmlFor="city">City:</label>
             <input
               name="city"
               onChange={handleChange}
               value={this.state.city}
+              className={this.state.valid.city ? null : "invalid"}
             />
             <label htmlFor="state">State:</label>
             <input
               name="state"
               onChange={handleChange}
               value={this.state.state}
+              className={this.state.valid.state ? null : "invalid"}
             />
             <label htmlFor="zip">ZIP code:</label>
-            <input name="zip" onChange={handleChange} value={this.state.zip} />
+            <input
+              name="zip"
+              onChange={handleChange}
+              value={this.state.zip}
+              className={this.state.valid.zip ? null : "invalid"}
+            />
             <div className="below-item">
               <button
                 className="cancel"
@@ -135,23 +183,6 @@ class Checkout extends React.Component {
             </div>
           </form>
         </div>
-        <div className="total">
-          <h3>Total: ${total}</h3>
-        </div>
-        <div className="cart-display">
-          {items.map((item) => (
-            <div className="cart-item" key={item.product.id}>
-              <img src={item.product.imageUrl} />
-              <h3>{item.product.title}</h3>
-              <li>Price: ${item.product.price}</li>
-              <li>
-                Quantity: {item.quantity} <br />
-                <br />
-                Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
-              </li>
-            </div>
-          ))}
-        </div>
       </div>
     );
   }
@@ -161,11 +192,18 @@ const mapDispatch = (dispatch) => {
   return {
     loadOrder: (status) => dispatch(fetchOrder(status)),
     cancelOrder: (cartId, status) => dispatch(changeStatus(cartId, status)),
-    updateOrder: (cartId, order) => dispatch(updateOrder(cartId, order)),
+    addShippingInfo: (cartId, address) =>
+      dispatch(shippingInfo(cartId, address)),
+    addUser: (user) => dispatch(addUser(user, history)),
+    authenticate: (username, email, password, formName) =>
+      dispatch(authenticate(username, email, password, formName)),
+    addToCart: (product) => dispatch(addItem(product)),
+    checkoutCart: (cartId, status) => dispatch(changeStatus(cartId, status)),
   };
 };
 const mapState = (state) => {
   return {
+    cart: state.cart,
     order: state.order,
     isLoggedIn: !!state.auth.id,
     auth: state.auth,

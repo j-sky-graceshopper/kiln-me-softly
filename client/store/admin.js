@@ -41,7 +41,9 @@ export const addUser = (user, history) => {
     try {
       const { data } = await axios.post("/api/admin", user);
       dispatch(_addUser(data));
-      history.push("/admin/users");
+      history.push("/admin-users");
+      return data;
+
     } catch (err) {
       console.log("There was an error adding a user", err);
     }
