@@ -22,7 +22,6 @@ const Navbar = ({ handleClick, isLoggedIn, auth }) => (
           {/* The navbar will show these links after you log in */}
           {auth.isAdmin ? (
             <>
-              <Link to="/add">Add Products</Link>
               <Link to="/admin">Admin Access</Link>
             </>
           ) : null}

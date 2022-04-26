@@ -12,6 +12,9 @@ class AdminLanding extends React.Component {
           <Link to="/admin/add-user">
             <h2>Add User</h2>
           </Link>
+          <Link to="/add">
+            <h2>Add Products</h2>
+          </Link>
         </div>
       </div>
     );

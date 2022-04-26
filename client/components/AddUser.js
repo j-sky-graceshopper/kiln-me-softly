@@ -1,6 +1,7 @@
 import React from "react";
 import { addUser } from "../store/admin";
 import { connect } from "react-redux";
+import history from "../history";
 
 class AddUser extends React.Component {
   constructor() {
@@ -32,6 +33,7 @@ class AddUser extends React.Component {
     const { username, password, email, isAdmin } = this.state;
     event.preventDefault();
     this.props.addUser({ username, password, email, isAdmin });
+    history.push("/admin/users");
   }
 
   render() {
