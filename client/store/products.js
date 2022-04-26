@@ -59,7 +59,7 @@ export const updateSingleProduct = (product, history) => {
     try {
       const { data } = await axios.put(`/api/products/${product.id}`, product);
       dispatch(updateProduct(data));
-      history.push("/products");
+      history.push(`/products/${product.id}`);
     } catch (err) {
       console.log("There's an error in updateSingleProduct Thunk!", err);
     }
