@@ -211,6 +211,12 @@ form div {
   width: 180px;
 }
 
+#cart-items {
+  text-align: center;
+  color: rgb(37,67,50);
+  font-family: "Alata",sans-serif;
+}
+
 .total {
   display: flex;
   justify-content: flex-end;
