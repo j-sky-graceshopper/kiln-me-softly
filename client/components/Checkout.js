@@ -66,10 +66,6 @@ class Checkout extends React.Component {
       );
       this.props.addShippingInfo(this.props.order.id, this.state);
       history.push("/stripepayment");
-      // history.push({
-      //   pathname: "/confirmation",
-      //   state: { status: "Completed" },
-      // });
     }
   }
 
