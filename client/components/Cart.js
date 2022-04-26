@@ -39,6 +39,14 @@ class Cart extends React.Component {
     this.props.updateCart(item);
   }
 
+  itemCount(items) {
+    let total = 0; 
+    for (let i = 0; i < items.length; i++) {
+      total += items[i].quantity
+    }
+    return total
+  }
+
   render() {
     let items;
 
@@ -73,12 +81,13 @@ class Cart extends React.Component {
     });
 
     items.sort((a, b) => a.product.id - b.product.id);
-
+    
     return (
       <div id="cart-container">
         {items.length > 0 ? (
           <>
             <h1 id="cart-title">Your Shopping Cart</h1>
+            <h3 id="cart-items">Number of Items: {this.itemCount(items)}</h3>
             <div className="total">
               <h3>Total: ${total.toFixed(2)}</h3>
               <button onClick={this.handleCheckout}>Checkout</button>

@@ -82,8 +82,11 @@ User.prototype.updateCartItem = async function (updatedItem) {
     (item) => item.productId === updatedItem.productId
   );
   if (item) {
-    item.quantity = updatedItem.quantity;
-    await item.save();
+    if (updatedItem.quantity === 0) {
+      await item.destroy();
+    }
+    item.quantity = updatedItem.quantity
+      await item.save()
   }
   return await this.getCart("Created");
 };
