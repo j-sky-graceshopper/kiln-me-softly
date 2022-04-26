@@ -35,6 +35,7 @@ export const addUser = (user, history) => {
       dispatch(_addUser(data));
       history.push("/admin-users");
       return data;
+
     } catch (err) {
       console.log("There was an error adding a user", err);
     }
