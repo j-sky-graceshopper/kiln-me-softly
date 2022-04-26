@@ -172,7 +172,8 @@ form div {
 }
 
 #cart-container {
-  width: 95%;
+  width: 70%;
+  margin: 0 auto 0 auto;
 }
 
 .cart-item {
@@ -207,6 +208,10 @@ form div {
 .total button {
   margin-left: 30px;
   font-size: 12pt;
+}
+
+#confirmed-total {
+  align-self: flex-end;
 }
 
 #all-items, .cart-display, #all-users {
@@ -252,6 +257,11 @@ form div {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 0;
+}
+
+.invalid {
+  border: 1px solid red;
 }
 
 #edit-button {
@@ -309,18 +319,19 @@ li {
 .add-product-form h1, .update-product-form h1, .add-form h1 {
   color: rgb(37,67,50);
   font-family: 'Alata', sans-serif;
+  margin: 0 auto 0 auto;
 }
 
-#add-product input, select, #edit-product input, select, #add-user input, select {
+#add-product input, select, #edit-product input, select, #add-user input, select, #checkout input, select {
   width: 100%;
   margin-bottom: 5%;
 }
 
-#add-product label, #edit-product label, #add-user label {
+#add-product label, #edit-product label, #add-user label, #checkout label {
   width: 100%;
 }
 
-#add-product, #edit-product, #add-user {
+#add-product, #edit-product, #add-user, #checkout {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -338,6 +349,32 @@ li {
 #admin-label input {
   width: 5%;
   margin: auto 0 auto 0;
+}
+
+#confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto 0 auto;
+  width: 40%;
+  border: 1px solid black;
+  padding: 0 5%;
+  white-space: nowrap;
+}
+
+#confirmation-container h1 {
+  margin-bottom: 0;
+}
+
+.confirmation-img {
+  width: 100px;
+}
+
+#confirmation-table th {
+  width: 100px;
+}
+#confirmation-table td {
+  padding: 0 10px;
 }
 
 button {

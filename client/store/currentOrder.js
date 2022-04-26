@@ -5,7 +5,7 @@ const TOKEN = "token";
 const SET_ORDER = "SET_ORDER";
 
 //action creator
-const setOrder = (order) => {
+export const setOrder = (order) => {
   return {
     type: SET_ORDER,
     order,

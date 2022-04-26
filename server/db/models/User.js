@@ -91,7 +91,7 @@ User.prototype.checkout = async function () {
   const cart = await this.getCart("Created");
   cart.status = "Processing";
   await cart.save();
-  return Order.findByPk(cart.id, {
+  return await Order.findByPk(cart.id, {
     include: [{ model: Item, include: [Product] }],
   });
 };
