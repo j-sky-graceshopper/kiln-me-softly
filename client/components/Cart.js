@@ -24,7 +24,6 @@ class Cart extends React.Component {
   handleChange(event, item) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const quantity = parseInt(event.target.value);
-    console.log(quantity, item);
     if (quantity > item.quantity) {
       cart.push(item.product);
     }
