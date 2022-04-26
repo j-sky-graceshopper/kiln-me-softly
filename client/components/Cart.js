@@ -24,6 +24,7 @@ class Cart extends React.Component {
   handleChange(event, item) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const quantity = parseInt(event.target.value);
+    console.log(quantity, item);
     if (quantity > item.quantity) {
       cart.push(item.product);
     }
@@ -40,11 +41,11 @@ class Cart extends React.Component {
   }
 
   itemCount(items) {
-    let total = 0; 
+    let total = 0;
     for (let i = 0; i < items.length; i++) {
-      total += items[i].quantity
+      total += items[i].quantity;
     }
-    return total
+    return total;
   }
 
   render() {
@@ -81,7 +82,7 @@ class Cart extends React.Component {
     });
 
     items.sort((a, b) => a.product.id - b.product.id);
-    
+
     return (
       <div id="cart-container">
         {items.length > 0 ? (
