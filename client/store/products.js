@@ -47,7 +47,7 @@ export const addProduct = (product, categories, history) => {
         categories,
       });
       dispatch(_addProduct(data));
-      history.push(`/products/${product.id}`);
+      history.push(`/products/${data.id}`);
     } catch (err) {
       console.log("There was an error creating a product", err);
     }
