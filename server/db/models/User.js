@@ -78,14 +78,15 @@ User.prototype.addToCart = async function (product) {
 
 User.prototype.updateCartItem = async function (updatedItem) {
   const cart = await this.getCart("Created");
-  let item = cart.items.find((item) => item.productId === updatedItem.productId);
+  let item = cart.items.find(
+    (item) => item.productId === updatedItem.productId
+  );
   if (item) {
-    item.quantity = updatedItem.quantity
-    await item.save()
+    item.quantity = updatedItem.quantity;
+    await item.save();
   }
-  return await this.getCart("Created")
-}
-
+  return await this.getCart("Created");
+};
 
 User.prototype.checkout = async function () {
   const cart = await this.getCart("Created");

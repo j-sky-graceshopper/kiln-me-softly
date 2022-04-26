@@ -39,7 +39,6 @@ router.put("/shipping", async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.body.cartId);
     order.update(req.body.address);
-    order.status = "Completed";
     await order.save();
     res.send(
       await Order.findByPk(req.body.cartId, {
@@ -63,7 +62,7 @@ router.delete("/remove", async (req, res, next) => {
 router.put("/update", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.updateCartItem(req.body))
+    res.send(await user.updateCartItem(req.body));
   } catch (err) {
     next(err);
   }

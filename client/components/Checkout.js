@@ -5,7 +5,6 @@ import { changeStatus, shippingInfo, addItem } from "../store/cart";
 import { addUser } from "../store/admin";
 import history from "../history";
 import { authenticate } from "../store";
-import { StripePaymentForm } from "./StripePaymentForm";
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadOrder("Processing");
+    // this.props.loadOrder("Processing");
   }
 
   handleChange(event) {
@@ -61,17 +60,23 @@ class Checkout extends React.Component {
     });
 
     if (allValid && this.props.isLoggedIn) {
+      console.log(
+        "clicked submit shipping info for cart#",
+        this.props.order.id
+      );
       this.props.addShippingInfo(this.props.order.id, this.state);
-      history.push({
-        pathname: "/confirmation",
-        state: { status: "Completed" },
-      });
+      history.push("/stripepayment");
+      // history.push({
+      //   pathname: "/confirmation",
+      //   state: { status: "Completed" },
+      // });
     }
   }
 
   async handleCancel(evt) {
     evt.preventDefault();
     if (this.props.isLoggedIn) {
+      console.log("clicked cancel for cart#", this.props.order.id);
       await this.props.cancelOrder(this.props.order.id, "Cancelled");
     } else {
       window.localStorage.removeItem("cart");
@@ -169,7 +174,7 @@ class Checkout extends React.Component {
               onChange={handleChange}
               value={this.state.zip}
               className={this.state.valid.zip ? null : "invalid"}
-            /> 
+            />
             <div className="below-item">
               <button
                 className="cancel"
@@ -184,7 +189,6 @@ class Checkout extends React.Component {
             </div>
           </form>
         </div>
-        <StripePaymentForm />
       </div>
     );
   }

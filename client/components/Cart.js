@@ -14,24 +14,27 @@ class Cart extends React.Component {
     // this.props.loadCart("Created");
   }
 
-  async handleCheckout() {
+  handleCheckout() {
     if (this.props.isLoggedIn) {
-      await this.props.checkoutCart(this.props.cart.id, "Processing");
+      console.log("clicked checkout for cart#", this.props.cart.id);
+      this.props.checkoutCart(this.props.cart.id, "Processing");
     }
     history.push("./checkout");
   }
 
   handleChange(event, item) {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]")
-    const quantity = parseInt(event.target.value)
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const quantity = parseInt(event.target.value);
     if (quantity > item.quantity) {
-      cart.push(item.product)
-    } 
-    if (quantity < item.quantity) {
-      const ind = cart.findIndex(product => product.title === item.product.title)
-      cart.splice(ind, 1)
+      cart.push(item.product);
     }
-    item.quantity = quantity
+    if (quantity < item.quantity) {
+      const ind = cart.findIndex(
+        (product) => product.title === item.product.title
+      );
+      cart.splice(ind, 1);
+    }
+    item.quantity = quantity;
 
     localStorage.setItem("cart", JSON.stringify(cart));
     this.props.updateCart(item);
@@ -70,7 +73,7 @@ class Cart extends React.Component {
       total += item.product.price * item.quantity;
     });
 
-    items.sort((a, b) => a.product.id - b.product.id)
+    items.sort((a, b) => a.product.id - b.product.id);
 
     return (
       <div id="cart-container">
