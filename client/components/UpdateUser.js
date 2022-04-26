@@ -9,6 +9,7 @@ export class UpdateUser extends React.Component {
     super();
     this.state = {
       username: "",
+      password: "",
       email: "",
       isAdmin: false,
     };

@@ -27,4 +27,4 @@ export default function singleUserReducer(state = {}, action) {
         default:
             return state;
     }
-}
+};
