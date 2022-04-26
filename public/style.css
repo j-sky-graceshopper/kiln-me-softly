@@ -172,7 +172,8 @@ form div {
 }
 
 #cart-container {
-  width: 95%;
+  width: 70%;
+  margin: 0 auto 0 auto;
 }
 
 .cart-item {
@@ -207,6 +208,10 @@ form div {
 .total button {
   margin-left: 30px;
   font-size: 12pt;
+}
+
+#confirmed-total {
+  align-self: flex-end;
 }
 
 #all-items, .cart-display, #all-users {
@@ -324,6 +329,28 @@ li {
 #admin-label input {
   width: 5%;
   margin: auto 0 auto 0;
+}
+
+#confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto 0 auto;
+  width: 40%;
+  border: 1px solid black;
+  padding: 0 5%;
+}
+
+#confirmation-container h1 {
+  margin-bottom: 0;
+}
+
+.confirmation-img {
+  width: 100px;
+}
+
+#confirmation-table th {
+  width: 100px;
 }
 
 button {

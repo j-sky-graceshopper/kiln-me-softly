@@ -39,6 +39,7 @@ router.put("/shipping", async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.body.cartId);
     order.update(req.body.address);
+    order.status = "Completed";
     await order.save();
     res.send(
       await Order.findByPk(req.body.cartId, {
