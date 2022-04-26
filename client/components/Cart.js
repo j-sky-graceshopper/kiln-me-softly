@@ -22,13 +22,19 @@ class Cart extends React.Component {
   }
 
   handleChange(event, item) {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    item.quantity = parseInt(event.target.value)
-    // cart.push(item.product);
-    //if statements to keep track
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]")
+    console.log("cart", [...cart])
+    const quantity = parseInt(event.target.value)
+    if (quantity > item.quantity) {
+      cart.push(item.product)
+    } 
+    if (quantity < item.quantity) {
+      const ind = cart.findIndex(product => product.title === item.product.title)
+      cart.splice(ind, 1)
+    }
+    item.quantity = quantity
 
     localStorage.setItem("cart", JSON.stringify(cart));
-
     this.props.updateCart(item);
   }
 
@@ -64,6 +70,8 @@ class Cart extends React.Component {
     items.forEach((item) => {
       total += item.product.price * item.quantity;
     });
+
+    items.sort((a, b) => a.product.id - b.product.id)
 
     return (
       <div id="cart-container">
