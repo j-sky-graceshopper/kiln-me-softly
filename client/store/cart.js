@@ -87,12 +87,17 @@ export const changeStatus = (cartId, status) => {
 export const updateCart = (item) => {
   return async (dispatch) => {
     try {
-      return dispatch(updateCartItem(item));
+      const token = window.localStorage.getItem(TOKEN);
+      if (token) {
+        await axios.put("/api/cart/update", item, {
+          headers: {authorization: token}
+        });
+      }
+      return dispatch(updateCartItem(item))
     } catch (err) {
-      console.log("Error while updating the cart");
+    console.log("Error while updating the cart")
     }
-  };
-};
+}}
 
 //reducer
 export default function (
