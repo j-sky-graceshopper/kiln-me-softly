@@ -16,7 +16,6 @@ class Cart extends React.Component {
 
   handleCheckout() {
     if (this.props.isLoggedIn) {
-      console.log("clicked checkout for cart#", this.props.cart.id);
       this.props.checkoutCart(this.props.cart.id, "Processing");
     }
     history.push("./checkout");

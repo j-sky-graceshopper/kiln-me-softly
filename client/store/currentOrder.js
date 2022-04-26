@@ -36,9 +36,7 @@ export const setOrder = (order) => {
 export const fetchOrder = (cartId) => {
   return async (dispatch) => {
     try {
-      console.log("fetching order for cart#", cartId);
       const res = await axios.get("/api/currentOrder/" + cartId);
-      console.log("new order", res.data);
       dispatch(fetchCart("Created"));
       return dispatch(setOrder(res.data));
     } catch (err) {
