@@ -12,6 +12,7 @@ import cart from "./cart";
 import order from "./currentOrder";
 import admin from "./admin";
 import orders from "./orderHistory";
+import singleUser from "./singleUser";
 
 const reducer = combineReducers({
   auth,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   order,
   admin,
   orders,
+  singleUser,
 });
 
 const middleware = composeWithDevTools(
