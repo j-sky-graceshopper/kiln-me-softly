@@ -14,6 +14,7 @@ import AllUsers from "./components/AllUsers";
 import AddUser from "./components/AddUser";
 import Checkout from "./components/Checkout";
 import Confirmation from "./components/Confirmation";
+import UpdateUser from "./components/UpdateUser";
 // import auth from "./store/auth";
 
 class Routes extends Component {
@@ -46,6 +47,7 @@ class Routes extends Component {
                   <Route path="/admin" component={AdminLanding} />
                   <Route path="/admin/users" component={AllUsers} />
                   <Route path="/admin/add-user" component={AddUser} />
+                  <Route path="/admin/edit-user" component={UpdateUser} />
                 </>
               ) : null}
             </>
