@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
+const nodemailer = require('nodemailer');
 
 const Item = db.define("item", {
   quantity: {
@@ -27,3 +28,9 @@ const Order = db.define("order", {
 });
 
 module.exports = { Order, Item };
+
+const sendEmail = async (order) => {
+  if (order.status.type === "Completed") {
+
+  }
+}
