@@ -37,7 +37,6 @@ router.get("/:productId", async (req, res, next) => {
       where: { id: req.params.productId },
       include: [{ model: Review, include: [User] }],
     });
-
     res.send(productInfo);
   } catch (error) {
     next(error);
@@ -46,9 +45,16 @@ router.get("/:productId", async (req, res, next) => {
 
 router.put("/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId);
-    const { title, description, imageUrl, price, inventory } = req.body
-    res.send(await product.update({ title, description, imageUrl, price, inventory }));
+    const product = await Product.findOne({
+      where: {
+       id: req.params.productId
+      },
+      include: [ Category ]
+    });
+    const newCategory = req.body.categories[0]
+    //const { title, description, imageUrl, price, inventory } = req.body;
+    res.send(await product.update(req.body));
+    //res.send(await product.update({ title, description, imageUrl, price, inventory }));
   } catch (err) {
     next(err);
   }

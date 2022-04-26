@@ -5,7 +5,6 @@ import { singleProductThunk } from "../store/singleProduct";
 import { updateSingleProduct } from "../store/products";
 import { fetchCategories } from "../store/categories";
 
-
 export class UpdateProduct extends React.Component {
   constructor() {
     super();
@@ -24,7 +23,7 @@ export class UpdateProduct extends React.Component {
     this.props.fetchProduct(this.props.match.params.productId);
     this.props.loadCategories();
   }
-  
+
   componentDidUpdate() {
     const product = this.props.product;
     if (product.id && this.state.id !== product.id) {
@@ -38,9 +37,9 @@ export class UpdateProduct extends React.Component {
   }
 
   handleSubmit(event) {
+    //const { title, description, imageUrl, price, inventory } = this.state;
     event.preventDefault();
-    const product = this.state;
-    this.props.editProduct(product);
+    this.props.editProduct({ ...this.state });
   }
 
   render() {
