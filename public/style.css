@@ -273,6 +273,13 @@ form div {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin: 20px 0;
+}
+
+.productReviews::after {
+  content: "♥♥♥♥♥";
+  color: rgb(200, 129, 35);
+  align-self: flex-start;
 }
 
 .productReviews p {
