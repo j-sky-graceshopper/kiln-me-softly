@@ -222,7 +222,7 @@ form div {
   gap: 18px;
 }
 
-#all-users-table, th, td {
+#all-users-table th, #all-users-table td {
   border: 1px rgb(105,141,112) solid;
   text-align: center;
 }

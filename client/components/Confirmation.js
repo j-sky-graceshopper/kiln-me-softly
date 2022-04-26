@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-// import history from "../history";
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -59,18 +58,9 @@ class Checkout extends React.Component {
     );
   }
 }
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     loadOrder: (status) => dispatch(fetchOrder(status)),
-//     cancelOrder: (cartId, status) => dispatch(changeStatus(cartId, status)),
-//   };
-// };
 const mapState = (state) => {
   return {
     order: state.order,
-    // isLoggedIn: !!state.auth.id,
-    // auth: state.auth,
   };
 };
 

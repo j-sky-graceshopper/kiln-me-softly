@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { changeStatus } from "../store/cart";
+import history from "../history";
 import {
   Elements,
   ElementsConsumer,
@@ -13,26 +16,37 @@ const stripePromise = loadStripe(
 );
 
 class PaymentForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   handleSubmit = async () => {
-    const { elements, stripe } = this.props;
-    const cardElement = elements.getElement(CardElement);
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
+    console.log(this.props);
+    this.props.submitOrder(this.props.order.id, "Completed");
+    history.push({
+      pathname: "/confirmation",
+      state: { status: "Completed" },
     });
+    // const { elements, stripe } = this.props;
+    // const cardElement = elements.getElement(CardElement);
 
-    if (error) {
-      console.log("[error]", error);
-    } else {
-      console.log("[PaymentMethod]", paymentMethod);
-      // ... SEND to your API server to process payment intent
-    }
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: "card",
+    //   card: cardElement,
+    // });
+
+    // if (error) {
+    //   console.log("[error]", error);
+    // } else {
+    //   console.log("[PaymentMethod]", paymentMethod);
+    //   // ... SEND to your API server to process payment intent
+    // }
   };
 
   render() {
     return (
       <div id="stripe-payment-form">
+        <h1>Ready to finalize your order?</h1>
         <label>
           <strong>Enter Credit Card Information</strong>
           <div id="card-element">
@@ -45,11 +59,24 @@ class PaymentForm extends React.Component {
   }
 }
 
+const mapDispatch = (dispatch) => {
+  return {
+    submitOrder: (cartId, status) => dispatch(changeStatus(cartId, status)),
+  };
+};
+const mapState = (state) => {
+  return {
+    order: state.order,
+  };
+};
+
+const ConnectedPaymentForm = connect(mapState, mapDispatch)(PaymentForm);
+
 export class StripePaymentForm extends React.Component {
   render() {
     return (
       <Elements stripe={stripePromise}>
-        <ElementsConsumer>{() => <PaymentForm />}</ElementsConsumer>
+        <ElementsConsumer>{() => <ConnectedPaymentForm />}</ElementsConsumer>
       </Elements>
     );
   }

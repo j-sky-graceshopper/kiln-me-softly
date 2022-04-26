@@ -13,25 +13,40 @@ export const setOrder = (order) => {
 };
 
 //THUNK
-export const fetchOrder = (status) => {
+// export const fetchOrder = (status) => {
+//   return async (dispatch) => {
+//     try {
+//       const token = window.localStorage.getItem(TOKEN);
+//       if (token) {
+//         const res = await axios.get("/api/currentOrder", {
+//           headers: {
+//             authorization: token,
+//             status,
+//           },
+//         });
+//         dispatch(fetchCart("Created"));
+//         return dispatch(setOrder(res.data));
+//       }
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+// };
+
+export const fetchOrder = (cartId) => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem(TOKEN);
-      if (token) {
-        const res = await axios.get("/api/currentOrder", {
-          headers: {
-            authorization: token,
-            status,
-          },
-        });
-        dispatch(fetchCart("Created"));
-        return dispatch(setOrder(res.data));
-      }
+      console.log("fetching order for cart#", cartId);
+      const res = await axios.get("/api/currentOrder/" + cartId);
+      console.log("new order", res.data);
+      dispatch(fetchCart("Created"));
+      return dispatch(setOrder(res.data));
     } catch (err) {
       console.log(err);
     }
   };
 };
+
 //reducer
 export default function (state = {}, action) {
   switch (action.type) {

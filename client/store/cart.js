@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setOrder } from "./currentOrder";
+import { fetchOrder, setOrder } from "./currentOrder";
 
 const TOKEN = "token";
 const SET_CART = "SET_CART";
@@ -69,14 +69,17 @@ export const addItem = (product) => {
 export const changeStatus = (cartId, status) => {
   return async (dispatch) => {
     try {
+      console.log("changing status of cart#", cartId);
       const cart = await axios.put("/api/cart/change-status", {
         cartId,
         status,
       });
+      console.log("new cart", cart.data);
       // if (status === "Processing") {
       //   dispatch(fetchOrder(status));
       // }
-      return dispatch(setCart(cart.data));
+      // return dispatch(setCart(cart.data));
+      return dispatch(fetchOrder(cartId));
     } catch (err) {
       console.log(err);
     }
@@ -86,12 +89,13 @@ export const changeStatus = (cartId, status) => {
 export const shippingInfo = (cartId, address) => {
   return async (dispatch) => {
     try {
+      console.log("adding shipping info for cart#", cartId);
       const cart = await axios.put("/api/cart/shipping", {
         cartId,
         address,
       });
       // await dispatch(changeStatus(cartId, "Completed"));
-      return dispatch(setOrder(cart.data));
+      return dispatch(fetchOrder(cartId));
     } catch (err) {
       console.log(err);
     }
@@ -104,14 +108,15 @@ export const updateCart = (item) => {
       const token = window.localStorage.getItem(TOKEN);
       if (token) {
         await axios.put("/api/cart/update", item, {
-          headers: {authorization: token}
+          headers: { authorization: token },
         });
       }
-      return dispatch(updateCartItem(item))
+      return dispatch(updateCartItem(item));
     } catch (err) {
-    console.log("Error while updating the cart")
+      console.log("Error while updating the cart");
     }
-}}
+  };
+};
 
 //reducer
 export default function (
