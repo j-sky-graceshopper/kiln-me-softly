@@ -5,6 +5,7 @@ import { changeStatus, shippingInfo, addItem } from "../store/cart";
 import { addUser } from "../store/admin";
 import history from "../history";
 import { authenticate } from "../store";
+import { StripePaymentForm } from "./StripePaymentForm";
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -168,7 +169,7 @@ class Checkout extends React.Component {
               onChange={handleChange}
               value={this.state.zip}
               className={this.state.valid.zip ? null : "invalid"}
-            />
+            /> 
             <div className="below-item">
               <button
                 className="cancel"
@@ -183,6 +184,7 @@ class Checkout extends React.Component {
             </div>
           </form>
         </div>
+        <StripePaymentForm />
       </div>
     );
   }
