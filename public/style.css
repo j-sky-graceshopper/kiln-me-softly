@@ -243,6 +243,11 @@ form div {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 0;
+}
+
+.invalid {
+  border: 1px solid red;
 }
 
 #edit-button {
@@ -300,6 +305,7 @@ li {
 .add-product-form h1, .update-product-form h1, .add-form h1 {
   color: rgb(37,67,50);
   font-family: 'Alata', sans-serif;
+  margin: 0 auto 0 auto;
 }
 
 #add-product input, select, #edit-product input, select, #add-user input, select, #checkout input, select {
@@ -339,6 +345,7 @@ li {
   width: 40%;
   border: 1px solid black;
   padding: 0 5%;
+  white-space: nowrap;
 }
 
 #confirmation-container h1 {
@@ -351,6 +358,9 @@ li {
 
 #confirmation-table th {
   width: 100px;
+}
+#confirmation-table td {
+  padding: 0 10px;
 }
 
 button {

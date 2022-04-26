@@ -79,7 +79,7 @@ class Cart extends React.Component {
           <>
             <h1 id="cart-title">Your Shopping Cart</h1>
             <div className="total">
-              <h3>Total: ${total}</h3>
+              <h3>Total: ${total.toFixed(2)}</h3>
               <button onClick={this.handleCheckout}>Checkout</button>
             </div>
           </>
