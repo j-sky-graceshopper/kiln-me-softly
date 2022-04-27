@@ -1,6 +1,6 @@
 import axios from "axios";
 import history from "../history";
-import { fetchCart } from "./cart";
+import { fetchCart, addItem } from "./cart";
 
 const TOKEN = "token";
 
@@ -25,7 +25,19 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    dispatch(fetchCart("Created"));
+
+    await dispatch(fetchCart("Created"));
+
+    // load items from local storage
+    const cartFromLocalStorage = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+    cartFromLocalStorage.forEach(async (product) => {
+      console.log(product);
+      dispatch(addItem(product));
+    });
+    window.localStorage.removeItem("cart");
+
     return dispatch(setAuth(res.data));
   }
 };
