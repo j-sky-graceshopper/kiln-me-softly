@@ -69,6 +69,23 @@ describe('Products routes', () => {
 
         })
       })
+      it ('DELETE /api/products/:productId', async() => {
+        it('deletes an existing product from database', async() => {
+          const pusheen = await Product.create({
+            id: 5,
+            title: "Pusheen",
+            description: "Cute pusheen cup for hot drinks",
+            price: 20.00,
+            inventory: 50,
+          })
+          await agent 
+            .delete(`/api/products/${pusheen}`)
+            .expect(204)
+
+            const isPusheenStillThere = await Product.findByPk(pusheen.id)
+            expect(isPusheenStillThere).to.equal(null)
+        })
+      })
     })
   }) // end describe('/api/users')
 }) // end describe('User routes')
