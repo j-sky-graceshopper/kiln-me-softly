@@ -46,46 +46,46 @@ describe('Products routes', () => {
             expect(res.body.description).to.be("Best mug ever")
           })
       })
-      it('PUT /api/products/:productId', () => {
-        it('updates an existing product', async () => {
-          const pusheen = await Product.create({
-            id: 5,
-            title: "Pusheen",
-            description: "Cute pusheen cup for hot drinks",
-            price: 20.00,
-            inventory: 50,
-          })
-          await agent 
-            .put(`api/products/${pusheen}`)
-            .send({
-              title: "Pusheen Mug"
-            })
-            .expect(200)
-            .then(res => {
-              expect(res.body).to.be.an('object')
-              expect(res.body.title).to.equal('Pusheen Mug')
-              expect(res.body.inventory).to.equal(50)
-            })
-
+    })
+    it('PUT /api/products/:productId', () => {
+      it('updates an existing product', async () => {
+        const pusheen = await Product.create({
+          id: 5,
+          title: "Pusheen",
+          description: "Cute pusheen cup for hot drinks",
+          price: 20.00,
+          inventory: 50,
         })
-      })
-      it ('DELETE /api/products/:productId', async() => {
-        it('deletes an existing product from database', async() => {
-          const pusheen = await Product.create({
-            id: 5,
-            title: "Pusheen",
-            description: "Cute pusheen cup for hot drinks",
-            price: 20.00,
-            inventory: 50,
+        await agent 
+          .put(`api/products/${pusheen}`)
+          .send({
+            title: "Pusheen Mug"
           })
-          await agent 
-            .delete(`/api/products/${pusheen}`)
-            .expect(204)
+          .expect(200)
+          .then(res => {
+            expect(res.body).to.be.an('object')
+            expect(res.body.title).to.equal('Pusheen Mug')
+            expect(res.body.inventory).to.equal(50)
+          })
 
-            const isPusheenStillThere = await Product.findByPk(pusheen.id)
-            expect(isPusheenStillThere).to.equal(null)
-        })
       })
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+    it ('DELETE /api/products/:productId', async() => {
+      it('deletes an existing product from database', async() => {
+        const pusheen = await Product.create({
+          id: 5,
+          title: "Pusheen",
+          description: "Cute pusheen cup for hot drinks",
+          price: 20.00,
+          inventory: 50,
+        })
+        await agent 
+          .delete(`/api/products/${pusheen}`)
+          .expect(204)
+
+          const isPusheenStillThere = await Product.findByPk(pusheen.id)
+          expect(isPusheenStillThere).to.equal(null)
+      })
+    })
+  })
+}) // end describe('/api/users') // end describe('User routes')
