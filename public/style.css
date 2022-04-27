@@ -169,13 +169,22 @@ form div {
   font-family: 'Quicksand', sans-serif;
 }
 
+#all-users-container h1 {
+  font-family: 'Alata', sans-serif;
+  color: rgb(37,67,50);
+  margin: 0 auto;
+}
+
 #admin-landing-page {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
-  margin: 0 auto;
+  padding: 0 10%;
+  margin: 0 auto 40px auto;;
   font-family: 'Quicksand', sans-serif;
+  gap: 20px;
+  white-space: nowrap;
 }
 
 #all-products-container {

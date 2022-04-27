@@ -17,7 +17,7 @@ class AllUsers extends React.Component {
     const { allUsers } = this.props;
     return (
       <div id="all-users-container">
-        <h2>All Users</h2>
+        <h1>All Users</h1>
         <div id="all-users">
           <table id="all-users-table">
             <th>User</th>
