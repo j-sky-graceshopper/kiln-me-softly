@@ -103,7 +103,7 @@ class Cart extends React.Component {
         )}
         <div className="cart-display">
           {items.map((item) => (
-            <div className="cart-item" key={item.product.id}>
+            <div className="cart-item" key={item.product.title}>
               <img src={item.product.imageUrl} />
               <h3>{item.product.title}</h3>
               <li>Price: ${item.product.price}</li>
