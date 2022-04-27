@@ -2,11 +2,11 @@ const {expect} = require('chai')
 const {db, models:{Product}} = require ('../index');
 const seed = require('../../../script/seed');
 
-describe.only('Product model', () => {
+describe('Product model', () => {
 
     beforeEach(() => db.sync({force:true}))
     
-    describe.only('column definitions and validations', () => {
+    describe('column definitions and validations', () => {
         it('has a "title", "description", "price", inventory"', async () => {
             const mug = await Product.create({
                 title: "Pusheen",
