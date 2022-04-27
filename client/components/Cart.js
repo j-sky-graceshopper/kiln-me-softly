@@ -20,8 +20,10 @@ class Cart extends React.Component {
       history.push("./checkout");
     } else {
       history.push({
-        pathname: "/login",
-        state: { message: "Please login to complete checkout!" },
+        pathname: "/signup",
+        state: {
+          message: "Please sign up for an account to complete checkout!",
+        },
       });
     }
   }
@@ -92,10 +94,13 @@ class Cart extends React.Component {
         {items.length > 0 ? (
           <>
             <h1 id="cart-title">Your Shopping Cart</h1>
-            <h3 id="cart-items">Number of Items: {this.itemCount(items)}</h3>
+            {/* <h3 id="cart-items">Number of Items: {this.itemCount(items)}</h3> */}
             <div className="total">
               <h3>Total: ${total.toFixed(2)}</h3>
-              <button onClick={this.handleCheckout}>Checkout</button>
+              <button onClick={this.handleCheckout}>
+                Checkout {this.itemCount(items)}{" "}
+                {this.itemCount(items) > 1 ? "Items" : "Item"}
+              </button>
             </div>
           </>
         ) : (

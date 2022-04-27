@@ -15,17 +15,14 @@ label {
 
 #authorization {
   border: 1px black solid;
-  border-radius: 10px;
-  margin: auto;
-  min-width: 45%;
-  max-width: 50%;
+  width: 40%;
   text-align: center;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin: 50px auto;
   align-items: center;
-  justify-content: space-between;
-  padding: 30px;
+  justify-content: center;
+  padding: 10px 50px;
 }
 
 #authorization input {
@@ -34,12 +31,22 @@ label {
 
 #authorization h1 {
   font-family: 'Alata',sans-serif;
-  color: rgb(37,67,50)
+  color: rgb(3, 7, 5);
+  margin: 20px 0 0 0;
 }
 
 #authorization label {
   display: inline-block;
-  font-size: 18pt;
+  font-size: 16pt;
+}
+
+#auth-div {
+ margin: 0 0 10px 0;
+}
+
+#message {
+  color: rgb(105,141,112);
+    margin: 20px 0 0 0;
 }
 
 #quantity-input {
@@ -107,7 +114,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0;
 }
 
 #nav-container {
@@ -240,7 +246,7 @@ form div {
 .total {
   display: flex;
   justify-content: flex-end;
-  margin-right: 100px;
+  margin-right: 10px;
   align-items: center;
   font-size: 14pt;
 }
@@ -523,6 +529,10 @@ hr { margin: 30px 0 30px 0; }
 
   #all-products-container {
     width: 100%;
+  }
+
+  nav a {
+    margin: .5em;
   }
 }
 
