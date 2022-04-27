@@ -7,10 +7,12 @@ import { authenticate } from "../store";
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  const { message } = props.location.state || "";
   return (
     <div>
       <form id="authorization" onSubmit={handleSubmit} name={name}>
         <h1>{displayName}</h1>
+        <h3 style={{ color: "rgb(105,141,112)" }}>{message}</h3>
         <div>
           <label htmlFor="username">
             <p>Username</p>

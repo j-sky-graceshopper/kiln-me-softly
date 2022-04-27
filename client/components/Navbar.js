@@ -6,7 +6,7 @@ import auth from "../store/auth";
 import CartIcon from "./CartIcon";
 
 const Navbar = ({ handleClick, isLoggedIn, auth }) => (
-  <div>
+  <div id="nav-container">
     <nav>
       <Link to="/home">
         <h1 id="logo">

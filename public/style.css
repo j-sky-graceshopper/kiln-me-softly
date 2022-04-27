@@ -51,6 +51,10 @@ label {
   font-size: 12pt;
 }
 
+#quantity {
+  width: 40px;
+}
+
 .error {
   color: red;
   font-size: 18pt;
@@ -104,6 +108,13 @@ nav {
   align-items: center;
   justify-content: space-between;
   margin: 0;
+}
+
+#nav-container {
+  position: sticky;
+  background-color: white;
+  width: 100%;
+  top: 0px;
 }
 
 #logo {
@@ -194,7 +205,7 @@ form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%;
   gap: 18px;
   white-space: nowrap;
   font-family: "Quicksand",sans-serif;
@@ -467,7 +478,9 @@ button:hover {
 
 hr { margin: 30px 0 30px 0; }
 
-#nav-border { margin: 15px 0; }
+#nav-border { 
+  margin: 15px 0; 
+}
   
 @media screen and (max-width: 850px) {
   nav {

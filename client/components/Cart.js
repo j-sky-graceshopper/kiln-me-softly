@@ -17,8 +17,13 @@ class Cart extends React.Component {
   handleCheckout() {
     if (this.props.isLoggedIn) {
       this.props.checkoutCart(this.props.cart.id, "Processing");
+      history.push("./checkout");
+    } else {
+      history.push({
+        pathname: "/login",
+        state: { message: "Please login to complete checkout!" },
+      });
     }
-    history.push("./checkout");
   }
 
   handleChange(event, item) {

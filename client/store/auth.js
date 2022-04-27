@@ -26,17 +26,17 @@ export const me = () => async (dispatch) => {
       },
     });
 
-    dispatch(fetchCart("Created"));
+    await dispatch(fetchCart("Created"));
 
     // load items from local storage
-    // const cartFromLocalStorage = JSON.parse(
-    //   localStorage.getItem("cart") || "[]"
-    // );
-    // cartFromLocalStorage.forEach((product) => {
-    //   console.log(product);
-    //   dispatch(addItem(product));
-    // });
-    // window.localStorage.removeItem("cart");
+    const cartFromLocalStorage = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+    cartFromLocalStorage.forEach(async (product) => {
+      console.log(product);
+      dispatch(addItem(product));
+    });
+    window.localStorage.removeItem("cart");
 
     return dispatch(setAuth(res.data));
   }
