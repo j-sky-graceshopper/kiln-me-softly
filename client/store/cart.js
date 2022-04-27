@@ -103,6 +103,8 @@ export const updateCart = (item) => {
           headers: { authorization: token },
         });
         return dispatch(setCart(res.data));
+      } else {
+        return dispatch(updateCartItem(item))
       }
     } catch (err) {
       console.log("Error while updating the cart");
