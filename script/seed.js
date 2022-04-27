@@ -1,5 +1,3 @@
-const { faker } = require("@faker-js/faker");
-
 const {
   db,
   models: { User, Product, Review, Category },
@@ -30,18 +28,6 @@ async function seed() {
   ]);
 
   console.log(`seeded ${users.length} users`);
-
-  // Creating Categories
-  // const categories = await Promise.all([
-  //   Category.create({ name: "mug" }),
-  //   Category.create({ name: "plate" }),
-  //   Category.create({ name: "bowl" }),
-  //   Category.create({ name: "pot" }),
-  //   Category.create({ name: "decorative" }),
-  //   Category.create({ name: "planter" }),
-  //   Category.create({ name: "set" }),
-  //   Category.create({ name: "vase" }),
-  // ]);
 
   const mug = await Category.create({ name: "mug" });
   const plate = await Category.create({ name: "plate" });
@@ -635,23 +621,6 @@ async function seed() {
       inventory: 30,
     }),
   ]);
-
-  // for (let i = 0; i < 14; i++) {
-  //   let product = await Product.create({
-  //     title: faker.random.word(),
-  //     description: faker.lorem.sentence(),
-  //     imageUrl: faker.image.image(800, 1000),
-  //     price: Math.random(),
-  //     inventory: Math.floor(Math.random() * 100),
-  //   });
-  //   products.push(product);
-  // }
-
-  // add random category to each product
-  // products.forEach(async (product) => {
-  //   const catId = Math.floor(Math.random() * categories.length + 1);
-  //   await product.addCategory(catId);
-  // });
 
   //adding category to each product
   products[0].addCategory(7);
