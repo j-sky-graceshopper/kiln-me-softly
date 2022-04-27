@@ -7,31 +7,33 @@ import { authenticate } from "../store";
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  const { message } = props.location.state || "";
   return (
     <div>
       <form id="authorization" onSubmit={handleSubmit} name={name}>
         <h1>{displayName}</h1>
-        <div>
+        <h3 id="message">{message}</h3>
+        <div className="auth-div">
           <label htmlFor="username">
             <p>Username</p>
           </label>
           <input name="username" type="text" />
         </div>
         {name === "signup" ? (
-          <div>
+          <div className="auth-div">
             <label htmlFor="email">
               <p>Email address</p>
             </label>
             <input name="email" type="text" />
           </div>
         ) : null}
-        <div>
+        <div className="auth-div">
           <label htmlFor="password">
             <p>Password</p>
           </label>
           <input name="password" type="password" />
         </div>
-        <div>
+        <div className="auth-div">
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && (

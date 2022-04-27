@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchOrder, setOrder } from "./currentOrder";
+import { fetchOrder } from "./currentOrder";
 
 const TOKEN = "token";
 const SET_CART = "SET_CART";
@@ -99,11 +99,13 @@ export const updateCart = (item) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       if (token) {
-        await axios.put("/api/cart/update", item, {
+        const res = await axios.put("/api/cart/update", item, {
           headers: { authorization: token },
         });
+        return dispatch(setCart(res.data));
+      } else {
+        return dispatch(updateCartItem(item))
       }
-      return dispatch(updateCartItem(item));
     } catch (err) {
       console.log("Error while updating the cart");
     }
